@@ -7,7 +7,7 @@ plugins {
     id 'com.google.android.gms.oss-licenses-plugin'
 }
 
-def tagName = '2.0'
+def tagName = '2.0.1'
 
 android {
     compileSdk 32
@@ -16,7 +16,7 @@ android {
         applicationId "com.kieronquinn.app.pixellaunchermods"
         minSdk 31
         targetSdk 32
-        versionCode 200
+        versionCode 201
         versionName tagName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

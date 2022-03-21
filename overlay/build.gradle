@@ -40,7 +40,6 @@ android {
             keyPassword "android"
 
             v1SigningEnabled true
-            v2SigningEnabled true
         }
     }
 

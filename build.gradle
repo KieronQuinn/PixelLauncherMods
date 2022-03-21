@@ -1,3 +1,4 @@
+import org.apache.tools.ant.taskdefs.condition.Os
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
@@ -31,11 +32,26 @@ task cleanOverlay(type: Delete, dependsOn: ordered(':overlay:clean')) {
     delete 'overlay/module/system/product/overlay/PixelLauncherModsOverlay/PixelLauncherModsOverlay.apk'
 }
 
-task buildAndCopyOverlay(type: Copy, dependsOn: ordered(':overlay:packageReleaseUniversalApk')) {
+/**
+ *  Using `:overlay:assembleRelease` does not seem to work from the Studio-embedded Gradle.
+ *  Instead, we spawn a separate gradle for this small task.
+ */
+task assembleGradleDaemon(type: Exec) {
+    String gradleWrapper = ""
+    if (Os.isFamily(Os.FAMILY_WINDOWS)) {
+        gradleWrapper = ".\\gradlew.bat"
+    }else{
+        gradleWrapper = "./gradlew"
+    }
+    workingDir "$projectDir"
+    commandLine gradleWrapper, ':overlay:assembleRelease'
+}
+
+task buildAndCopyOverlay(type: Copy, dependsOn: ordered(':assembleGradleDaemon')) {
     //Copy built APK into module folder
-    from "overlay/build/outputs/universal_apk/release/overlay-release-universal.apk"
+    from "overlay/build/outputs/apk/release/overlay-release.apk"
     into "overlay/module/system/product/overlay/PixelLauncherModsOverlay"
-    rename("overlay-release-universal.apk", "PixelLauncherModsOverlay.apk")
+    rename("overlay-release.apk", "PixelLauncherModsOverlay.apk")
 }
 
 task zipModule(type: Zip) {
