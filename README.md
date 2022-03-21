@@ -18,9 +18,10 @@ before installing or making issues / asking questions
 
 [![App Icons](https://i.imgur.com/ORcHncml.png)](https://i.imgur.com/ORcHncm.png)
 [![App Editor](https://i.imgur.com/WSJjUUgl.png)](https://i.imgur.com/WSJjUUg.png)
-[![Home screen Shortcut Editor](https://i.imgur.com/Zbn76orl.png)](https://i.imgur.com/Zbn76or.png)
 
+[![Home screen Shortcut Editor](https://i.imgur.com/Zbn76orl.png)](https://i.imgur.com/Zbn76or.png)
 [![Tweaks](https://i.imgur.com/MHPJWlul.png)](https://i.imgur.com/MHPJWlu.png)
+
 [![At a Glance / Search Box replacement](https://i.imgur.com/0XIyNnWl.png)](https://i.imgur.com/0XIyNnW.png)
 [![Hiding Apps](https://i.imgur.com/XY7keMql.png)](https://i.imgur.com/XY7keMq.png)
 
