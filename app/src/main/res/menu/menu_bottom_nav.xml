@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="@string/menu_bottom_nav_apps"
+        android:id="@+id/nav_graph_apps"
+        android:icon="@drawable/ic_nav_apps" />
+
+    <item android:title="@string/menu_bottom_nav_shortcuts"
+        android:id="@+id/nav_graph_shortcuts"
+        android:icon="@drawable/ic_nav_shortcuts" />
+
+    <item android:title="@string/menu_bottom_nav_tweaks"
+        android:id="@+id/nav_graph_tweaks"
+        android:icon="@drawable/ic_nav_tweaks" />
+
+    <item android:title="@string/menu_bottom_nav_options"
+        android:id="@+id/nav_graph_options"
+        android:icon="@drawable/ic_nav_options" />
+
+</menu>

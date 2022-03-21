@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/widget_empty_configure"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:autoSizeTextType="uniform"
+        android:shadowColor="@android:color/black"
+        android:shadowDy="1"
+        android:shadowRadius="2"
+        android:text="@string/proxy_widget_empty"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium.PixelLauncherMods"
+        android:textColor="@android:color/white" />
+
+</LinearLayout>

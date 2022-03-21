@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="TextAppearance.AppCompat.Small.PixelLauncherMods" parent="TextAppearance.AppCompat.Small">
+        <item name="android:fontFamily">@font/google_sans_text</item>
+    </style>
+
+    <style name="TextAppearance.AppCompat.Small.PixelLauncherMods.Medium" parent="TextAppearance.AppCompat.Small">
+        <item name="android:fontFamily">@font/google_sans_text</item>
+        <item name="android:textFontWeight">500</item>
+    </style>
+
+    <style name="TextAppearance.AppCompat.Medium.PixelLauncherMods" parent="TextAppearance.AppCompat.Medium">
+        <item name="android:fontFamily">@font/google_sans_text</item>
+        <item name="android:textFontWeight">500</item>
+    </style>
+
+    <style name="TextAppearance.AppCompat.Large.PixelLauncherMods" parent="TextAppearance.AppCompat.Large">
+        <item name="android:fontFamily">@font/google_sans_text</item>
+        <item name="android:textFontWeight">500</item>
+    </style>
+
+    <style name="TextAppearance.AppCompat.Large.PixelLauncherMods.Lighter" parent="TextAppearance.AppCompat.Large.PixelLauncherMods">
+        <item name="android:textFontWeight">400</item>
+    </style>
+
+    <style name="TextAppearance.AppCompat.ExtraLarge.PixelLauncherMods" parent="TextAppearance.AppCompat.Large">
+        <item name="android:fontFamily">@font/google_sans_text_medium</item>
+        <item name="android:textSize">32sp</item>
+    </style>
+
+    <style name="Widget.Material3.CardView.Filled.PixelLauncherMods" parent="Widget.Material3.CardView.Filled">
+        <item name="cardCornerRadius">16dp</item>
+    </style>
+
+    <style name="Widget.Material3.TextInputLayout.OutlinedBox.PixelLauncherMods" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusTopStart">@dimen/margin_16</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/margin_16</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/margin_16</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/margin_16</item>
+        <item name="boxStrokeWidth">2dp</item>
+    </style>
+
+    <style name="Widget.Material3.Chip.Icon.PixelLauncherMods" parent="@style/Widget.Material3.Chip.Assist">
+        <item name="chipIconVisible">true</item>
+        <item name="chipStrokeColor">@android:color/transparent</item>
+    </style>
+
+    <style name="TextAppearance.Tabs" parent="TextAppearance.AppCompat.Small.PixelLauncherMods">
+        <item name="android:textFontWeight">500</item>
+    </style>
+
+</resources>

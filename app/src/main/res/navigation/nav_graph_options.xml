@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_options"
+    app:startDestination="@id/optionsFragment">
+
+    <fragment
+        android:id="@+id/deferredRestartFragment"
+        android:name="com.kieronquinn.app.pixellaunchermods.ui.screens.tweaks.deferredrestart.DeferredRestartFragment"
+        android:label="@string/tweaks_deferred_restart"
+        tools:layout="@layout/fragment_deferred_restart"/>
+    <fragment
+        android:id="@+id/backupRestoreFragment"
+        android:name="com.kieronquinn.app.pixellaunchermods.ui.screens.backuprestore.BackupRestoreFragment"
+        android:label="@string/options_backup_restore"
+        tools:layout="@layout/fragment_settings_base">
+        <action
+            android:id="@+id/action_backupRestoreFragment_to_backupRestoreBackupFragment"
+            app:destination="@id/backupRestoreBackupFragment" />
+        <action
+            android:id="@+id/action_backupRestoreFragment_to_backupRestoreRestoreFragment"
+            app:destination="@id/backupRestoreRestoreFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/backupRestoreBackupFragment"
+        android:name="com.kieronquinn.app.pixellaunchermods.ui.screens.backuprestore.backup.BackupRestoreBackupFragment"
+        android:label="@string/options_backup_restore_backup"
+        tools:layout="@layout/fragment_backup_restore_backup">
+        <argument
+            android:name="uri"
+            app:argType="android.net.Uri" />
+    </fragment>
+    <fragment
+        android:id="@+id/optionsFragment"
+        android:name="com.kieronquinn.app.pixellaunchermods.ui.screens.options.OptionsFragment"
+        android:label="@string/options_title"
+        tools:layout="@layout/fragment_settings_base" >
+        <action
+            android:id="@+id/action_optionsFragment_to_deferredRestartFragment"
+            app:destination="@id/deferredRestartFragment" />
+        <action
+            android:id="@+id/action_optionsFragment_to_backupRestoreFragment"
+            app:destination="@id/backupRestoreFragment" />
+        <action
+            android:id="@+id/action_optionsFragment_to_optionsReapplyFragment"
+            app:destination="@id/optionsReapplyFragment" />
+        <action
+            android:id="@+id/action_optionsFragment_to_optionsAdvancedFragment"
+            app:destination="@id/optionsAdvancedFragment" />
+        <action
+            android:id="@+id/action_optionsFragment_to_contributorsFragment"
+            app:destination="@id/contributorsFragment" />
+        <action
+            android:id="@+id/action_optionsFragment_to_optionsFaqFragment"
+            app:destination="@id/optionsFaqFragment" />
+        <action
+            android:id="@+id/action_optionsFragment_to_ossLicensesMenuActivity"
+            app:destination="@id/ossLicensesMenuActivity" />
+    </fragment>
+    <fragment
+        android:id="@+id/backupRestoreRestoreFragment"
+        android:name="com.kieronquinn.app.pixellaunchermods.ui.screens.backuprestore.restore.BackupRestoreRestoreFragment"
+        android:label="@string/options_backup_restore_restore"
+        tools:layout="@layout/fragment_backup_restore_restore">
+        <argument
+            android:name="uri"
+            app:argType="android.net.Uri" />
+        <action
+            android:id="@+id/action_backupRestoreRestoreFragment_to_overlayApplyFragment"
+            app:destination="@id/overlayApplyFragment" />
+        <action
+            android:id="@+id/action_backupRestoreRestoreFragment_to_magiskInfoFragment"
+            app:destination="@id/magiskInfoFragment" />
+        <action
+            android:id="@+id/action_backupRestoreRestoreFragment_to_backupRestoreIssuesFragment"
+            app:destination="@id/backupRestoreIssuesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/overlayApplyFragment"
+        android:name="com.kieronquinn.app.pixellaunchermods.ui.screens.tweaks.overlayapply.OverlayApplyFragment"
+        android:label="@string/overlay_apply_applying"
+        tools:layout="@layout/fragment_tweaks_apply">
+        <argument
+            android:name="components"
+            app:argType="string[]"
+            app:nullable="true" />
+        <argument
+            android:name="widget_replacement"
+            app:argType="com.kieronquinn.app.pixellaunchermods.model.tweaks.ParceledWidgetReplacement"
+            app:nullable="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/magiskInfoFragment"
+        android:name="com.kieronquinn.app.pixellaunchermods.ui.screens.magiskinfo.MagiskInfoFragment"
+        android:label="@string/magisk_info_title"
+        tools:layout="@layout/fragment_magisk_info" />
+    <fragment
+        android:id="@+id/backupRestoreIssuesFragment"
+        android:name="com.kieronquinn.app.pixellaunchermods.ui.screens.backuprestore.restore.issues.BackupRestoreIssuesFragment"
+        android:label="@string/restore_issue_title"
+        tools:layout="@layout/fragment_backup_restore_issues" >
+        <argument
+            android:name="issues"
+            app:argType="com.kieronquinn.app.pixellaunchermods.repositories.BackupRestoreRepository$RestoreIssue[]" />
+    </fragment>
+    <fragment
+        android:id="@+id/optionsReapplyFragment"
+        android:name="com.kieronquinn.app.pixellaunchermods.ui.screens.options.reapply.OptionsReapplyFragment"
+        android:label="@string/options_reapply_icons"
+        tools:layout="@layout/fragment_options_reapply">
+        <deepLink
+            android:id="@+id/reapplyDeeplink"
+            app:action="android.intent.action.VIEW"
+            app:uri="plm://reapply" />
+    </fragment>
+    <fragment
+        android:id="@+id/optionsAdvancedFragment"
+        android:name="com.kieronquinn.app.pixellaunchermods.ui.screens.options.advanced.OptionsAdvancedFragment"
+        android:label="@string/options_advanced"
+        tools:layout="@layout/fragment_settings_base" >
+        <action
+            android:id="@+id/action_optionsAdvancedFragment_to_resetInfoFragment"
+            app:destination="@id/resetInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/resetInfoFragment"
+        android:name="com.kieronquinn.app.pixellaunchermods.ui.screens.reset.ResetInfoFragment"
+        android:label="@string/options_advanced_reset"
+        tools:layout="@layout/fragment_reset_info" >
+        <action
+            android:id="@+id/action_resetInfoFragment_to_resetApplyFragment"
+            app:destination="@id/resetApplyFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/resetApplyFragment"
+        android:name="com.kieronquinn.app.pixellaunchermods.ui.screens.reset.apply.ResetApplyFragment"
+        android:label="@string/options_advanced_reset" />
+    <fragment
+        android:id="@+id/contributorsFragment"
+        android:name="com.kieronquinn.app.pixellaunchermods.ui.screens.options.contributors.ContributorsFragment"
+        android:label="@string/about_contributors"
+        tools:layout="@layout/fragment_settings_base"/>
+    <fragment
+        android:id="@+id/optionsFaqFragment"
+        android:name="com.kieronquinn.app.pixellaunchermods.ui.screens.options.faq.OptionsFaqFragment"
+        android:label="@string/options_faq_short"
+        tools:layout="@layout/fragment_options_faq" />
+    <activity
+        android:id="@+id/ossLicensesMenuActivity"
+        android:name="com.google.android.gms.oss.licenses.OssLicensesMenuActivity"
+        tools:layout="@layout/libraries_social_licenses_license_menu_activity" />
+</navigation>

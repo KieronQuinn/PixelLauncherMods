@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <item android:title="@string/app_editor_save"
+        android:id="@+id/menu_widget_resize_save"
+        android:showAsAction="always|withText"
+        android:icon="@drawable/ic_app_editor_save"
+        tools:ignore="AppCompatResource"/>
+</menu>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:transitionGroup="true">
+
+    <include
+        android:id="@+id/hide_apps_search"
+        layout="@layout/include_search"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/search_box_height"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/hide_apps_loading_progress"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        android:indeterminate="true"
+        app:layout_constraintBottom_toTopOf="@id/hide_apps_loading_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:trackCornerRadius="4dp"
+        app:trackThickness="8dp" />
+
+    <TextView
+        android:id="@+id/hide_apps_loading_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_16"
+        android:text="@string/hide_apps_loading"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium.PixelLauncherMods"
+        android:textColor="?android:textColorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/hide_apps_loading_progress" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/hide_apps_loading"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:constraint_referenced_ids="hide_apps_loading_label,hide_apps_loading_progress" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/hide_apps_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/search_box_margin"
+        android:clipToPadding="false"
+        android:paddingStart="@dimen/margin_4"
+        android:paddingTop="@dimen/search_box_margin"
+        android:paddingEnd="@dimen/margin_4"
+        android:paddingBottom="@dimen/margin_16"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/hide_apps_loaded"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:constraint_referenced_ids="hide_apps_search,hide_apps_recyclerview,hide_apps_save" />
+
+    <include
+        android:id="@+id/hide_apps_magisk"
+        layout="@layout/include_hide_apps_magisk"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:layout_marginBottom="@dimen/bottom_nav_height"
+        tools:visibility="visible" />
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/hide_apps_save"
+        android:layout_margin="@dimen/bottom_nav_height_margins"
+        android:text="@string/hide_apps_save"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium.PixelLauncherMods"
+        app:icon="@drawable/ic_app_editor_save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

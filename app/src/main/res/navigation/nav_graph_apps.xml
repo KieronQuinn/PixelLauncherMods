@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_apps"
+    app:startDestination="@id/appsFragment">
+    <fragment
+        android:id="@+id/appsFragment"
+        android:name="com.kieronquinn.app.pixellaunchermods.ui.screens.apps.AppsFragment"
+        android:label="@string/apps_title"
+        tools:layout="@layout/fragment_apps" >
+        <action
+            android:id="@+id/action_appsFragment_to_nav_graph_app_editor"
+            app:destination="@id/nav_graph_app_editor">
+            <argument
+                android:name="remote_app"
+                app:argType="com.kieronquinn.app.pixellaunchermods.model.remote.RemoteApp" />
+        </action>
+        <action
+            android:id="@+id/action_appsFragment_to_autoIconPackFragment"
+            app:destination="@id/autoIconPackFragment" />
+    </fragment>
+    <include app:graph="@navigation/nav_graph_app_editor" />
+    <fragment
+        android:id="@+id/autoIconPackFragment"
+        android:name="com.kieronquinn.app.pixellaunchermods.ui.screens.autoiconpack.AutoIconPackFragment"
+        android:label="@string/apps_apply_icon_pack"
+        tools:layout="@layout/fragment_auto_icon_pack" >
+        <action
+            android:id="@+id/action_autoIconPackFragment_to_autoIconPackApplyFragment"
+            app:destination="@id/autoIconPackApplyFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/autoIconPackApplyFragment"
+        android:name="com.kieronquinn.app.pixellaunchermods.ui.screens.autoiconpack.apply.AutoIconPackApplyFragment"
+        android:label="@string/apps_apply_icon_pack"
+        tools:layout="@layout/fragment_auto_icon_pack_apply" >
+        <argument
+            android:name="icon_packs"
+            app:argType="string[]" />
+    </fragment>
+</navigation>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?android:selectableItemBackground">
+
+    <ImageView
+        android:id="@+id/item_icon_source_icon"
+        android:layout_width="@dimen/item_app_width"
+        android:layout_height="@dimen/item_app_width"
+        android:padding="@dimen/margin_16"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@mipmap/ic_launcher" />
+
+    <TextView
+        android:id="@+id/item_icon_source_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_16"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium.PixelLauncherMods"
+        android:textColor="?android:textColorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/item_icon_source_more"
+        app:layout_constraintStart_toEndOf="@id/item_icon_source_icon"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Icon Pack with a very long name" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/item_icon_source_more"
+        style="@style/Widget.Material3.Button.IconButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_16"
+        android:paddingStart="@dimen/margin_16"
+        android:text="@string/app_editor_iconpicker_more"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small.PixelLauncherMods.Medium"
+        android:textColor="?android:textColorPrimary"
+        app:backgroundTint="?colorSurfaceVariant"
+        app:icon="@drawable/ic_arrow_right"
+        app:iconGravity="end"
+        app:iconPadding="@dimen/margin_8"
+        app:iconSize="16dp"
+        app:iconTint="?android:textColorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/item_icon_source_name"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/reset_apply_progress"
+        android:layout_width="200dp"
+        android:layout_marginTop="200dp"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        app:trackCornerRadius="4dp"
+        app:trackThickness="8dp" />
+
+    <TextView
+        android:id="@+id/reset_apply_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_16"
+        android:layout_marginBottom="@dimen/margin_4"
+        android:gravity="center"
+        android:text="@string/reset_apply_title"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium.PixelLauncherMods"
+        android:textColor="?android:textColorPrimary" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/reset_apply_content"
+        android:gravity="center"
+        android:layout_marginBottom="@dimen/margin_8"
+        android:layout_marginStart="@dimen/margin_16"
+        android:layout_marginEnd="@dimen/margin_16"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small.PixelLauncherMods"/>
+
+</LinearLayout>

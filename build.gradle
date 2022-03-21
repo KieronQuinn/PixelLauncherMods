@@ -1,0 +1,64 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    ext.nav_version = "2.4.1"
+    repositories {
+        google()
+    }
+    dependencies {
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
+        classpath 'com.google.android.gms:oss-licenses-plugin:0.10.5'
+    }
+}
+
+plugins {
+    id 'com.android.application' version '7.1.1' apply false
+    id 'com.android.library' version '7.1.1' apply false
+    id 'org.jetbrains.kotlin.android' version '1.6.10' apply false
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+/**
+ *  Module building tasks: These tasks build the Magisk module with the overlay stub.
+ *  They are dynamic, copying the relevant files from the overlay module into app's assets when done.
+ */
+
+task cleanOverlay(type: Delete, dependsOn: ordered(':overlay:clean')) {
+    //Delete the previously built APK to start fresh
+    delete 'overlay/module/system/product/overlay/PixelLauncherModsOverlay/PixelLauncherModsOverlay.apk'
+}
+
+task buildAndCopyOverlay(type: Copy, dependsOn: ordered(':overlay:packageReleaseUniversalApk')) {
+    //Copy built APK into module folder
+    from "overlay/build/outputs/universal_apk/release/overlay-release-universal.apk"
+    into "overlay/module/system/product/overlay/PixelLauncherModsOverlay"
+    rename("overlay-release-universal.apk", "PixelLauncherModsOverlay.apk")
+}
+
+task zipModule(type: Zip) {
+    //Zip up the module, copying it into the assets of the app
+    archiveFileName = "module.zip"
+    destinationDirectory = file("app/src/main/assets/overlay")
+    from "overlay/module"
+}
+
+task copyManifest(type: Copy) {
+    //Copy the current Manifest file into the assets for dynamic building
+    from "overlay/src/main/AndroidManifest.xml"
+    into "app/src/main/assets/overlay/build"
+}
+
+task createModule(dependsOn: ordered(':cleanOverlay', ':buildAndCopyOverlay', ':zipModule', ":copyManifest")) {
+    println "Building Module..."
+}
+
+def ordered(String... dependencyPaths) {
+    def dependencies = dependencyPaths.collect {tasks.getByPath(it) }
+    for (int i = 0; i < dependencies.size() - 1; i++) {
+        dependencies[i + 1].mustRunAfter(dependencies[i])
+    }
+    return dependencies
+}

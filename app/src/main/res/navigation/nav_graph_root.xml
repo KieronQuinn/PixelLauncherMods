@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_root"
+    app:startDestination="@id/containerFragment">
+
+    <fragment
+        android:id="@+id/containerFragment"
+        android:name="com.kieronquinn.app.pixellaunchermods.ui.screens.container.ContainerFragment"
+        android:label="ContainerFragment"
+        tools:layout="@layout/fragment_container" >
+        <action
+            android:id="@+id/action_containerFragment_to_widgetResizeFragment"
+            app:destination="@id/widgetResizeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/widgetResizeFragment"
+        android:name="com.kieronquinn.app.pixellaunchermods.ui.screens.tweaks.widgetresize.WidgetResizeFragment"
+        android:label="WidgetResizeFragment"
+        tools:layout="@layout/fragment_widget_resize" />
+
+</navigation>

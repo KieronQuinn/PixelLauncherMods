@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.google.android.apps.nexuslauncher.plmoverlay"
+    android:compileSdkVersion="31"
+    android:compileSdkVersionCodename="12"
+    android:versionCode="1"
+    android:versionName="1.0">
+
+    <uses-sdk
+        android:targetSdkVersion="31"
+        android:minSdkVersion="31"/>
+
+    <overlay
+        android:priority="10"
+        android:targetName="PixelLauncherModsOverlay"
+        android:targetPackage="com.google.android.apps.nexuslauncher" />
+
+    <application
+        android:allowBackup="false"
+        android:hasCode="false"
+        android:label="PixelLauncherModsOverlay" />
+
+</manifest>

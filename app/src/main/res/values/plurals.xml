@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="widget_replacement_picker_item_app_count">
+        <item quantity="one">@string/widget_replacement_picker_item_app_count_one</item>
+        <item quantity="other">@string/widget_replacement_picker_item_app_count_other</item>
+    </plurals>
+    <plurals name="backup_restore_restore_issues_content">
+        <item quantity="one">@string/backup_restore_restore_issues_content_one</item>
+        <item quantity="other">@string/backup_restore_restore_issues_content_other</item>
+    </plurals>
+</resources>

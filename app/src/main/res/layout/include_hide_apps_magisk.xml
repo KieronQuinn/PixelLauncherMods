@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="@dimen/margin_16">
+
+        <ImageView
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:src="@drawable/ic_magisk"
+            app:tint="?android:colorAccent" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_16"
+            android:gravity="center"
+            android:text="@string/hide_apps_magisk_title"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large.PixelLauncherMods" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_16"
+            android:gravity="center"
+            android:text="@string/hide_apps_magisk_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small.PixelLauncherMods" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/hide_apps_magisk_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_16"
+            android:text="@string/hide_apps_magisk_button"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small.PixelLauncherMods.Medium"
+            app:icon="@drawable/ic_magisk_save" />
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

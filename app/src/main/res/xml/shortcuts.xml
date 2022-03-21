@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:shortcutId="reapply"
+        android:enabled="true"
+        android:icon="@mipmap/ic_launcher_reapply"
+        android:shortcutShortLabel="@string/options_reapply_icons"
+        android:shortcutLongLabel="@string/options_reapply_icons"
+        android:shortcutDisabledMessage="@string/options_reapply_icons">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.kieronquinn.app.pixellaunchermods"
+            android:data="plm://reapply" />
+    </shortcut>
+</shortcuts>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:id="@+id/widget_resize_viewpager"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/widget_resize_sheet"/>
+
+    <com.kieronquinn.app.pixellaunchermods.ui.views.viewpager.UnderlinePageIndicator
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginStart="@dimen/margin_16"
+        android:layout_marginEnd="@dimen/margin_16"
+        android:id="@+id/widget_resize_viewpager_indicator"
+        app:selectedColor="@color/viewpager_indicator"
+        app:fades="false"
+        app:layout_constraintBottom_toTopOf="@id/widget_resize_sheet"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="-16dp"
+        android:paddingBottom="16dp"
+        android:id="@+id/widget_resize_loading"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="?android:colorBackground"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/widget_resize_sheet">
+
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/widget_resize_loading_progress"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            app:layout_constraintBottom_toTopOf="@id/widget_resize_loading_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:trackCornerRadius="4dp"
+            app:trackThickness="8dp" />
+
+        <TextView
+            android:id="@+id/widget_resize_loading_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_16"
+            android:text="@string/widget_resize_loading"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium.PixelLauncherMods"
+            android:textColor="?android:textColorPrimary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/widget_resize_loading_progress" />
+
+    </LinearLayout>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/widget_resize_sheet"
+        style="@style/Widget.Material3.CardView.Filled.PixelLauncherMods"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <include
+            layout="@layout/include_widget_resize_sheet"
+            android:id="@+id/widget_resize_sheet_include"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

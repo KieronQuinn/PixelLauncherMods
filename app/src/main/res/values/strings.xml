@@ -1,0 +1,251 @@
+<resources>
+
+    <string name="app_name">Pixel Launcher Mods</string>
+    <string name="search">Search</string>
+
+    <string name="no_root_dialog_title">No Root</string>
+    <string name="no_root_dialog_content">Pixel Launcher Mods requires a rooted device. Please read the FAQs for more details.</string>
+    <string name="no_root_dialog_close">Close</string>
+
+    <string name="no_pixel_launcher_dialog_title">Pixel Launcher Not Installed</string>
+    <string name="no_pixel_launcher_dialog_content">You must have the Pixel Launcher installed to use Pixel Launcher Mods</string>
+    <string name="no_pixel_launcher_dialog_close">Close</string>
+
+    <string name="menu_bottom_nav_apps">Apps</string>
+    <string name="menu_bottom_nav_shortcuts">Shortcuts</string>
+    <string name="menu_bottom_nav_tweaks">Tweaks</string>
+    <string name="menu_bottom_nav_options">More</string>
+    <string name="apps_title">App Drawer Apps</string>
+    <string name="apps_loading">Loading Apps…</string>
+    <string name="apps_error">Error Loading Apps</string>
+    <string name="apps_error_sub">Make sure you have granted the app root. If the problem persists, try rebooting or clearing the data of Pixel Launcher.</string>
+    <string name="apps_apply_icon_pack">Apply Icon Packs</string>
+
+    <string name="app_editor_input_label">Label</string>
+    <string name="app_editor_save">Save</string>
+    <string name="app_editor_normal_icon">App Drawer</string>
+    <string name="app_editor_normal_icon_shortcut">Icon</string>
+    <string name="app_editor_add_themed_icon">Add Themed Icon</string>
+    <string name="app_editor_themed_icon">Home Screen</string>
+    <string name="app_editor_themed_icon_shortcut">Themed Icon</string>
+    <string name="app_editor_loading">Loading App…</string>
+    <string name="app_editor_loading_shortcut">Loading Shortcut…</string>
+    <string name="app_editor_saving">Saving App…</string>
+    <string name="app_editor_resetting">Resetting App…</string>
+    <string name="app_editor_saving_shortcut">Saving Shortcut…</string>
+    <string name="app_editor_resetting_shortcut">Resetting Shortcut…</string>
+    <string name="app_editor_reset">Reset</string>
+    <string name="app_editor_dynamic_warning">This app\'s icons are dynamic and cannot be changed</string>
+    <string name="app_editor_app_shortcut_label_warning">App Shortcut labels cannot be edited</string>
+
+    <string name="app_editor_iconpicker_remove">Remove Themed Icon</string>
+    <string name="app_editor_iconpicker_legacy_themed_title">Themed Icons (Legacy)</string>
+    <string name="app_editor_iconpicker_lawnicons_title">Lawnicons</string>
+    <string name="app_editor_iconpicker_loading">Loading Icon Sources…</string>
+    <string name="app_editor_iconpicker_title">Icon Source</string>
+    <string name="app_editor_iconpicker_header">Themed Icons are always tinted to your device theme colour. When using a custom icon, adaptive icons and/or icons without a solid background work best.</string>
+    <string name="app_editor_iconpicker_more">More</string>
+    <string name="app_editor_iconpicker_apps">Installed Apps</string>
+    <string name="app_editor_iconpicker_apps_switch_title">Adaptive Icon Conversion</string>
+    <string name="app_editor_iconpicker_apps_switch_subtitle">Adds a white \'plate\' behind older, non-adaptive icons</string>
+    <string name="app_editor_iconpicker_files">Import Image</string>
+    <string name="app_editor_iconpicker_pack_loading">Loading Icons…</string>
+    <string name="app_editor_iconpicker_pack_title">Icon Pack</string>
+    <string name="app_editor_iconpicker_pack_open_external">Open Pack</string>
+    <string name="app_editor_iconpicker_legacy_themed_header_content">Icon Packs and custom images cannot be set as a Themed Icon directly. For more Themed Icons, consider using a Magisk module that adds more via overlays (see XDA thread for details).</string>
+    <string name="app_editor_iconpicker_legacy_themed_loading">Loading Themed Icons…</string>
+    <string name="app_editor_iconpicker_apps_loading">Loading Apps…</string>
+    <string name="app_editor_iconpicker_apps_title">Installed Apps</string>
+
+    <string name="shortcuts_title">Home Screen Shortcuts</string>
+    <string name="shortcuts_error">No Shortcuts Found</string>
+    <string name="shortcuts_error_sub">If you were expecting shortcuts, make sure you have granted Pixel Launcher Mods root. If the problem persists, try rebooting or clearing the data of Pixel Launcher.</string>
+    <string name="shortcuts_loading">Loading Shortcuts…</string>
+
+    <string name="notification_channel_title_foreground_service">Background Service</string>
+    <string name="notification_channel_desc_foreground_service">Notifications to keep the background service running</string>
+    <string name="notification_title_foreground_service">Pixel Launcher Mods is running</string>
+    <string name="notification_content_foreground_service">Listening for app icon changes, tap to hide.</string>
+    <string name="notification_channel_title_icon_applying">Icon Changes</string>
+    <string name="notification_channel_desc_icon_applying">Progress notifications when updating &amp; applying icons</string>
+    <string name="notification_channel_title_update">Update</string>
+    <string name="notification_channel_desc_update">Notifications when an update is available</string>
+    <string name="notification_title_update">Pixel Launcher Mods update available</string>
+    <string name="notification_title_content">An update is available for Pixel Launcher Mods (%1s to %1s)</string>
+    <string name="notification_title_applying_icons">Applying Icons</string>
+    <string name="notification_title_updating_icons">Updating Icons</string>
+    <string name="notification_title_updating_icon_packs">Updating Icon Packs</string>
+    <string name="notification_content_updating_icon_packs">This may take a few minutes</string>
+    <string name="auto_icon_pack_loading">Loading Icon Packs…</string>
+    <string name="auto_icon_pack_error">No Icon Packs found</string>
+    <string name="auto_icon_pack_header">Drag your icon packs into the priority order you wish to apply icons with. Packs below the line will not be used.\n<b>Note:</b> Using a large number of icon packs may take a while.</string>
+    <string name="auto_icon_pack_apply">Apply</string>
+    <string name="auto_icon_pack_snackbar">No icon packs above the line!</string>
+    <string name="auto_icon_pack_applying">Applying Icon Packs…</string>
+    <string name="auto_icon_pack_applying_sub">This may take a few minutes, depending on how many packs you selected and how many apps you have installed.</string>
+    <string name="auto_icon_pack_applying_done">Icon packs applied</string>
+
+    <string name="tweaks_title">Tweaks</string>
+    <string name="tweaks_resize_widgets_title">Resize Widgets</string>
+    <string name="tweaks_resize_widgets_content">Resize widgets beyond their normal bounds</string>
+    <string name="tweaks_resize_widgets_sheet_unselected">Tap a widget to begin</string>
+    <string name="tweaks_resize_widgets_sheet_unselected_info">Note: Icons are not themed and are included as a guide.</string>
+    <string name="widget_resize_loading">Loading Widgets…</string>
+    <string name="tweaks_hide_clock">Hide Clock</string>
+    <string name="tweaks_hide_clock_content">Hide the clock from the status bar when the Pixel Launcher is showing.\n<b>Note: This will also apply in the recent apps screen, as it is handled by the Pixel Launcher.</b></string>
+    <string name="hide_apps_loading">Loading…</string>
+    <string name="hide_apps_magisk_title">Magisk Module Required</string>
+    <string name="hide_apps_magisk_content">The Pixel Launcher Mods Magisk module is required for this option.\n\nTo install the module, first save the module using the button below, then use the <b>Install from storage</b> option in Magisk to install it, and reboot your device.</string>
+    <string name="hide_apps_magisk_button">Save Module</string>
+    <string name="tweaks_hide_apps">Hide Apps</string>
+    <string name="tweaks_hide_apps_content">Hide apps from the app drawer</string>
+    <string name="tweaks_apply">Apply Tweaks</string>
+    <string name="hide_apps_save">Apply</string>
+    <string name="overlay_apply_applying">Applying Tweaks…</string>
+    <string name="overlay_apply_success">Tweaks applied</string>
+    <string name="tweaks_apply_failed">Failed to apply Tweaks</string>
+    <string name="tweaks_apply_close">Close</string>
+    <string name="tweaks_apply_save_log">Save Log</string>
+    <string name="tweaks_widget_replacement_preview_title">Choose Replacement Position</string>
+    <string name="tweaks_widget_replacement_preview_bottom">Bottom</string>
+    <string name="tweaks_widget_replacement_preview_top">Top</string>
+    <string name="tweaks_widget_replacement">At a Glance / Search Box</string>
+    <string name="tweaks_widget_replacement_content"><b>Experimental:</b> Replace the At a Glance <b>or</b> Search Box with a widget of your choice</string>
+    <string name="proxy_widget_loading">Loading…</string>
+    <string name="proxy_widget_empty">Tap to configure</string>
+    <string name="proxy_widget_error">This widget failed to load\nTry a different widget</string>
+    <string name="tweaks_widget_replacement_switch">Enable Replacement</string>
+    <string name="tweaks_widget_replacement_provider">Select Widget</string>
+    <string name="tweaks_widget_replacement_provider_content_unset">Set the widget to show</string>
+    <string name="tweaks_widget_replacement_provider_content_set">Set the widget to show. Currently set to %1s.</string>
+    <string name="tweaks_widget_replacement_provider_reconfigure">Reconfigure widget</string>
+    <string name="tweaks_widget_replacement_provider_reconfigure_content">Change this widget\'s settings in its app</string>
+    <string name="tweaks_widget_replacement_loading">Loading…</string>
+    <string name="tweaks_widget_replacement_save">Apply</string>
+    <string name="tweaks_widget_replacement_info">Due to limitations within the Pixel Launcher, it is not possible to replace both the At a Glance and the Search Box at the same time.\n\n<b>Note:</b> Not all widgets are compatible with this feature. If your chosen widget fails to load (for example it stays blank or shows the generic search box), try a different one.</string>
+    <string name="widget_replacement_picker_title">Select Widget</string>
+    <string name="widget_replacement_picker_loading">Loading Widgets…</string>
+    <string name="widget_replacement_picker_item_app_count_one">%1s widget</string>
+    <string name="widget_replacement_picker_item_app_count_other">%1s widgets</string>
+    <string name="widget_replacement_picker_header">Previews of the widgets may be different to how they show in the Pixel Launcher. Sizing is approximate, and dynamic previews are intentionally clipped to simulate the small space.</string>
+    <string name="widget_replacement_picker_error_toast">An error occurred when setting up this widget.</string>
+    <string name="proxy_widget_preview">@string/app_name</string>
+    <string name="tweaks_deferred_restart">Seamless Restart</string>
+    <string name="tweaks_deferred_restart_content">Configure when to restart the Pixel Launcher for minimum disruption to device use</string>
+
+    <string name="deferred_restart_loading">Loading…</string>
+    <string name="deferred_restart_header">Seamless Restart allows the Pixel Launcher to be restarted in the background, when you are not using it. If you are still experiencing unwanted restarts, try using the \"while screen off\" option, to make it only restart when your device\'s display is off. If you are experiencing unwanted icon resets, you may need to use a more aggressive setting.</string>
+    <string name="deferred_restart_instant_title">Instant Restart</string>
+    <string name="deferred_restart_instant_content">Restarts the Pixel Launcher immediately after making changes, effectively disabling Seamless Restart.\n<b>Note:</b> Restarting instantly includes when the launcher is visible, you may lose your scroll position mid-use.</string>
+    <string name="deferred_restart_background_title">Background Restart</string>
+    <string name="deferred_restart_background_content">Restarts the Pixel Launcher when it is not visible, ie. it is in the background. Icon resets should be minimal in this mode, unless you leave your device with the launcher always showing.\n<b>Recommended</b></string>
+    <string name="deferred_restart_screen_off_title">Screen Off Restart</string>
+    <string name="deferred_restart_screen_off_content">Restarts only when the display is off, for zero disruption. You may experience icon resets with this mode, if you use your device for long periods of time and have automatic updates enabled.</string>
+    <string name="backup_restore_backup_close">Close</string>
+    <string name="backup_restore_backup_creating">Creating backup…</string>
+    <string name="backup_restore_backup_creating_success">Backup created</string>
+    <string name="backup_restore_backup_creating_failed">Failed to create backup</string>
+
+    <string name="options_backup_restore">Backup &amp; Restore</string>
+    <string name="options_backup_restore_content">Backup &amp; restore your app options and settings</string>
+    <string name="options_backup_restore_backup">Backup</string>
+    <string name="options_backup_restore_backup_content">Create a backup of your Pixel Launcher Mods options and settings to your device or the cloud</string>
+    <string name="options_backup_restore_restore">Restore</string>
+    <string name="options_backup_restore_restore_content">Restore a backup from your device or the cloud</string>
+
+    <string name="backup_restore_restore_close">Close</string>
+    <string name="backup_restore_restore_restoring">Restoring backup…</string>
+    <string name="backup_restore_restore_issues_title">%1d Skipped</string>
+    <string name="backup_restore_restore_issues_content_one">%1d app was skipped during restoring. Tap for more info.</string>
+    <string name="backup_restore_restore_issues_content_other">%1d apps were skipped during restoring. Tap for more info.</string>
+    <string name="backup_restore_restore_magisk_title">Magisk Module Required</string>
+    <string name="backup_restore_restore_magisk_content">This backup contains tweaks which require the Pixel Launcher Mods Magisk Module. Tap for more info.</string>
+    <string name="backup_restore_restore_tweaks_title">Restore Tweaks</string>
+    <string name="backup_restore_restore_tweaks_content">This backup contains tweak settings, which must be applied separately. Tap to apply them.\n<b>Note:</b> Due to system limitations, it is not possible to restore your chosen widget replacement (if set), only the position.</string>
+    <string name="backup_restore_restore_restoring_success">Backup restored</string>
+    <string name="backup_restore_restore_restoring_failed">Failed to restore backup</string>
+
+    <string name="restore_issue_title">Skipped Apps</string>
+    <string name="restore_issue_type_app">An app</string>
+    <string name="restore_issue_type_shortcut">A shortcut</string>
+    <string name="restore_issue_type_app_short">App</string>
+    <string name="restore_issue_type_shortcut_short">Shortcut</string>
+    <string name="restore_issue_component_title">{type_short_upper} Not Found</string>
+    <string name="restore_issue_component_content">{type} with the package name %1s was not found.</string>
+    <string name="restore_issue_package_title">{type_short_upper} Icon Not Found</string>
+    <string name="restore_issue_package_content">An app with the package name %1s was not found, so its icon could not be used for the {type_short} with package name %1s.</string>
+    <string name="restore_issue_icon_pack_title">Icon Pack Icon Not Found</string>
+    <string name="restore_issue_icon_pack_content">The icon for {type_short} %1s was not found in an icon pack with a package name of %1s, so it could not be applied to this {type_short}. Check the pack is installed and up to date.</string>
+    <string name="restore_issue_lawnicon_title">Lawnicon Icon Not Found</string>
+    <string name="restore_issue_lawnicon_content">A Lawnicon for the {type_short} %1s (icon %1s) could not be found, check you are using the same version of Lawnicons as when this backup was made.</string>
+    <string name="restore_issue_legacy_mono_title">Legacy Themed Icon Not Found</string>
+    <string name="restore_issue_legacy_mono_content">A legacy themed icon for {type_short} %1s (icon %1s) could not be found. If you were previously using an overlay to add more icons, check if it is installed.</string>
+    <string name="restore_issue_mono_icon_not_compatible_title">Themed Icon Not Compatible</string>
+    <string name="restore_issue_mono_icon_not_compatible_content">The themed icon set for {type_short} %1s in the backup is not compatible with this version of Android.</string>
+    <string name="restore_issue_static_icon_title">Icon Not Found</string>
+    <string name="restore_issue_static_icon_content">The icon for %1s was not found in this backup, check the backup has not been modified.</string>
+    <string name="restore_issue_package_unknown">Unknown</string>
+
+    <string name="magisk_info_title">Magisk Module</string>
+
+    <string name="options_title">Options</string>
+    <string name="options_reapply_icons">Re-apply Icons</string>
+    <string name="options_reapply_icons_content">Re-applies icons manually, use if an icon is stuck un-themed after an update</string>
+    <string name="options_reapply_title">Re-applying Icons…</string>
+    <string name="options_reapply_finished">Icons re-applied</string>
+    <string name="options_advanced">Advanced</string>
+    <string name="options_advanced_content">Advanced options including resetting, disabling shortcut updates, and restarting the Pixel Launcher manually</string>
+    <string name="options_advanced_restart">Restart Pixel Launcher</string>
+    <string name="options_advanced_restart_content">Restart the Pixel Launcher immediately</string>
+    <string name="options_advanced_restart_finished">Restart complete</string>
+    <string name="options_advanced_shortcut">Disable App Shortcut Updates</string>
+    <string name="options_advanced_shortcut_content">Some apps send app shortcut updates very often, which can increase battery usage of Pixel Launcher Mods and lead to more common restarts. If you are experiencing this, disabling app shortcut updates will resolve the problem, but you may need to re-apply icons more often for them to not be un-themed.</string>
+    <string name="options_advanced_reset">Reset</string>
+    <string name="options_advanced_reset_content">Reset all modified apps\' &amp; app shortcut\'s labels and icons, and rebuild the Pixel Launcher\'s icon cache</string>
+    <string name="reset_info_loading">Loading…</string>
+    <string name="reset_info_warning">Resetting is irreversible. Make sure you have made a backup before continuing, if you wish to keep your app and app shortcut configuration</string>
+    <string name="reset_info_title">Warning</string>
+    <string name="reset_info_included">Resetting will delete</string>
+    <string name="reset_info_included_content">• Modified app labels and icons, both themed and normal\n• Modified app shortcut icons\n• Automatic icon pack configuration</string>
+    <string name="reset_info_not_included">Resetting will <b>not</b> delete</string>
+    <string name="reset_info_not_included_content">%1s• Hidden apps configuration\n• Widget replacement configuration (both this and hidden apps must be reset separately)\n• Your Pixel Launcher Mods settings, such as hiding the clock or the Seamless Restart configuration</string>
+    <string name="reset_info_not_included_content_extra_shortcut">• Legacy shortcuts, such as \"%1s\"\n</string>
+    <string name="reset_info_continue">Continue</string>
+    <string name="reset_apply_title">Resetting…</string>
+    <string name="reset_apply_content">This may take up to a few minutes, depending on how many apps you have installed</string>
+    <string name="reset_apply_toast_success">Reset complete</string>
+    <string name="reset_apply_toast_failed">Reset failed</string>
+    <string name="menu_hide_apps_deselect_all">Deselect all</string>
+
+    <string name="options_faq">Frequently Asked Questions</string>
+    <string name="options_faq_short">FAQs</string>
+    <string name="options_faq_content">Answers to frequently asked questions, including <b>how to cleanly uninstall Pixel Launcher Mods, without leaving changes behind</b></string>
+
+    <string name="xda_thread">XDA Thread</string>
+    <string name="github">GitHub</string>
+    <string name="libraries">Third party libraries</string>
+    <string name="donate">Donate</string>
+    <string name="twitter">Follow me on Twitter</string>
+    <string name="about_version">Version %1s\nCreated by Kieron Quinn</string>
+    <string name="about_contributors">Contributors</string>
+    <string name="about_contributors_icons">Icons</string>
+    <string name="about_contributors_icons_content"><![CDATA[<b><a href="https://material.io/resources/icons">Material Icons</a></b> (<a href="https://www.apache.org/licenses/LICENSE-2.0.html">Apache Licence 2.0</a>)<br><b><a href="https://github.com/Templarian/MaterialDesign">Material Design Icons</a></b> (<a href="https://github.com/Templarian/MaterialDesign/blob/master/LICENSE">Pictogrammers Free Licence</a>)<br><a href="https://github.com/LawnchairLauncher/lawnicons/blob/develop/app/src/main/res/drawable/magisk.xml"><b>Magisk icon from Lawnicons</b> - Patryk Michalik</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0.html">Apache Licence 2.0</a>)]]></string>
+    <string name="about_contributors_overlay">Dynamic Overlay Generation</string>
+    <string name="about_contributors_overlay_content"><![CDATA[Statically compiled <b><a href="https://github.com/rendiix/termux-aapt">aapt</a></b> and <b><a href="https://github.com/rendiix/termux-zipalign">zipalign</a></b> by <a href="https://github.com/rendiix">rendixx</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0.html">Apache Licence 2.0</a>)<br><a href="https://android.googlesource.com/platform/tools/apksig/">apksigner</a> from AOSP (<a href="https://www.apache.org/licenses/LICENSE-2.0.html">Apache Licence 2.0</a>)]]></string>
+
+    <!-- Update downloader -->
+    <string name="snackbar_update">Update available</string>
+    <string name="snackbar_update_button">Update</string>
+    <string name="settings_update_heading">Pixel Launcher Mods version %1s</string>
+    <string name="settings_update_subheading">Current version %1s</string>
+    <string name="settings_update_changes">Changes</string>
+    <string name="settings_update_open_installer">Start Install</string>
+    <string name="settings_update_done">Download Complete</string>
+    <string name="settings_update_loading">Loading…</string>
+    <string name="settings_update_fab">Download</string>
+    <string name="download_manager_description">Downloading update…</string>
+    <string name="update_downloader_downloading_title">Downloading update…</string>
+    <string name="update_downloader_downloading_failed">Download failed</string>
+    <string name="update_downloader_github">Download via browser</string>
+
+</resources>

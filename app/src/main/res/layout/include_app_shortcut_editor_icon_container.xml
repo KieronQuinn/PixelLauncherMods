@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:animateLayoutChanges="true"
+    android:padding="@dimen/margin_16">
+
+    <ImageView
+        android:id="@+id/app_editor_shortcut_icon_normal"
+        android:layout_width="@dimen/app_editor_icon_size"
+        android:layout_height="@dimen/app_editor_icon_size"
+        android:src="@mipmap/ic_launcher"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/app_editor_shortcut_label_normal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_8"
+        android:text="@string/app_editor_themed_icon"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small.PixelLauncherMods.Medium"
+        app:layout_constraintEnd_toEndOf="@id/app_editor_shortcut_icon_normal"
+        app:layout_constraintStart_toStartOf="@id/app_editor_shortcut_icon_normal"
+        app:layout_constraintTop_toBottomOf="@id/app_editor_shortcut_icon_normal" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

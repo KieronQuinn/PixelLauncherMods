@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_app_editor"
+    app:startDestination="@id/appEditorFragment">
+    <fragment
+        android:id="@+id/appEditorFragment"
+        android:name="com.kieronquinn.app.pixellaunchermods.ui.screens.apps.editor.AppEditorFragment"
+        android:label=" "
+        tools:layout="@layout/fragment_app_editor">
+        <argument
+            android:name="remote_app"
+            app:argType="com.kieronquinn.app.pixellaunchermods.model.remote.RemoteApp" />
+        <action
+            android:id="@+id/action_appEditorFragment_to_nav_graph_icon_picker"
+            app:destination="@id/nav_graph_icon_picker">
+            <argument
+                android:name="component_name"
+                app:argType="string" />
+            <argument
+                android:name="mono"
+                app:argType="boolean" />
+        </action>
+    </fragment>
+    <include app:graph="@navigation/nav_graph_icon_picker"/>
+</navigation>

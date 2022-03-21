@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="MonetSwitch">
+        <attr name="android:textAppearance" format="reference"/>
+        <attr name="android:textColor" format="color"/>
+        <attr name="android:text" format="string"/>
+    </declare-styleable>
+    <declare-styleable name="WidgetSizeInput">
+        <attr name="android:src" format="reference"/>
+    </declare-styleable>
+</resources>

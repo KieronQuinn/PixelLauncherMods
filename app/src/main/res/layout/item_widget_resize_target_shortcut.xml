@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <ImageView
+        android:id="@+id/app_icon"
+        android:adjustViewBounds="true"
+        android:layout_width="@dimen/item_app_width"
+        android:layout_height="@dimen/item_app_width"
+        android:paddingStart="@dimen/item_app_icon_padding_normal"
+        android:paddingTop="@dimen/item_app_icon_padding_normal"
+        android:paddingEnd="@dimen/item_app_icon_padding_normal"
+        android:paddingBottom="8dp"
+        android:layout_gravity="center_horizontal"
+        tools:src="@mipmap/ic_launcher" />
+
+    <TextView
+        android:id="@+id/app_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:lines="1"
+        android:textColor="@android:color/white"
+        android:shadowDy="1"
+        android:shadowRadius="2"
+        android:shadowColor="@android:color/black"
+        android:paddingStart="@dimen/margin_4"
+        android:paddingEnd="@dimen/margin_4"
+        android:paddingBottom="@dimen/item_app_icon_padding_normal"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small.PixelLauncherMods.Medium"
+        tools:text="@string/app_name" />
+
+</LinearLayout>

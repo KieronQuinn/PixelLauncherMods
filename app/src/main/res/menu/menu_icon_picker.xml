@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <item
+        android:id="@+id/app_editor_iconpicker_remove"
+        android:title="@string/app_editor_iconpicker_remove"
+        android:icon="@drawable/ic_icon_remove"
+        android:showAsAction="always"
+        tools:ignore="AppCompatResource" />
+</menu>

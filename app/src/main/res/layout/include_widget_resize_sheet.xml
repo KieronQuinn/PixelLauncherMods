@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:animateLayoutChanges="true"
+    android:paddingBottom="@dimen/margin_16">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/widget_resize_sheet_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:animateLayoutChanges="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_back"
+        app:title="@string/tweaks_resize_widgets_title"
+        app:titleCentered="true"
+        app:titleTextAppearance="@style/TextAppearance.AppCompat.Large.PixelLauncherMods" />
+
+    <com.kieronquinn.app.pixellaunchermods.ui.views.WidgetSizeInput
+        android:id="@+id/widget_resize_sheet_resize_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_8"
+        android:src="@drawable/ic_widget_resize_horizontal"
+        app:layout_constraintEnd_toStartOf="@id/widget_resize_sheet_resize_vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/widget_resize_sheet_toolbar" />
+
+    <com.kieronquinn.app.pixellaunchermods.ui.views.WidgetSizeInput
+        android:id="@+id/widget_resize_sheet_resize_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_8"
+        android:src="@drawable/ic_widget_resize_vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/widget_resize_sheet_resize_horizontal"
+        app:layout_constraintTop_toBottomOf="@id/widget_resize_sheet_toolbar" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/tweaks_resize_widgets_sheet_selected"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="widget_resize_sheet_resize_horizontal,widget_resize_sheet_resize_vertical" />
+
+    <LinearLayout
+        android:id="@+id/tweaks_resize_widgets_sheet_unselected"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:orientation="vertical"
+        android:paddingStart="@dimen/margin_16"
+        android:paddingEnd="@dimen/margin_16"
+        android:layout_marginTop="@dimen/margin_8"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/widget_resize_sheet_toolbar">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/tweaks_resize_widgets_sheet_unselected"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium.PixelLauncherMods"
+            android:textColor="?android:textColorPrimary" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/tweaks_resize_widgets_sheet_unselected_info"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small.PixelLauncherMods"
+            android:textColor="?android:textColorPrimary" />
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

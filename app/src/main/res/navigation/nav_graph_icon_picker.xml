@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_icon_picker"
+    app:startDestination="@id/iconPickerFragment">
+    <fragment
+        android:id="@+id/iconPickerFragment"
+        android:name="com.kieronquinn.app.pixellaunchermods.ui.screens.iconpicker.IconPickerFragment"
+        android:label="@string/app_editor_iconpicker_title"
+        tools:layout="@layout/fragment_icon_picker" >
+        <argument
+            android:name="component_name"
+            app:argType="string" />
+        <argument
+            android:name="mono"
+            app:argType="boolean" />
+        <action
+            android:id="@+id/action_iconPickerFragment_to_iconPickerPackFragment"
+            app:destination="@id/iconPickerPackFragment" />
+        <action
+            android:id="@+id/action_iconPickerFragment_to_iconPickerAppsFragment"
+            app:destination="@id/iconPickerAppsFragment" />
+        <action
+            android:id="@+id/action_iconPickerFragment_to_legacyThemedIconPickerFragment"
+            app:destination="@id/legacyThemedIconPickerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/iconPickerPackFragment"
+        android:name="com.kieronquinn.app.pixellaunchermods.ui.screens.iconpicker.pack.IconPickerPackFragment"
+        android:label="@string/app_editor_iconpicker_pack_title"
+        tools:layout="@layout/fragment_icon_picker_pack">
+        <argument
+            android:name="mono"
+            app:argType="boolean" />
+        <argument
+            android:name="icon_pack"
+            app:argType="com.kieronquinn.app.pixellaunchermods.model.editor.IconPack" />
+    </fragment>
+    <fragment
+        android:id="@+id/iconPickerAppsFragment"
+        android:name="com.kieronquinn.app.pixellaunchermods.ui.screens.iconpicker.apps.IconPickerAppsFragment"
+        android:label="@string/app_editor_iconpicker_apps"
+        tools:layout="@layout/fragment_icon_picker_apps">
+        <argument
+            android:name="mono"
+            app:argType="boolean" />
+    </fragment>
+    <fragment
+        android:id="@+id/legacyThemedIconPickerFragment"
+        android:name="com.kieronquinn.app.pixellaunchermods.ui.screens.iconpicker.legacythemed.LegacyThemedIconPickerFragment"
+        android:label=" "
+        tools:layout="@layout/fragment_icon_picker_legacy_themed">
+        <argument
+            android:name="mono"
+            app:argType="boolean" />
+        <argument
+            android:name="lawnicons"
+            app:argType="boolean" />
+    </fragment>
+
+</navigation>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_shortcuts"
+    app:startDestination="@id/shortcutsFragment">
+
+    <fragment
+        android:id="@+id/shortcutsFragment"
+        android:name="com.kieronquinn.app.pixellaunchermods.ui.screens.shortcuts.ShortcutsFragment"
+        android:label="@string/shortcuts_title"
+        tools:layout="@layout/fragment_shortcuts" >
+        <action
+            android:id="@+id/action_shortcutsFragment_to_nav_graph_app_editor"
+            app:destination="@id/nav_graph_app_editor">
+            <argument
+                android:name="remote_app"
+                app:argType="com.kieronquinn.app.pixellaunchermods.model.remote.RemoteApp" />
+        </action>
+        <action
+            android:id="@+id/action_shortcutsFragment_to_shortcutEditorFragment"
+            app:destination="@id/shortcutEditorFragment" />
+    </fragment>
+    <include app:graph="@navigation/nav_graph_app_editor" />
+    <fragment
+        android:id="@+id/shortcutEditorFragment"
+        android:name="com.kieronquinn.app.pixellaunchermods.ui.screens.shortcuts.editor.ShortcutEditorFragment"
+        android:label=" "
+        tools:layout="@layout/fragment_shortcut_editor" >
+        <argument
+            android:name="remote_favourite"
+            app:argType="com.kieronquinn.app.pixellaunchermods.model.remote.RemoteFavourite" />
+        <action
+            android:id="@+id/action_shortcutEditorFragment_to_nav_graph_icon_picker"
+            app:destination="@id/nav_graph_icon_picker">
+            <argument
+                android:name="component_name"
+                app:argType="string" />
+            <argument
+                android:name="mono"
+                app:argType="boolean" />
+        </action>
+    </fragment>
+    <include app:graph="@navigation/nav_graph_icon_picker" />
+
+</navigation>

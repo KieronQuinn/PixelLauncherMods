@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/tweaks_apply_icon"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:visibility="gone"
+            tools:src="@drawable/ic_check_circle"
+            tools:visibility="visible" />
+
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/tweaks_apply_progress"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            app:trackCornerRadius="4dp"
+            app:trackThickness="8dp" />
+
+        <TextView
+            android:id="@+id/tweaks_apply_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_16"
+            android:layout_marginBottom="@dimen/margin_8"
+            android:gravity="center"
+            android:text="@string/overlay_apply_applying"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium.PixelLauncherMods"
+            android:textColor="?android:textColorPrimary" />
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/tweaks_apply_console_container"
+            android:layout_width="300dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="@dimen/margin_16"
+            android:background="@drawable/background_tweaks_apply_console"
+            android:clipChildren="true"
+            android:clipToPadding="false"
+            android:fillViewport="true"
+            android:outlineProvider="background"
+            android:padding="@dimen/margin_16">
+
+            <TextView
+                android:id="@+id/tweaks_apply_console"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/google_sans_mono"
+                android:textColor="@android:color/white"
+                tools:text="Console" />
+
+        </androidx.core.widget.NestedScrollView>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/tweaks_apply_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_16"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small.PixelLauncherMods.Medium"
+            android:text="@string/tweaks_apply_close" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/tweaks_apply_save_log"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_8"
+            android:text="@string/tweaks_apply_save_log"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small.PixelLauncherMods.Medium"
+            app:icon="@drawable/ic_magisk_save" />
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>
