@@ -219,3 +219,11 @@ fabric.properties
 !/gradle/wrapper/gradle-wrapper.jar
 
 # End of https://www.toptal.com/developers/gitignore/api/android,androidstudio,java,kotlin,gradle
+
+# Include ApkSigner dependency & android JAR
+!app/libs/apksigner.jar
+!app/src/main/assets/overlay/build/android-manifest.jar
+
+# Include keystores for overlay (NOT used for the release app)
+!overlay.keystore.jks
+!plm.keystore.bk1.keystore
