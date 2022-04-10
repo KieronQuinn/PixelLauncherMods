@@ -60,6 +60,9 @@ interface SettingsRepository {
     val proxyWidgetPreviewIdTop: PixelLauncherModsSetting<Int>
     val proxyWidgetPreviewIdBottom: PixelLauncherModsSetting<Int>
 
+    //Debug: Show toast message with (possible) restart reason from service
+    val debugRestartReasonToast: PixelLauncherModsSetting<Boolean>
+
     suspend fun resetIcons()
 
     abstract class PixelLauncherModsSetting<T> {
@@ -129,6 +132,11 @@ interface SettingsRepository {
      */
     enum class DeferredRestartMode(val titleRes: Int, val contentRes: Int) {
         /**
+         *  Disables all restarts, user must restart manually
+         */
+        DISABLED(R.string.deferred_restart_disabled, R.string.deferred_restart_disabled_content),
+
+        /**
          *  Restart the launcher immediately, even if it is in the foreground
          */
         INSTANT(R.string.deferred_restart_instant_title, R.string.deferred_restart_instant_content),
@@ -177,6 +185,8 @@ class SettingsRepositoryImpl(context: Context): SettingsRepository {
         private const val DEFAULT_PROXY_WIDGET_PREVIEW_ID_TOP = -1
         private const val KEY_PROXY_WIDGET_PREVIEW_ID_BOTTOM = "proxy_widget_preview_id_bottom"
         private const val DEFAULT_PROXY_WIDGET_PREVIEW_ID_BOTTOM = -1
+        private const val KEY_DEBUG_RESTART_REASON_TOAST = "debug_restart_reason_toast"
+        private const val DEFAULT_DEBUG_RESTART_REASON_TOAST = false
     }
 
     override val shouldLaunchService: PixelLauncherModsSetting<Boolean> = PixelLauncherModsSettingImpl(
@@ -245,6 +255,12 @@ class SettingsRepositoryImpl(context: Context): SettingsRepository {
         KEY_PROXY_WIDGET_PREVIEW_ID_BOTTOM,
         DEFAULT_PROXY_WIDGET_PREVIEW_ID_BOTTOM,
         SHARED_INT
+    )
+
+    override val debugRestartReasonToast: PixelLauncherModsSetting<Boolean> = PixelLauncherModsSettingImpl(
+        KEY_DEBUG_RESTART_REASON_TOAST,
+        DEFAULT_DEBUG_RESTART_REASON_TOAST,
+        SHARED_BOOLEAN
     )
 
     override suspend fun resetIcons() {

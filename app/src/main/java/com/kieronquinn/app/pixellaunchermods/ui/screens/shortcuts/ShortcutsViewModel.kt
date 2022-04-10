@@ -17,6 +17,10 @@ import kotlinx.coroutines.launch
 abstract class ShortcutsViewModel: ViewModel() {
 
     abstract val state: StateFlow<State>
+    abstract val searchShowClear: StateFlow<Boolean>
+
+    abstract fun getSearchTerm(): String
+    abstract fun setSearchTerm(search: String)
     abstract fun onItemClicked(item: Shortcut)
     abstract fun updateThemedIconsState(isDarkMode: Boolean)
     abstract fun onResume()
@@ -35,7 +39,11 @@ class ShortcutsViewModelImpl(
     private val navigation: ContainerNavigation
 ): ShortcutsViewModel() {
 
+    private val searchTerm = MutableStateFlow("")
     private val loadIcons = MutableSharedFlow<Unit>()
+
+    override val searchShowClear = searchTerm.map { it.isNotBlank() }
+        .stateIn(viewModelScope, SharingStarted.Eagerly, false)
 
     private val remoteShortcuts = instantCombine(loadIcons, remoteAppsRepository.onRemoteDatabaseChanged).mapLatest {
         remoteAppsRepository.getRemoteShortcuts().sortedBy { it.label?.lowercase() }
@@ -50,19 +58,31 @@ class ShortcutsViewModelImpl(
         GlideApp.get(context)
     }
 
-    override val state = combine(remoteShortcuts, themedIconsEnabled) { shortcuts, themed ->
+    override val state = combine(remoteShortcuts, themedIconsEnabled, searchTerm) { shortcuts, themed, search ->
         when {
             shortcuts?.isEmpty() == true -> {
                 State.Error
             }
             shortcuts != null && themed != null -> {
-                State.Loaded(shortcuts, themed)
+                State.Loaded(shortcuts.filter {
+                      it.label?.contains(search, true) == true
+                }, themed)
             }
             else -> {
                 State.Loading
             }
         }
     }.stateIn(viewModelScope, SharingStarted.Eagerly, State.Loading)
+
+    override fun getSearchTerm(): String {
+        return searchTerm.value
+    }
+
+    override fun setSearchTerm(search: String) {
+        viewModelScope.launch {
+            searchTerm.emit(search)
+        }
+    }
 
     override fun updateThemedIconsState(isDarkMode: Boolean) {
         viewModelScope.launch {

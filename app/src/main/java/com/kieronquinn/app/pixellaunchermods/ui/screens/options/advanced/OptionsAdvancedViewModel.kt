@@ -14,6 +14,7 @@ abstract class OptionsAdvancedViewModel: BaseSettingsViewModel() {
 
     abstract val restartBus: Flow<Unit>
     abstract val suppressShortcutSetting: SettingsRepository.PixelLauncherModsSetting<Boolean>
+    abstract val debugRestartReasonToastSetting: SettingsRepository.PixelLauncherModsSetting<Boolean>
 
     abstract fun onRestartClicked()
     abstract fun onResetClicked()
@@ -28,6 +29,7 @@ class OptionsAdvancedViewModelImpl(
 
     override val restartBus = MutableSharedFlow<Unit>()
     override val suppressShortcutSetting = settingsRepository.suppressShortcutChangeListener
+    override val debugRestartReasonToastSetting = settingsRepository.debugRestartReasonToast
 
     override fun onRestartClicked() {
         viewModelScope.launch(Dispatchers.IO) {

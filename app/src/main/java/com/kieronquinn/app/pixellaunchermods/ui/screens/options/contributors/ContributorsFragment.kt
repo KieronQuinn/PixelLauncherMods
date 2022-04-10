@@ -5,6 +5,7 @@ import com.kieronquinn.app.pixellaunchermods.ui.base.BackAvailable
 import com.kieronquinn.app.pixellaunchermods.ui.base.settings.BaseSettingsAdapter
 import com.kieronquinn.app.pixellaunchermods.ui.base.settings.BaseSettingsFragment
 import com.kieronquinn.app.pixellaunchermods.ui.base.settings.BaseSettingsViewModel.SettingsItem
+import com.kieronquinn.app.pixellaunchermods.utils.extensions.getResourceIdArray
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ContributorsFragment: BaseSettingsFragment(), BackAvailable {
@@ -24,12 +25,27 @@ class ContributorsFragment: BaseSettingsFragment(), BackAvailable {
                 titleRes = R.string.about_contributors_overlay,
                 contentRes = R.string.about_contributors_overlay_content,
                 linkClicked = viewModel::onLinkClicked
-            )
+            ),
+            SettingsItem.Header(R.string.contributors_translators),
+            *getTranslatorsList().toTypedArray()
         )
     }
 
     override fun createAdapter(items: List<SettingsItem>): BaseSettingsAdapter {
         return ContributorsAdapter()
+    }
+
+    private fun getTranslatorsList(): List<SettingsItem.Text> {
+        val headings = resources.getResourceIdArray(R.array.about_translators_headings)
+        val content = resources.getResourceIdArray(R.array.about_translators_content)
+        val flags = resources.getResourceIdArray(R.array.about_translators_flags)
+        return headings.mapIndexed { index, resource ->
+            SettingsItem.Text(
+                icon = flags[index],
+                titleRes = resource,
+                contentRes = content[index]
+            )
+        }
     }
 
     inner class ContributorsAdapter: BaseSettingsAdapter(requireContext(), binding.settingsBaseRecyclerView, items)

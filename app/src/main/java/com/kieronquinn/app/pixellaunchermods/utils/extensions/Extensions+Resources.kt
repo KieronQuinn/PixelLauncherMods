@@ -1,6 +1,7 @@
 package com.kieronquinn.app.pixellaunchermods.utils.extensions
 
 import android.content.res.Resources
+import androidx.annotation.ArrayRes
 
 /**
  *  Hacky method for checking if a given resource is *probably* an adaptive icon, by checking
@@ -16,4 +17,14 @@ fun Resources.rawResourceContains(identifier: Int, searchString: String): Boolea
             reader.readText().contains(searchString)
         }
     }
+}
+
+fun Resources.getResourceIdArray(@ArrayRes resourceId: Int): Array<Int> {
+    val array = obtainTypedArray(resourceId)
+    val items = mutableListOf<Int>()
+    for(i in 0 until array.length()){
+        items.add(array.getResourceId(i, 0))
+    }
+    array.recycle()
+    return items.toTypedArray()
 }
