@@ -141,6 +141,9 @@
     <string name="deferred_restart_background_content">Restarts the Pixel Launcher when it is not visible, ie. it is in the background. Icon resets should be minimal in this mode, unless you leave your device with the launcher always showing.\n<b>Recommended</b></string>
     <string name="deferred_restart_screen_off_title">Screen Off Restart</string>
     <string name="deferred_restart_screen_off_content">Restarts only when the display is off, for zero disruption. You may experience icon resets with this mode, if you use your device for long periods of time and have automatic updates enabled.</string>
+    <string name="deferred_restart_disabled">Disabled</string>
+    <string name="deferred_restart_disabled_content">Disables automatic restarts entirely, <b>you will need to manually re-apply icons when required.</b></string>
+
     <string name="backup_restore_backup_close">Close</string>
     <string name="backup_restore_backup_creating">Creating backup…</string>
     <string name="backup_restore_backup_creating_success">Backup created</string>
@@ -202,6 +205,8 @@
     <string name="options_advanced_shortcut_content">Some apps send app shortcut updates very often, which can increase battery usage of Pixel Launcher Mods and lead to more common restarts. If you are experiencing this, disabling app shortcut updates will resolve the problem, but you may need to re-apply icons more often for them to not be un-themed.</string>
     <string name="options_advanced_reset">Reset</string>
     <string name="options_advanced_reset_content">Reset all modified apps\' &amp; app shortcut\'s labels and icons, and rebuild the Pixel Launcher\'s icon cache</string>
+    <string name="options_advanced_debug_restart_reason_toast">Debug: Show Restart Reason Toast</string>
+    <string name="options_advanced_debug_restart_reason_toast_content">Shows a Toast message with the reason for a <b>potential</b> restart, before it happens. Note that this does not <i>guarantee</i> a restart, but it will tell you what caused the restart if one happens.</string>
     <string name="reset_info_loading">Loading…</string>
     <string name="reset_info_warning">Resetting is irreversible. Make sure you have made a backup before continuing, if you wish to keep your app and app shortcut configuration</string>
     <string name="reset_info_title">Warning</string>
@@ -229,7 +234,7 @@
     <string name="about_version">Version %1s\nCreated by Kieron Quinn</string>
     <string name="about_contributors">Contributors</string>
     <string name="about_contributors_icons">Icons</string>
-    <string name="about_contributors_icons_content"><![CDATA[<b><a href="https://material.io/resources/icons">Material Icons</a></b> (<a href="https://www.apache.org/licenses/LICENSE-2.0.html">Apache Licence 2.0</a>)<br><b><a href="https://github.com/Templarian/MaterialDesign">Material Design Icons</a></b> (<a href="https://github.com/Templarian/MaterialDesign/blob/master/LICENSE">Pictogrammers Free Licence</a>)<br><a href="https://github.com/LawnchairLauncher/lawnicons/blob/develop/app/src/main/res/drawable/magisk.xml"><b>Magisk icon from Lawnicons</b> - Patryk Michalik</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0.html">Apache Licence 2.0</a>)]]></string>
+    <string name="about_contributors_icons_content"><![CDATA[<b><a href="https://material.io/resources/icons">Material Icons</a></b> (<a href="https://www.apache.org/licenses/LICENSE-2.0.html">Apache Licence 2.0</a>)<br><b><a href="https://github.com/Templarian/MaterialDesign">Material Design Icons</a></b> (<a href="https://github.com/Templarian/MaterialDesign/blob/master/LICENSE">Pictogrammers Free Licence</a>)<br><a href="https://github.com/LawnchairLauncher/lawnicons/blob/develop/app/src/main/res/drawable/magisk.xml"><b>Magisk icon from Lawnicons</b> - Patryk Michalik</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0.html">Apache Licence 2.0</a>)<br><b><a href="https://github.com/HatScripts/circle-flags">circle-flags</a></b> by HatScripts (<a href="https://github.com/HatScripts/circle-flags/blob/gh-pages/LICENSE">MIT Licence</a>)]]></string>
     <string name="about_contributors_overlay">Dynamic Overlay Generation</string>
     <string name="about_contributors_overlay_content"><![CDATA[Statically compiled <b><a href="https://github.com/rendiix/termux-aapt">aapt</a></b> and <b><a href="https://github.com/rendiix/termux-zipalign">zipalign</a></b> by <a href="https://github.com/rendiix">rendixx</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0.html">Apache Licence 2.0</a>)<br><a href="https://android.googlesource.com/platform/tools/apksig/">apksigner</a> from AOSP (<a href="https://www.apache.org/licenses/LICENSE-2.0.html">Apache Licence 2.0</a>)]]></string>
 
@@ -247,5 +252,15 @@
     <string name="update_downloader_downloading_title">Downloading update…</string>
     <string name="update_downloader_downloading_failed">Download failed</string>
     <string name="update_downloader_github">Download via browser</string>
+
+    <!-- Restart Reason Debug Toasts -->
+    <string name="restart_reason_template">Possible restart: %1s</string>
+    <string name="restart_reason_package">%1s changed</string>
+    <string name="restart_reason_restart">PL was killed / icon reset</string>
+    <string name="restart_reason_config">icon config changed</string>
+
+    <!-- Contributors: Translation Languages -->
+    <string name="contributors_translators">Translators</string>
+    <string name="contributors_translators_romanian">Romanian</string>
 
 </resources>

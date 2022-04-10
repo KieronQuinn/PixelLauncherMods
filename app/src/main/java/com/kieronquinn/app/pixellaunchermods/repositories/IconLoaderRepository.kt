@@ -28,6 +28,7 @@ import com.kieronquinn.app.pixellaunchermods.model.remote.RemoteAppOptions
 import com.kieronquinn.app.pixellaunchermods.model.remote.RemoteFavourite
 import com.kieronquinn.app.pixellaunchermods.ui.drawables.ClockDrawableWrapper
 import com.kieronquinn.app.pixellaunchermods.ui.screens.iconpicker.BasePickerViewModel.IconPickerResultOptions
+import com.kieronquinn.app.pixellaunchermods.utils.drawable.IconNormalizer
 import com.kieronquinn.app.pixellaunchermods.utils.extensions.*
 import com.kieronquinn.app.pixellaunchermods.utils.glide.GlideApp
 import com.kieronquinn.app.pixellaunchermods.utils.glide.ScaleTransformation
@@ -70,7 +71,8 @@ interface IconLoaderRepository {
 
 class IconLoaderRepositoryImpl(
     private val context: Context,
-    private val iconPackRepository: IconPackRepository
+    private val iconPackRepository: IconPackRepository,
+    private val overrideIconSize: Int? = null,
 ): IconLoaderRepository, KoinComponent {
 
     companion object {
@@ -83,6 +85,7 @@ class IconLoaderRepositoryImpl(
         private const val THEMED_ICON_MAP_FILE = "grayscale_icon_map"
         const val THEMED_ICON_INSET_FRACTION = 0.325f
         const val THEMED_ICON_INSET_FRACTION_LARGE = 0.225f
+        const val THEMED_ICON_INSET_FRACTION_EXTRA_LARGE = 0.175f
     }
 
     private val remoteAppsRepository by inject<RemoteAppsRepository>()
@@ -92,8 +95,12 @@ class IconLoaderRepositoryImpl(
     private val packageManager = context.packageManager
     private var lawniconsIconMap: Map<String, LegacyThemedIcon>? = null
 
+    private val iconNormalizer by lazy {
+        IconNormalizer(context, iconSize, true)
+    }
+
     override val iconSize
-        get() = remoteAppsRepository.iconSize.value ?: throw NullPointerException("Cannot access iconSize before it is set")
+        get() = overrideIconSize ?: remoteAppsRepository.iconSize.value ?: throw NullPointerException("Cannot access iconSize before it is set")
 
     private val glide by lazy {
         GlideApp.with(context)
@@ -358,17 +365,30 @@ class IconLoaderRepositoryImpl(
                 }
             }
         }.run {
-            if(options.mono && this is AdaptiveIconDrawable){
-                scale = 1f + THEMED_ICON_INSET_FRACTION
-                this.getMonochromeOrForeground()
+            if(!options.result.isLegacyThemedIcon() && options.mono && this is AdaptiveIconDrawable){
+                val drawable = this.getMonochromeOrForeground()
+                scale = 1f + iconNormalizer.getScale(drawable, null, null, null)
+                drawable
+            }else this
+        }.run {
+            if(options.result.isLegacyThemedIcon() && this is AdaptiveIconDrawable) {
+                getMonochromeOrForeground()
             }else this
         }.run {
             glide.load(this).run {
                 scale?.let {
                     transform(ScaleTransformation(it))
-                } ?: run { this }
+                } ?: this
             }.submit(iconSize, iconSize).get()
+        }?.run {
+            if(!options.result.isLegacyThemedIcon() && options.mono){
+                InsetDrawable(this, THEMED_ICON_INSET_FRACTION_EXTRA_LARGE)
+            }else this
         }
+    }
+
+    private fun IconPickerResult.isLegacyThemedIcon(): Boolean {
+        return this is IconPickerResult.LegacyThemedIcon || this is IconPickerResult.Lawnicon
     }
 
     override fun createLegacyThemedIcon(resourceId: Int): LegacyThemedIcon {

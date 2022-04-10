@@ -14,7 +14,6 @@ import android.content.pm.ILauncherApps
 import android.content.pm.IOnAppsChangedListener
 import android.os.*
 import android.system.Os
-import android.util.Log
 import com.android.internal.appwidget.IAppWidgetService
 import com.kieronquinn.app.pixellaunchermods.BuildConfig
 import com.kieronquinn.app.pixellaunchermods.OVERLAY_PACKAGE_NAME
@@ -26,7 +25,7 @@ import com.kieronquinn.app.pixellaunchermods.model.remote.ModifiedRemoteApp
 import com.kieronquinn.app.pixellaunchermods.model.remote.RemoteApp
 import com.kieronquinn.app.pixellaunchermods.model.remote.RemoteFavourite
 import com.kieronquinn.app.pixellaunchermods.model.remote.RemoteWidget
-import com.kieronquinn.app.pixellaunchermods.service.PixelLauncherModsForegroundService.Companion.SETTINGS_KEY_ICON_BLACKLIST
+import com.kieronquinn.app.pixellaunchermods.repositories.HideClockRepositoryImpl.Companion.SETTINGS_KEY_ICON_BLACKLIST
 import com.kieronquinn.app.pixellaunchermods.utils.extensions.*
 import com.kieronquinn.app.pixellaunchermods.utils.widget.ProxyAppWidgetService
 import com.topjohnwu.superuser.internal.Utils
