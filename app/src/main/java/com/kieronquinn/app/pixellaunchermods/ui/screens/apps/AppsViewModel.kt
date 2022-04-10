@@ -15,6 +15,10 @@ import kotlinx.coroutines.launch
 abstract class AppsViewModel: ViewModel() {
 
     abstract val state: StateFlow<State>
+    abstract val searchShowClear: StateFlow<Boolean>
+
+    abstract fun getSearchTerm(): String
+    abstract fun setSearchTerm(search: String)
     abstract fun onItemClicked(item: Item)
     abstract fun updateThemedIconsState(isDarkMode: Boolean)
     abstract fun onResume()
@@ -42,7 +46,11 @@ class AppsViewModelImpl(
     private val navigation: ContainerNavigation
 ): AppsViewModel() {
 
+    private val searchTerm = MutableStateFlow("")
     private val loadIcons = MutableSharedFlow<Unit>()
+
+    override val searchShowClear = searchTerm.map { it.isNotBlank() }
+        .stateIn(viewModelScope, SharingStarted.Eagerly, false)
 
     private val remoteApps = instantCombine(loadIcons, remoteAppsRepository.onRemoteDatabaseChanged).mapLatest {
         remoteAppsRepository.getRemoteApps(false)
@@ -56,17 +64,29 @@ class AppsViewModelImpl(
         GlideApp.get(context)
     }
 
-    override val state = remoteApps.filterNotNull().map { apps ->
+    override val state = combine(searchTerm, remoteApps.filterNotNull()) { search, apps ->
         when {
             apps.isEmpty() -> {
                 State.Error
             }
             else -> {
-                val items = listOf(Item.Header) + apps.map { Item.App(it) }
+                val items = listOf(Item.Header) + apps
+                    .filter { it.label.contains(search, true) }
+                    .map { Item.App(it) }
                 State.Loaded(items)
             }
         }
     }.stateIn(viewModelScope, SharingStarted.Eagerly, State.Loading)
+
+    override fun getSearchTerm(): String {
+        return searchTerm.value
+    }
+
+    override fun setSearchTerm(search: String) {
+        viewModelScope.launch {
+            searchTerm.emit(search)
+        }
+    }
 
     override fun updateThemedIconsState(isDarkMode: Boolean) {
         viewModelScope.launch {

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- DO NOT TRANSLATE -->
+    <string name="contributors_translators_romanian_content">Igor Sorocean</string>
+
+    <!-- You MUST add a language to all THREE translators arrays, with the heading, content and icon -->
+    <array name="about_translators_headings">
+        <item>@string/contributors_translators_romanian</item>
+    </array>
+
+    <array name="about_translators_content">
+        <item>@string/contributors_translators_romanian_content</item>
+    </array>
+
+    <array name="about_translators_flags">
+        <item>@drawable/ic_about_translators_ro</item>
+    </array>
+
+</resources>

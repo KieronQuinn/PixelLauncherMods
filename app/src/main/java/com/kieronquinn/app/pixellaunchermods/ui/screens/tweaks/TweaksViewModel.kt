@@ -3,6 +3,7 @@ package com.kieronquinn.app.pixellaunchermods.ui.screens.tweaks
 import androidx.lifecycle.viewModelScope
 import com.kieronquinn.app.pixellaunchermods.components.navigation.ContainerNavigation
 import com.kieronquinn.app.pixellaunchermods.components.navigation.RootNavigation
+import com.kieronquinn.app.pixellaunchermods.repositories.HideClockRepository
 import com.kieronquinn.app.pixellaunchermods.repositories.SettingsRepository
 import com.kieronquinn.app.pixellaunchermods.ui.base.settings.BaseSettingsViewModel
 import com.kieronquinn.app.pixellaunchermods.ui.screens.container.ContainerFragmentDirections
@@ -21,6 +22,7 @@ abstract class TweaksViewModel: BaseSettingsViewModel() {
 class TweaksViewModelImpl(
     private val rootNavigation: RootNavigation,
     private val containerNavigation: ContainerNavigation,
+    private val hideClockRepository: HideClockRepository,
     settingsRepository: SettingsRepository
 ): TweaksViewModel() {
 
@@ -42,6 +44,19 @@ class TweaksViewModelImpl(
         viewModelScope.launch {
             containerNavigation.navigate(TweaksFragmentDirections.actionTweaksFragmentToHideAppsFragment())
         }
+    }
+
+    //Immediately show the clock when the option is disabled to prevent it getting stuck disabled
+    private fun setupDisableHideClock() = viewModelScope.launch {
+        hideClock.asFlow().collect {
+            if(!it){
+                hideClockRepository.setClockVisible(true)
+            }
+        }
+    }
+
+    init {
+        setupDisableHideClock()
     }
 
 }

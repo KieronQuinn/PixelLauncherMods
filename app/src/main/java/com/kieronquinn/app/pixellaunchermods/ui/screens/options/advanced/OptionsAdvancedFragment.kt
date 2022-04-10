@@ -34,6 +34,12 @@ class OptionsAdvancedFragment: BaseSettingsFragment(), BackAvailable {
                 titleRes = R.string.options_advanced_reset,
                 contentRes = R.string.options_advanced_reset_content,
                 onClick = viewModel::onResetClicked
+            ),
+            BaseSettingsViewModel.SettingsItem.Switch(
+                icon = R.drawable.ic_advanced_debug_restart_reason_toast,
+                titleRes = R.string.options_advanced_debug_restart_reason_toast,
+                contentRes = R.string.options_advanced_debug_restart_reason_toast_content,
+                setting = viewModel.debugRestartReasonToastSetting
             )
         )
     }

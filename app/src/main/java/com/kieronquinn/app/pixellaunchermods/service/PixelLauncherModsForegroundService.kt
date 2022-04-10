@@ -6,6 +6,7 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.provider.Settings
+import android.widget.Toast
 import androidx.lifecycle.LifecycleService
 import androidx.lifecycle.lifecycleScope
 import com.kieronquinn.app.pixellaunchermods.R
@@ -25,21 +26,19 @@ import kotlinx.coroutines.flow.*
 import org.koin.android.ext.android.inject
 import kotlin.math.roundToInt
 
-class PixelLauncherModsForegroundService: LifecycleService() {
+class PixelLauncherModsForegroundService : LifecycleService() {
 
     companion object {
-        const val SETTINGS_KEY_ICON_BLACKLIST = "icon_blacklist"
-        private const val ICON_DENYLIST_CLOCK = "clock"
 
-        fun start(context: Context, restart: Boolean = false){
+        fun start(context: Context, restart: Boolean = false) {
             val intent = Intent(context, PixelLauncherModsForegroundService::class.java)
-            if(restart) {
+            if (restart) {
                 context.stopService(intent)
             }
             context.startForegroundService(intent)
         }
 
-        private fun stop(context: Context, intent: Intent){
+        private fun stop(context: Context, intent: Intent) {
             context.stopService(intent)
         }
 
@@ -56,9 +55,14 @@ class PixelLauncherModsForegroundService: LifecycleService() {
     private val settingsRepository by inject<SettingsRepository>()
     private val appStateRepository by inject<AppStateRepository>()
     private val proxyAppWidgetRepository by inject<ProxyAppWidgetRepository>()
+    private val hideClockRepository by inject<HideClockRepository>()
 
     private val restartMode = settingsRepository.deferredRestartMode.asFlow()
-        .stateIn(lifecycleScope, SharingStarted.Eagerly, settingsRepository.deferredRestartMode.getSync())
+        .stateIn(
+            lifecycleScope,
+            SharingStarted.Eagerly,
+            settingsRepository.deferredRestartMode.getSync()
+        )
 
     private val deferredRestart = MutableStateFlow<DeferredRestart?>(null)
 
@@ -74,38 +78,55 @@ class PixelLauncherModsForegroundService: LifecycleService() {
     }
 
     private val restartBus by lazy {
-        combine(restartMode, deferredRestart, screenState, pixelLauncherForeground) { mode, deferred, screen, foreground ->
-            if(deferred == null) return@combine null
-            if(appStateRepository.appInForeground.first()){
+        combine(
+            restartMode,
+            deferredRestart,
+            screenState,
+            pixelLauncherForeground
+        ) { mode, deferred, screen, foreground ->
+            if (deferred == null) return@combine null
+            if (appStateRepository.appInForeground.first()) {
                 //App is in foreground, always restart immediately
                 return@combine deferred.isFromRestart
             }
-            when(mode){
+            when (mode) {
                 DeferredRestartMode.INSTANT -> {
                     //Restart immediately
                     deferred.isFromRestart
                 }
                 DeferredRestartMode.BACKGROUND -> {
                     //Restart only if Pixel Launcher is in the background
-                    if(!foreground){
+                    if (!foreground) {
                         deferred.isFromRestart
-                    }else null
+                    } else null
                 }
                 DeferredRestartMode.SCREEN_OFF -> {
                     //Restart only if the screen is off
-                    if(!screen){
+                    if (!screen) {
                         deferred.isFromRestart
-                    }else null
+                    } else null
+                }
+                DeferredRestartMode.DISABLED -> {
+                    //Never restart when disabled
+                    null
                 }
             }
         }.filterNotNull()
     }
 
     private val autoIconPacks = settingsRepository.autoIconPackOrder.asFlow()
-        .stateIn(lifecycleScope, SharingStarted.Eagerly, settingsRepository.autoIconPackOrder.getSync())
+        .stateIn(
+            lifecycleScope,
+            SharingStarted.Eagerly,
+            settingsRepository.autoIconPackOrder.getSync()
+        )
 
     private val suppressShortcuts = settingsRepository.suppressShortcutChangeListener.asFlow()
-        .stateIn(lifecycleScope, SharingStarted.Eagerly, settingsRepository.suppressShortcutChangeListener.getSync())
+        .stateIn(
+            lifecycleScope,
+            SharingStarted.Eagerly,
+            settingsRepository.suppressShortcutChangeListener.getSync()
+        )
 
     private val modifiedPackages = databaseRepository.getAllModifiedAppsAsFlow().mapLatest {
         it.mapNotNull { app ->
@@ -121,7 +142,7 @@ class PixelLauncherModsForegroundService: LifecycleService() {
 
     private val packageChanged = remoteAppsRepository.onPackageChanged
         .mapNotNull {
-            if(it.second && suppressShortcuts.value) return@mapNotNull null
+            if (it.second && suppressShortcuts.value) return@mapNotNull null
             it.first
         }
         .shareIn(lifecycleScope, SharingStarted.Eagerly)
@@ -136,18 +157,24 @@ class PixelLauncherModsForegroundService: LifecycleService() {
 
     private val delayedPackageChangeListener = packageChangedListener.mapLatest {
         delay(PACKAGE_CHANGED_DELAY)
+        it
     }
 
-    private val delayedPixelLauncherRestartListener = remoteAppsRepository.onPixelLauncherRestarted.mapLatest {
-        delay(PACKAGE_CHANGED_DELAY)
-    }
+    private val delayedPixelLauncherRestartListener =
+        remoteAppsRepository.onPixelLauncherRestarted.mapLatest {
+            delay(PACKAGE_CHANGED_DELAY)
+        }
 
     private val shouldHideClock = combine(
         settingsRepository.hideClock.asFlow(),
         pixelLauncherForeground
     ) { hide, foreground ->
         hide && foreground
-    }.stateIn(lifecycleScope, SharingStarted.Eagerly, settingsRepository.hideClock.getSync() && pixelLauncherForeground.value)
+    }.stateIn(
+        lifecycleScope,
+        SharingStarted.Eagerly,
+        settingsRepository.hideClock.getSync() && pixelLauncherForeground.value
+    )
 
     private val proxyAppWidgetListening = combine(
         settingsRepository.qsbWidgetId.asFlow(),
@@ -174,7 +201,6 @@ class PixelLauncherModsForegroundService: LifecycleService() {
         setupNightModeChangedListener()
         setupIconApplyProgress()
         setupHideClock()
-        //setupQsbWidget()
         setupProxyAppWidget()
     }
 
@@ -185,7 +211,7 @@ class PixelLauncherModsForegroundService: LifecycleService() {
 
     private fun setupPackageUpdateListener() = lifecycleScope.launchWhenCreated {
         delayedPackageChangeListener.collect {
-            deferredRestart.emit(false)
+            deferredRestart.emit(false, getString(R.string.restart_reason_package, it))
         }
     }
 
@@ -197,7 +223,7 @@ class PixelLauncherModsForegroundService: LifecycleService() {
 
     private fun setupPixelLauncherRestartListener() = lifecycleScope.launchWhenCreated {
         delayedPixelLauncherRestartListener.collect {
-            deferredRestart.emit(true)
+            deferredRestart.emit(true, getString(R.string.restart_reason_restart))
         }
     }
 
@@ -209,7 +235,7 @@ class PixelLauncherModsForegroundService: LifecycleService() {
 
     private fun setupIconConfigurationChangedListener() = lifecycleScope.launchWhenCreated {
         remoteAppsRepository.onIconConfigurationChanged.collect {
-            deferredRestart.emit(false)
+            deferredRestart.emit(false, getString(R.string.restart_reason_config))
         }
     }
 
@@ -228,9 +254,9 @@ class PixelLauncherModsForegroundService: LifecycleService() {
 
     private fun setupIconApplyProgress() = lifecycleScope.launchWhenCreated {
         iconApplyProgress.collect {
-            if(it != null){
+            if (it != null) {
                 showApplyingNotification(it)
-            }else{
+            } else {
                 clearApplyingNotification()
             }
         }
@@ -242,12 +268,7 @@ class PixelLauncherModsForegroundService: LifecycleService() {
 
     private fun setupHideClock() = lifecycleScope.launchWhenCreated {
         shouldHideClock.collect {
-            val iconList = getIconDenylist().toMutableList().apply {
-                if(it) add(ICON_DENYLIST_CLOCK)
-            }.joinToString(",")
-            rootServiceRepository.runWithRootService {
-                it.setStatusBarIconDenylist(iconList)
-            }
+            hideClockRepository.setClockVisible(!it)
         }
     }
 
@@ -272,13 +293,15 @@ class PixelLauncherModsForegroundService: LifecycleService() {
             )
             it.setTicker(getString(R.string.notification_title_foreground_service))
         }
-        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val notificationManager =
+            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.notify(NotificationId.FOREGROUND_SERVICE.ordinal, notification)
         return notification
     }
 
     private fun clearApplyingNotification() {
-        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val notificationManager =
+            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.cancel(NotificationId.ICON_APPLYING.ordinal)
     }
 
@@ -286,7 +309,7 @@ class PixelLauncherModsForegroundService: LifecycleService() {
         val notification = createNotification(NotificationChannel.ICON_APPLYING) {
             val title = iconApplyProgress.titleRes
             val content = iconApplyProgress.contentRes
-            val progress = when(iconApplyProgress){
+            val progress = when (iconApplyProgress) {
                 is IconApplyProgress.ApplyingIcons -> null
                 is IconApplyProgress.UpdatingConfiguration -> {
                     iconApplyProgress.progress
@@ -296,14 +319,14 @@ class PixelLauncherModsForegroundService: LifecycleService() {
                 }
             }
             it.setContentTitle(getString(title))
-            if(content != null){
+            if (content != null) {
                 it.setContentText(getString(content))
             }
             it.setSmallIcon(R.drawable.ic_notification)
             it.setOngoing(true)
-            if(progress != null){
+            if (progress != null) {
                 it.setProgress(100, (100 * progress).roundToInt(), progress == 0f)
-            }else{
+            } else {
                 it.setProgress(100, 0, true)
             }
             it.setContentIntent(
@@ -316,34 +339,33 @@ class PixelLauncherModsForegroundService: LifecycleService() {
             )
             it.setTicker(getString(title))
         }
-        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val notificationManager =
+            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.notify(NotificationId.ICON_APPLYING.ordinal, notification)
         return notification
     }
 
     private data class DeferredRestart(val isFromRestart: Boolean)
 
-    private suspend fun MutableStateFlow<DeferredRestart?>.emit(isFromRestart: Boolean) {
+    private suspend fun MutableStateFlow<DeferredRestart?>.emit(
+        isFromRestart: Boolean,
+        reason: String
+    ) {
         value?.let {
-            if(!it.isFromRestart && isFromRestart) return //isFromRestart = false overrides true
+            if (!it.isFromRestart && isFromRestart) return //isFromRestart = false overrides true
         }
         emit(DeferredRestart(isFromRestart))
-    }
-
-    /**
-     *  Gets the icon denylist for the statusbar from Settings.Secure. If the clock is already
-     *  denied, it will be ignored so it can be toggled.
-     */
-    private fun getIconDenylist(): List<String> {
-        val blacklist = Settings.Secure.getString(contentResolver, SETTINGS_KEY_ICON_BLACKLIST) ?: ""
-        val items = if(blacklist.contains(",")){
-            blacklist.split(",")
-        }else listOf(blacklist)
-        return items.filterNot { it == ICON_DENYLIST_CLOCK }
+        if (settingsRepository.debugRestartReasonToast.get() && restartMode.value != DeferredRestartMode.DISABLED) {
+            Toast.makeText(
+                this@PixelLauncherModsForegroundService,
+                getString(R.string.restart_reason_template, reason),
+                Toast.LENGTH_LONG
+            ).show()
+        }
     }
 
     private fun setupProxyAppWidget() {
-        if(settingsRepository.qsbWidgetId.getSync() != -1) {
+        if (settingsRepository.qsbWidgetId.getSync() != -1) {
             ProxyWidget.sendUpdate(this)
         }
         lifecycleScope.launchWhenCreated {

@@ -1,16 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:transitionGroup="true"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:transitionGroup="true">
+
+    <include
+        android:id="@+id/apps_search"
+        layout="@layout/include_search"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/search_box_height"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.progressindicator.LinearProgressIndicator
         android:id="@+id/apps_loading_progress"
         android:layout_width="200dp"
-        android:layout_marginTop="200dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
         android:indeterminate="true"
         app:layout_constraintBottom_toTopOf="@id/apps_loading_label"
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,8 +35,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_16"
         android:text="@string/apps_loading"
-        android:textColor="?android:textColorPrimary"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium.PixelLauncherMods"
+        android:textColor="?android:textColorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/apps_loading_progress" />
@@ -52,15 +61,15 @@
         android:id="@+id/apps_error_label"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_16"
         android:layout_marginTop="@dimen/margin_16"
+        android:layout_marginEnd="@dimen/margin_16"
         android:gravity="center"
         android:paddingStart="@dimen/margin_16"
         android:paddingEnd="@dimen/margin_16"
-        android:layout_marginStart="@dimen/margin_16"
-        android:layout_marginEnd="@dimen/margin_16"
         android:text="@string/apps_error"
-        android:textColor="?android:textColorPrimary"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium.PixelLauncherMods"
+        android:textColor="?android:textColorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/apps_error_icon" />
@@ -69,12 +78,12 @@
         android:id="@+id/apps_error_label_sub"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_16"
         android:layout_marginTop="@dimen/margin_16"
+        android:layout_marginEnd="@dimen/margin_16"
         android:gravity="center"
         android:paddingStart="@dimen/margin_16"
         android:paddingEnd="@dimen/margin_16"
-        android:layout_marginStart="@dimen/margin_16"
-        android:layout_marginEnd="@dimen/margin_16"
         android:text="@string/apps_error_sub"
         android:textAppearance="@style/TextAppearance.AppCompat.Small.PixelLauncherMods"
         app:layout_constraintEnd_toEndOf="parent"
@@ -90,15 +99,16 @@
         tools:visibility="visible" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/apps_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/apps_recyclerview"
-        tools:listitem="@layout/item_app"
-        android:paddingTop="@dimen/margin_16"
-        android:paddingStart="8dp"
-        android:paddingEnd="8dp"
+        android:layout_marginTop="@dimen/search_box_margin"
         android:clipToPadding="false"
-        tools:spanCount="4"
-        tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager" />
+        android:paddingStart="8dp"
+        android:paddingTop="@dimen/search_box_margin"
+        android:paddingEnd="8dp"
+        tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        tools:listitem="@layout/item_app"
+        tools:spanCount="4" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

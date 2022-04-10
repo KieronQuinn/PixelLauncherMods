@@ -21,7 +21,11 @@ class UpdateRepositoryImpl: UpdateRepository {
     private val gitHubService = createGitHubService()
 
     override suspend fun getUpdate(currentTag: String): Release? = withContext(Dispatchers.IO) {
-        val releasesResponse = gitHubService.getReleases().execute()
+        val releasesResponse = try {
+            gitHubService.getReleases().execute()
+        }catch (e: Exception) {
+            return@withContext null
+        }
         if(!releasesResponse.isSuccessful) return@withContext null
         val newestRelease = releasesResponse.body()?.firstOrNull() ?: return@withContext null
         if(newestRelease.tag == null || newestRelease.tag == currentTag) return@withContext null

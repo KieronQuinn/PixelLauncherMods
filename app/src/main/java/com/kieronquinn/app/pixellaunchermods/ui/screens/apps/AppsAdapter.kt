@@ -15,7 +15,6 @@ import com.kieronquinn.app.pixellaunchermods.ui.screens.apps.AppsViewModel.Item
 class AppsAdapter(
     context: Context,
     var items: List<Item>,
-    var themedIconsEnabled: Boolean,
     private val onItemClicked: (Item) -> Unit
 ) : RecyclerView.Adapter<AppsAdapter.ViewHolder>() {
 
