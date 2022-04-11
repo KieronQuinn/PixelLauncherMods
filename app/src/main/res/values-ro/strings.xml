@@ -104,7 +104,7 @@
     <string name="tweaks_widget_replacement">Pe scurt / Caseta de căutare</string>
     <string name="tweaks_widget_replacement_content"><b>Experimental:</b> Înlocuiește Pe scurt <b>sau</b> Caseta de căutare cu un widget la alegere</string>
     <string name="proxy_widget_loading">Se încarcă…</string>
-    <string name="proxy_widget_empty">Atingeți ca să configurați</string>
+    <string name="proxy_widget_empty">Apăsați pentru a configura</string>
     <string name="proxy_widget_error">Acest widget nu a putut fi încărcat\nÎncercați un alt widget</string>
     <string name="tweaks_widget_replacement_switch">Activează înlocuirea</string>
     <string name="tweaks_widget_replacement_provider">Selectați Widget-ul</string>
@@ -114,8 +114,8 @@
     <string name="tweaks_widget_replacement_provider_reconfigure_content">Schimbați setările acestui widget în aplicație</string>
     <string name="tweaks_widget_replacement_loading">Se încarcă…</string>
     <string name="tweaks_widget_replacement_save">Aplicare</string>
-    <string name="tweaks_widget_replacement_info">Din cauza limitărilor din lansatorul Pixel, nu este posibil să înlocuiți Pe scurt și Caseta de căutare în același timp.\n\n<b>Notă:</b> Nu toate widget-urile sunt compatibile cu această funcție. Dacă widgetul ales de dvs. nu se încarcă (de exemplu, rămâne necompletat sau afișează caseta de căutare generică), încercați unul diferit.</string>
-    <string name="widget_replacement_picker_title">Selectați Widget-ul</string>
+    <string name="tweaks_widget_replacement_info">Din cauza limitărilor din lansatorul Pixel, nu este posibil să înlocuiți Pe scurt și Caseta de căutare în același timp.\n\n<b>Notă:</b> Nu toate widget-urile sunt compatibile cu această funcție. Dacă widget-ul ales de dvs. nu se încarcă (de exemplu, rămâne necompletat sau afișează caseta de căutare generică), încercați unul diferit.</string>
+    <string name="widget_replacement_picker_title">Selectați widget-ul</string>
     <string name="widget_replacement_picker_loading">Se încarcă widget-urile…</string>
     <string name="widget_replacement_picker_item_app_count_one">%1s widget</string>
     <string name="widget_replacement_picker_item_app_count_other">%1s widget-uri</string>
@@ -131,6 +131,8 @@
     <string name="deferred_restart_background_content">Repornește lansatorul Pixel atunci când nu este vizibil, de exemplu este în fundal. Resetările pictogramelor ar trebui să fie minime în acest mod, cu excepția cazului în care lăsați dispozitivul cu lansatorul afișat mereu.\n<b>Recomandat</b></string>
     <string name="deferred_restart_screen_off_title">Repornire ecran oprit</string>
     <string name="deferred_restart_screen_off_content">Repornește numai când ecranul este oprit, pentru zero întreruperi. Este posibil să aveți resetări ale pictogramelor cu acest mod, dacă utilizați dispozitivul pentru perioade lungi de timp și aveți activate actualizările automate.</string>
+    <string name="deferred_restart_disabled">Dezactivat</string>
+    <string name="deferred_restart_disabled_content">Se dezactivează complet repornirile automate, <b>va trebui să aplicați din nou manual pictogramele atunci când este necesar.</b></string>
     <string name="backup_restore_backup_close">Închideți</string>
     <string name="backup_restore_backup_creating">Se creează copia de rezervă…</string>
     <string name="backup_restore_backup_creating_success">Copie de rezervă creată</string>
@@ -149,7 +151,7 @@
     <string name="backup_restore_restore_magisk_title">Modulul Magisk este necesar</string>
     <string name="backup_restore_restore_magisk_content">Această copie de rezervă conține modificări care necesită modulul Magisk al Pixel Launcher Mods. Atingeți pentru mai multe informații.</string>
     <string name="backup_restore_restore_tweaks_title">Restaurare ajustări</string>
-    <string name="backup_restore_restore_tweaks_content">Această copie de rezervă conține setări de ajustare, care trebuie aplicate separat. Atingeți pentru a le aplica.\n<b>Notă:</b> Din cauza limitărilor sistemului, nu este posibil să restabiliți înlocuirea widget-ului aleasă (dacă este setată), doar poziția.</string>
+    <string name="backup_restore_restore_tweaks_content">Această copie de rezervă conține setări de ajustare, ce trebuie aplicate separat. Atingeți pentru a le aplica.\n<b>Notă:</b> Din cauza limitărilor sistemului, nu este posibil să restabiliți înlocuirea widget-ului ales (dacă este setată), doar poziția.</string>
     <string name="backup_restore_restore_restoring_success">Copie de rezervă restaurată</string>
     <string name="backup_restore_restore_restoring_failed">Nu s-a putut restaura copia de rezervă</string>
     <string name="restore_issue_title">Aplicații omise</string>
@@ -187,6 +189,8 @@
     <string name="options_advanced_shortcut_content">Unele aplicații trimit foarte des actualizări pentru comenzile rapide ale aplicațiilor, ceea ce poate crește utilizarea bateriei pentru Pixel Launcher Mods și poate duce la reporniri mai frecvente. Dacă vă confruntați cu acest lucru, dezactivarea actualizărilor comenzilor rapide ale aplicației va rezolva problema, dar poate fi necesar să aplicați din nou pictogramele mai des pentru ca acestea să nu fie netematice.</string>
     <string name="options_advanced_reset">Resetare</string>
     <string name="options_advanced_reset_content">Resetați toate aplicațiile modificate, etichetele scurtăturilor, pictogramele și reconstruiți memoria cache a pictogramelor lansatorului Pixel</string>
+    <string name="options_advanced_debug_restart_reason_toast">Depanare: se afișează motivul repornirii</string>
+    <string name="options_advanced_debug_restart_reason_toast_content">Afișează un mesaj Toast cu motivul unei <b>potențiale</b> reporniri, înainte să se întâmple. Rețineți că acest lucru nu <i>garantează</i> o repornire, dar vă va spune ce a cauzat repornirea dacă se întâmplă una.</string>
     <string name="reset_info_loading">Se încarcă…</string>
     <string name="reset_info_warning">Resetarea este ireversibilă. Asigurați-vă că ați făcut o copie de rezervă înainte de a continua, dacă doriți să păstrați configurația aplicației și comenzilor rapide ale aplicației</string>
     <string name="reset_info_title">Avertisment</string>
@@ -229,4 +233,12 @@
     <string name="update_downloader_downloading_title">Se descarcă actualizarea…</string>
     <string name="update_downloader_downloading_failed">Descărcare eșuată</string>
     <string name="update_downloader_github">Descărcare prin browser</string>
+    <!-- Restart Reason Debug Toasts -->
+    <string name="restart_reason_template">Repornire posibilă: %1s</string>
+    <string name="restart_reason_package">%1s modificat</string>
+    <string name="restart_reason_restart">PL a fost oprit / resetare pictograme</string>
+    <string name="restart_reason_config">Configurația pictogramelor a fost schimbată</string>
+    <!-- Contributors: Translation Languages -->
+    <string name="contributors_translators">Traducători</string>
+    <string name="contributors_translators_romanian">Română</string>
 </resources>
