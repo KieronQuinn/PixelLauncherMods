@@ -370,6 +370,10 @@ class IconLoaderRepositoryImpl(
                 drawable
             }else this
         }.run {
+            if(options.result.isLegacyThemedIcon() && options.mono && this is AdaptiveIconDrawable) {
+                getMonochromeOrForeground()
+            }else this
+        }.run {
             glide.load(this).run {
                 scale?.let {
                     transform(ScaleTransformation(it))
