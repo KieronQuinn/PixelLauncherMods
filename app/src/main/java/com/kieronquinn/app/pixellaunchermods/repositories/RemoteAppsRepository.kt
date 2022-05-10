@@ -326,15 +326,19 @@ class RemoteAppsRepositoryImpl(
     override suspend fun updateModifiedApps(isFromRestart: Boolean) {
         withContext(Dispatchers.IO) {
             iconApplyProgress.emit(IconApplyProgress.ApplyingIcons)
-            var iconSize = settings.iconSize.get()
+            val cachedIconSize = settings.iconSize.get()
             val modifiedApps = getAllModifiedApps()
             rootServiceRepository.runWithRootService {
+                var iconSize = it.remoteIconSize
                 if (iconSize == -1) {
-                    //Not yet set, get the current
-                    val remoteIconSize = it.remoteIconSize
-                    iconSize = remoteIconSize
-                    settings.iconSize.set(remoteIconSize)
+                    //Not yet set, try to use the cache if possible
+                    if(!settings.iconSize.exists()) {
+                        //We won't be able to apply as we don't have a size, abort until next time
+                        return@runWithRootService
+                    }
+                    iconSize = cachedIconSize
                 }
+                settings.iconSize.set(iconSize)
                 it.updateModifiedApps(
                     ParceledListSlice(modifiedApps),
                     isFromRestart,
@@ -420,6 +424,7 @@ class RemoteAppsRepositoryImpl(
         databaseRepository.clearAllIcons()
         settings.resetIcons()
         rootServiceRepository.runWithRootService {
+            it.uninstallOverlayUpdates()
             it.resetAllIcons(callback)
         } ?: trySend(false)
         awaitClose {

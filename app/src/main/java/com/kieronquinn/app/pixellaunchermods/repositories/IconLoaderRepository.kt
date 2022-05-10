@@ -177,7 +177,6 @@ class IconLoaderRepositoryImpl(
             BitmapFactory.decodeByteArray(icon, 0, icon.size).run {
                 BitmapDrawable(context.resources, this)
             }
-
         } else null
     }
 
@@ -369,10 +368,6 @@ class IconLoaderRepositoryImpl(
                 val drawable = this.getMonochromeOrForeground()
                 scale = 1f + iconNormalizer.getScale(drawable, null, null, null)
                 drawable
-            }else this
-        }.run {
-            if(options.result.isLegacyThemedIcon() && this is AdaptiveIconDrawable) {
-                getMonochromeOrForeground()
             }else this
         }.run {
             glide.load(this).run {

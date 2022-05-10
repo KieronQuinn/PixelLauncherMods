@@ -768,6 +768,10 @@ class PixelLauncherModsRootServiceImpl: IPixelLauncherModsRootService.Stub() {
         }
     }
 
+    override fun uninstallOverlayUpdates() {
+        execRootCommand("pm uninstall $OVERLAY_PACKAGE_NAME")
+    }
+
     override fun resetAllIcons(callback: IResetCompleteCallback) {
         GlobalScope.launch {
             withContext(Dispatchers.IO) {

@@ -12,10 +12,14 @@ fun Resources.isAdaptiveIcon(identifier: Int): Boolean {
 }
 
 fun Resources.rawResourceContains(identifier: Int, searchString: String): Boolean {
-    return openRawResource(identifier).use {
-        it.bufferedReader().use { reader ->
-            reader.readText().contains(searchString)
+    return try {
+        openRawResource(identifier).use {
+            it.bufferedReader().use { reader ->
+                reader.readText().contains(searchString)
+            }
         }
+    }catch (e: Resources.NotFoundException){
+        false
     }
 }
 

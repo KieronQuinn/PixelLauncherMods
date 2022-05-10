@@ -195,9 +195,9 @@
     <string name="reset_info_warning">Resetarea este ireversibilă. Asigurați-vă că ați făcut o copie de rezervă înainte de a continua, dacă doriți să păstrați configurația aplicației și comenzilor rapide ale aplicației</string>
     <string name="reset_info_title">Avertisment</string>
     <string name="reset_info_included">Resetarea va șterge</string>
-    <string name="reset_info_included_content">• Etichete și pictograme pentru aplicații modificate, atât tematice, cât și normale\n• Pictograme modificate pentru comenzile rapide pentru aplicații\n• Configurare automată a pachetului de pictograme</string>
+    <string name="reset_info_included_content">• Etichete și pictograme pentru aplicații modificate, atât tematice, cât și normale\n• Pictograme modificate pentru comenzile rapide pentru aplicații\n• Configurare automată a pachetului de pictograme\n• Configurarea aplicațiilor ascunse\n• Configurarea înlocuirii widget-ului</string>
     <string name="reset_info_not_included">Resetarea <b>nu</b> va șterge</string>
-    <string name="reset_info_not_included_content">%1s• Configurarea aplicațiilor ascunse\n• Configurarea înlocuirii widget-ului (atât aceasta cât și aplicațiile ascunse trebuie resetate separat)\n• Setările Pixel Launcher Mods, cum ar fi ascunderea ceasului sau a configurației Repornire fără întreruperi</string>
+    <string name="reset_info_not_included_content">%1s• Setările Pixel Launcher Mods, cum ar fi ascunderea ceasului sau a configurației Repornire fără întreruperi</string>
     <string name="reset_info_not_included_content_extra_shortcut">• Scurtăturile moștenite, cum ar fi ”%1s”\n</string>
     <string name="reset_info_continue">Continuați</string>
     <string name="reset_apply_title">Se resetează…</string>

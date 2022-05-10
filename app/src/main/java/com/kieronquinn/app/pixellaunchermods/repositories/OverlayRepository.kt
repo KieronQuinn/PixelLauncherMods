@@ -1,5 +1,6 @@
 package com.kieronquinn.app.pixellaunchermods.repositories
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.net.Uri
 import android.util.Xml
@@ -137,7 +138,7 @@ class OverlayRepositoryImpl(
         overlayCacheDir.mkdirs()
         extractBuildTools()
         emitter.println("Building XML…")
-        writeValues(config.components)
+        writeValues(config.components, config.widgetReplacement)
         writeSearchContainer(config.widgetReplacement)
         emitter.println("Compiling resources…")
         if(!emitter.runAndEmit(::compileResources)) return false
@@ -172,7 +173,7 @@ class OverlayRepositoryImpl(
         assetManager.copyRecursively("overlay/build", buildDir)
     }
 
-    private fun writeValues(hiddenComponents: List<String>) {
+    private fun writeValues(hiddenComponents: List<String>, widgetReplacement: WidgetReplacement) {
         //Not disabled when empty as we need to apply *something*
         val valuesDir = File(resDir, "values")
         valuesDir.mkdirs()
@@ -185,33 +186,35 @@ class OverlayRepositoryImpl(
                         element("item", it)
                     }
                 }
+                if(widgetReplacement == WidgetReplacement.TOP) {
+                    //Hide existing smartspace
+                    element("dimen", "0dp") {
+                        attribute("name", "enhanced_smartspace_height")
+                    }
+                }
             }
         }
         val valuesXml = File(valuesDir, "values.xml")
         valuesXml.writeText(values)
     }
 
+    @SuppressLint("UnsafeOptInUsageError")
     private fun writeSearchContainer(widgetReplacement: WidgetReplacement) {
         if(widgetReplacement == WidgetReplacement.NONE) {
             //This option is disabled
             return
         }
-        val addDummySmartspace = { serializer: XmlSerializer ->
-            //Workaround to fix smartspace on 13 DP2 - keeps smartspace, but makes it invisible
-            with(serializer){
-                element("com.google.android.apps.nexuslauncher.qsb.SmartspaceViewContainer") {
-                    attribute("android:id", "@+id/search_container_workspace")
-                    attribute("android:layout_height", "0dp")
-                    attribute("android:layout_width", "0dp")
-                    attribute("android:visibility", "gone")
-                }
-            }
-        }
         val layoutDir = File(resDir, "layout")
         layoutDir.mkdirs()
         val xml = Xml.newSerializer()
         val layout = xml.document {
-            element("FrameLayout") {
+            //If we're replacing the top we have to keep Smartspace's container, otherwise can get away with a regular FrameLayout
+            val rootTag = if(widgetReplacement == WidgetReplacement.TOP){
+                "com.google.android.apps.nexuslauncher.qsb.SmartspaceViewContainer"
+            }else{
+                "FrameLayout"
+            }
+            element(rootTag) {
                 attribute("xmlns:android", "http://schemas.android.com/apk/res/android")
                 attribute("android:orientation", "vertical")
                 attribute("android:layout_width", "match_parent")
@@ -223,10 +226,6 @@ class OverlayRepositoryImpl(
                     attribute("android:layout_width", "match_parent")
                     attribute("android:tag", "qsb_view")
                     attribute("android:layout_height", "match_parent")
-                }
-
-                if(BuildCompat.isAtLeastT() && widgetReplacement == WidgetReplacement.TOP){
-                    addDummySmartspace(this)
                 }
             }
         }
