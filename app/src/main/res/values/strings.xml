@@ -211,9 +211,9 @@
     <string name="reset_info_warning">Resetting is irreversible. Make sure you have made a backup before continuing, if you wish to keep your app and app shortcut configuration</string>
     <string name="reset_info_title">Warning</string>
     <string name="reset_info_included">Resetting will delete</string>
-    <string name="reset_info_included_content">• Modified app labels and icons, both themed and normal\n• Modified app shortcut icons\n• Automatic icon pack configuration</string>
+    <string name="reset_info_included_content">• Modified app labels and icons, both themed and normal\n• Modified app shortcut icons\n• Automatic icon pack configuration\n• Hidden apps configuration\n• Widget replacement configuration</string>
     <string name="reset_info_not_included">Resetting will <b>not</b> delete</string>
-    <string name="reset_info_not_included_content">%1s• Hidden apps configuration\n• Widget replacement configuration (both this and hidden apps must be reset separately)\n• Your Pixel Launcher Mods settings, such as hiding the clock or the Seamless Restart configuration</string>
+    <string name="reset_info_not_included_content">%1s• Your Pixel Launcher Mods settings, such as hiding the clock or the Seamless Restart configuration</string>
     <string name="reset_info_not_included_content_extra_shortcut">• Legacy shortcuts, such as \"%1s\"\n</string>
     <string name="reset_info_continue">Continue</string>
     <string name="reset_apply_title">Resetting…</string>

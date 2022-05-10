@@ -115,7 +115,7 @@ class WidgetReplacementPickerViewModelImpl(
             it.provider.packageName == BuildConfig.APPLICATION_ID
         }.groupBy {
             val packageName = it.activityInfo.packageName
-            val appInfo = appsRepository.getApplicationInfoForPackage(packageName)!!
+            val appInfo = appsRepository.getApplicationInfoForPackage(packageName) ?: return@groupBy null
             val label = appsRepository.loadApplicationLabel(appInfo)
             Item.App(label, appInfo)
         })
@@ -126,16 +126,17 @@ class WidgetReplacementPickerViewModelImpl(
     }.stateIn(viewModelScope, SharingStarted.Eagerly, State.Loading)
 
     private suspend fun getItems(
-        allWidgets: Map<Item.App, List<AppWidgetProviderInfo>>,
+        allWidgets: Map<Item.App?, List<AppWidgetProviderInfo>>,
         searchTerm: String
     ): ArrayList<Item> = withContext(Dispatchers.IO) {
         val items = ArrayList<Item>()
         items.add(Item.Header)
         allWidgets.entries
-            .sortedBy { it.key.label.toString().lowercase() }
+            .filterNot { it.key == null }
+            .sortedBy { it.key!!.label.toString().lowercase() }
             .forEach {
                 val app = it.key
-                val appContainsTerm = app.label.contains(searchTerm, true)
+                val appContainsTerm = app!!.label.contains(searchTerm, true)
                 val widgets = it.value.map { item -> item.toWidgetItem(app) }.filter { item ->
                     appContainsTerm || searchTerm.isBlank() || item.label.contains(searchTerm, true)
                 }.sortedBy { item -> item.label.toString().lowercase() }

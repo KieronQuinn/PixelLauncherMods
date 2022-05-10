@@ -46,4 +46,7 @@ interface IPixelLauncherModsRootService {
     //Widget replacement
     void setSearchWidgetPackageEnabled(boolean enabled);
 
+    //Reset
+    void uninstallOverlayUpdates();
+
 }
