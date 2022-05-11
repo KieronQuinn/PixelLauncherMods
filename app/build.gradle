@@ -7,8 +7,8 @@ plugins {
     id 'com.google.android.gms.oss-licenses-plugin'
 }
 
-def tagName = '2.2.1'
-def tagCode = 221
+def tagName = '2.2.2'
+def tagCode = 222
 
 android {
     compileSdk 32
