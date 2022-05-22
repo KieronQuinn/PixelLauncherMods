@@ -38,8 +38,8 @@
     <string name="app_editor_dynamic_warning">Uygulamanın simgesi dinamik olduğundan değiştirilemez</string>
     <string name="app_editor_app_shortcut_label_warning">Uygulama kısayolu ismi değiştirilemez</string>
     
-	<string name="app_editor_iconpicker_remove">Temalı simgeyi temizle</string>
-	<string name="app_editor_iconpicker_legacy_themed_title">Temalı simgeler (miras)</string>
+    <string name="app_editor_iconpicker_remove">Temalı simgeyi temizle</string>
+    <string name="app_editor_iconpicker_legacy_themed_title">Temalı simgeler (miras)</string>
     <string name="app_editor_iconpicker_lawnicons_title">Lawn simgeleri</string>
     <string name="app_editor_iconpicker_loading">Simge kaynakları yükleniyor…</string>
     <string name="app_editor_iconpicker_title">Simge Kaynağı</string>
@@ -57,12 +57,12 @@
     <string name="app_editor_iconpicker_apps_loading">Uygulamalar Yükleniyor…</string>
     <string name="app_editor_iconpicker_apps_title">Yüklü Uygulamalar</string>
     
-	<string name="shortcuts_title">Ana Ekran Kısayolları</string>
+    <string name="shortcuts_title">Ana Ekran Kısayolları</string>
     <string name="shortcuts_error">Kısayol Bulunamadı</string>
     <string name="shortcuts_error_sub">Kısayol bekliyorsanız, Pixel Launcher Mods\'a root izni verdiğinizden emin olun. Sorun devam ederse, yeniden başlatmayı veya Pixel Launcher'ın verilerini temizlemeyi deneyin</string>
     <string name="shortcuts_loading">Kısayollar Yükleniyor…</string>
     
-	<string name="notification_channel_title_foreground_service">Arka fon Hizmeti</string>
+    <string name="notification_channel_title_foreground_service">Arka fon Hizmeti</string>
     <string name="notification_channel_desc_foreground_service">Arka fon hizmetini çalışır durumda tutmak için bildirimler</string>
     <string name="notification_title_foreground_service">Pixel Launcher Mods çalışıyor</string>
     <string name="notification_content_foreground_service">Uygulama simgesi değişikliklerini bekliyorum, gizlemek için dokunun.</string>
@@ -191,7 +191,7 @@
 
     <string name="magisk_info_title">Magisk Modülü</string>
 	
-	  <string name="options_title">Seçenekler</string>
+    <string name="options_title">Seçenekler</string>
     <string name="options_reapply_icons">Simgeleri Yeniden Uygula</string>
     <string name="options_reapply_icons_content">Simgeleri manuel olarak yeniden uygular, bir güncellemeden sonra bir simge teması olmadan takılırsa kullanın</string>
     <string name="options_reapply_title">Simgeleri Yeniden Uygulanıyor…</string>
@@ -226,7 +226,7 @@
     <string name="options_faq_short">SSS</string>
     <string name="options_faq_content"><b>Pixel Launcher Mods\'un değişiklikleri geride bırakmadan nasıl temiz bir şekilde kaldırılacağı da dahil olmak üzere sık sorulan soruların yanıtları</b></string>
     
-	  <string name="xda_thread">XDA Konusu</string>
+    <string name="xda_thread">XDA Konusu</string>
     <string name="github">GitHub</string>
     <string name="libraries">Üçüncü taraf kitaplıkları</string>
     <string name="donate">Bağış yap</string>
