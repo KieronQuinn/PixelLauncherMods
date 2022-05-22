@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Pixel Launcher Mods</string>
+    <string name="search">Arama</string>
+	
+    <string name="no_root_dialog_title">Root izni bulunamadı</string>
+    <string name="no_root_dialog_content">Pixel Launcher Mods root sadece izinli telefonda kullanılabilir. Detaylar için sıkça sorulan soruları okuyunuz.</string>
+    <string name="no_root_dialog_close">Kapat</string>
+	
+    <string name="no_pixel_launcher_dialog_title">Pixel Launcher kurulmamış</string>
+    <string name="no_pixel_launcher_dialog_content">Pixel Launcher Mods kullanmak için telefonunuzda Pixel Launcher kurulu olmalıdır</string>
+    <string name="no_pixel_launcher_dialog_close">Kapat</string>
+	
+    <string name="menu_bottom_nav_apps">Uygulamalar</string>
+    <string name="menu_bottom_nav_shortcuts">Kısayollar</string>
+    <string name="menu_bottom_nav_tweaks">Ayarlar</string>
+    <string name="menu_bottom_nav_options">Daha fazla</string>
+    <string name="apps_title">Uygulama Çekmecesi</string>
+    <string name="apps_loading">Uygulamalar yükleniyor...</string>
+    <string name="apps_error">Uygulama yüklerken bir hata gerçekleşti</string>
+    <string name="apps_error_sub">Uygulamaya root izni verdiğinizden emin olunuz. Sorun devam ederseç telefonunuzu yeniden başlatmayı ve Pixel Launcher Mods uygulamasının verilerini temizlemeyi deneyin.</string>
+    <string name="apps_apply_icon_pack">Simge paketini uygula</string>
+	
+    <string name="app_editor_input_label">Etiket</string>
+    <string name="app_editor_save">Kaydet</string>
+    <string name="app_editor_normal_icon">Uygulama Çekmecesi</string>
+    <string name="app_editor_normal_icon_shortcut">Simge</string>
+    <string name="app_editor_add_themed_icon">Temalı simge uygula</string>
+    <string name="app_editor_themed_icon">Ana Ekran</string>
+    <string name="app_editor_themed_icon_shortcut">Temalı simge</string>
+    <string name="app_editor_loading">Uygulama yükleniyor…</string>
+    <string name="app_editor_loading_shortcut">Kısayol yükleniyor…</string>
+    <string name="app_editor_saving">Uygulama kaydediliyor…</string>
+    <string name="app_editor_resetting">Uygulama sıfırlanlyor…</string>
+    <string name="app_editor_saving_shortcut">Kısayol kaydediliyor…</string>
+    <string name="app_editor_resetting_shortcut">Kısayol sıfırlanıyor</string>
+    <string name="app_editor_reset">Sıfırla</string>
+    <string name="app_editor_dynamic_warning">Uygulamanın simgesi dinamik olduğundan değiştirilemez</string>
+    <string name="app_editor_app_shortcut_label_warning">Uygulama kısayolu ismi değiştirilemez</string>
+    
+	<string name="app_editor_iconpicker_remove">Temalı simgeyi temizle</string>
+	<string name="app_editor_iconpicker_legacy_themed_title">Temalı simgeler (miras)</string>
+    <string name="app_editor_iconpicker_lawnicons_title">Lawn simgeleri</string>
+    <string name="app_editor_iconpicker_loading">Simge kaynakları yükleniyor…</string>
+    <string name="app_editor_iconpicker_title">Simge Kaynağı</string>
+    <string name="app_editor_iconpicker_header">Temalı ikonlar cihaz tema rengine uygun renklenir. Özel simge kullandığınızda uyarlanabilir simgeler veya arka fonu olmayan simgeler daha iyi duruyor.</string>
+    <string name="app_editor_iconpicker_more">Daha fazla</string>
+    <string name="app_editor_iconpicker_apps">Kurulmuş uygulamalar</string>
+    <string name="app_editor_iconpicker_apps_switch_title">Uyarlanabilir simgelere çevirme</string>
+    <string name="app_editor_iconpicker_apps_switch_subtitle">Uyarlanamayan simgelere beyaz arka fon ekler</string>
+    <string name="app_editor_iconpicker_files">Resim yükle</string>
+    <string name="app_editor_iconpicker_pack_loading">Simgeler yükleniyor…</string>
+    <string name="app_editor_iconpicker_pack_title">Simge paketi</string>
+    <string name="app_editor_iconpicker_pack_open_external">Paketi aç</string>
+    <string name="app_editor_iconpicker_legacy_themed_header_content">Simge paketleri ve resimler direkt olarak temali simge şeklinde uygulanamaz. Daha fazla temalı simgeler için örtüleri olan Magisk modülleri kullanın (XDA forumunda daha detaylı bilgi alabilirsiniz).</string>
+    <string name="app_editor_iconpicker_legacy_themed_loading">Temalı Simgeler Yükleniyor…</string>
+    <string name="app_editor_iconpicker_apps_loading">Uygulamalar Yükleniyor…</string>
+    <string name="app_editor_iconpicker_apps_title">Yüklü Uygulamalar</string>
+    
+	<string name="shortcuts_title">Ana Ekran Kısayolları</string>
+    <string name="shortcuts_error">Kısayol Bulunamadı</string>
+    <string name="shortcuts_error_sub">Kısayol bekliyorsanız, Pixel Launcher Mods\'a root izni verdiğinizden emin olun. Sorun devam ederse, yeniden başlatmayı veya Pixel Launcher'ın verilerini temizlemeyi deneyin</string>
+    <string name="shortcuts_loading">Kısayollar Yükleniyor…</string>
+    
+	<string name="notification_channel_title_foreground_service">Arka fon Hizmeti</string>
+    <string name="notification_channel_desc_foreground_service">Arka fon hizmetini çalışır durumda tutmak için bildirimler</string>
+    <string name="notification_title_foreground_service">Pixel Launcher Mods çalışıyor</string>
+    <string name="notification_content_foreground_service">Uygulama simgesi değişikliklerini bekliyorum, gizlemek için dokunun.</string>
+    <string name="notification_channel_title_icon_applying">Simge Değişiklikleri</string>
+    <string name="notification_channel_desc_icon_applying">Güncellemeyle ilgili progress bildirimi&amp; simgeler uygulanıyor</string>
+    <string name="notification_channel_title_update">Güncelleme</string>
+    <string name="notification_channel_desc_update">Bir güncelleme olduğunda bildirimler</string>
+    <string name="notification_title_update">Pixel Launcher Mods güncellemesi mevcut</string>
+    <string name="notification_title_content">Pixel Launcher Mods için bir güncelleme mevcut (%1s - %1s)</string>
+    <string name="notification_title_applying_icons">Simgeleri Uygulama</string>
+    <string name="notification_title_updating_icons">Simgeleri Güncelleme</string>
+    <string name="notification_title_updating_icon_packs">Simge Paketlerini Güncelleme</string>
+    <string name="notification_content_updating_icon_packs">Bu işlem birkaç dakika sürebilir</string>
+    <string name="auto_icon_pack_loading">Simge Paketleri Yükleniyor…</string>
+    <string name="auto_icon_pack_error">Hiç Simge Paketi bulunamadı</string>
+    <string name="auto_icon_pack_header">Simge paketlerinizi, simgeleri uygulamak istediğiniz öncelik sırasına sürükleyin. Satırın altındaki paketler kullanılmayacaktır.\n<b>Not:</b> Çok sayıda simge paketi kullanmak biraz zaman alabilir.</string>
+    <string name="auto_icon_pack_apply">Uygula</string>
+    <string name="auto_icon_pack_snackbar">Satırın üzerinde simge paketi yok!</string>
+    <string name="auto_icon_pack_applying">Simge Paketleri Uygulanıyor…</string>
+    <string name="auto_icon_pack_applying_sub">Seçtiğiniz paket sayısına ve yüklediğiniz uygulama sayısına bağlı olarak bu işlem birkaç dakika sürebilir.</string>
+    <string name="auto_icon_pack_applying_done">Simge paketleri uygulandı</string>
+
+    <string name="tweaks_title">Ayarlar</string>
+    <string name="tweaks_resize_widgets_title">Widget\'ları Yeniden Boyutlandır</string>
+    <string name="tweaks_resize_widgets_content">Widget\'ları normal sınırlarının ötesinde yeniden boyutlandır</string>
+    <string name="tweaks_resize_widgets_sheet_unselected">Başlamak için bir widget\'a dokunun</string>
+    <string name="tweaks_resize_widgets_sheet_unselected_info">Not: Simgeler temalı değildir ve kılavuz olarak dahil edilmiştir.</string>
+    <string name="widget_resize_loading">Widget\'lar Yükleniyor…</string>
+    <string name="tweaks_hide_clock">Saati Gizle</string>
+    <string name="tweaks_hide_clock_content">Pixel Launcher gösterilirken saati durum çubuğundan gizleyin.\n<b>Not: Bu, Pixel Launcher tarafından işlendiği için son uygulamalar ekranında da geçerli olacaktır.</ b></string>
+    <string name="hide_apps_loading">Yükleniyor…</string>
+    <string name="hide_apps_magisk_title">Magisk Modülü Gerekli</string>
+    <string name="hide_apps_magisk_content">Bu seçenek için Pixel Launcher Mods Magisk modülü gereklidir.\n\nModülü kurmak için önce aşağıdaki düğmeyi kullanarak modülü kaydedin, ardından <b>Depodan yükle</b>\'yi kullanın. Yüklemek ve cihazınızı yeniden başlatmak için Magisk\'teki seçenek.</string>
+    <string name="hide_apps_magisk_button">Modülü Kaydet</string>
+    <string name="tweaks_hide_apps">Uygulamaları Gizle</string>
+    <string name="tweaks_hide_apps_content">Uygulamaları uygulama çekmecesinden gizle</string>
+    <string name="tweaks_apply">Tweaks Uygula</string>
+    <string name="hide_apps_save">Uygula</string>
+    <string name="overlay_apply_applying">Tweaks Uygulanıyor…</string>
+    <string name="overlay_apply_success">Tweaks uygulandı</string>
+    <string name="tweaks_apply_failed">Tweaks uygulanamadı</string>
+    <string name="tweaks_apply_close">Kapat</string>
+    <string name="tweaks_apply_save_log">Günlüğü Kaydet</string>
+    <string name="tweaks_widget_replacement_preview_title">Değiştirme Konumunu Seçin</string>
+    <string name="tweaks_widget_replacement_preview_bottom">Alt</string>
+    <string name="tweaks_widget_replacement_preview_top">Üst</string>
+    <string name="tweaks_widget_replacement">At a Glance / Arama Kutusu</string>
+    <string name="tweaks_widget_replacement_content"><b>Deneysel:</b> At a Glance <b>veya</b> Arama Kutusunu istediğiniz bir widget ile değiştirin</string>
+    <string name="proxy_widget_loading">Yükleniyor…</string>
+    <string name="proxy_widget_empty">Yapılandırmak için dokunun</string>
+    <string name="proxy_widget_error">Bu widget yüklenemedi\nFarklı bir widget deneyin</string>
+    <string name="tweaks_widget_replacement_switch">Değiştirmeyi Etkinleştir</string>
+    <string name="tweaks_widget_replacement_provider">Widget Seç</string>
+    <string name="tweaks_widget_replacement_provider_content_unset">Widget\'i gösterilecek şekilde ayarlayın</string>
+    <string name="tweaks_widget_replacement_provider_content_set">Görüntülenecek widget\'ı ayarlayın. Şu anda %1s olarak ayarlandı.</string>
+    <string name="tweaks_widget_replacement_provider_reconfigure">Widget\'i yeniden yapılandır</string>
+    <string name="tweaks_widget_replacement_provider_reconfigure_content">Bu widget\'ın ayarlarını uygulamasında değiştirin</string>
+    <string name="tweaks_widget_replacement_loading">Yükleniyor…</string>
+    <string name="tweaks_widget_replacement_save">Uygula</string>
+    <string name="tweaks_widget_replacement_info">Pixel Launcher\'daki sınırlamalar nedeniyle, At a Glance ve Arama Kutusunun aynı anda değiştirilmesi mümkün değildir.\n\n<b>Not:</b> Tüm widget\'lar bu özellikle uyumlu değil. Seçtiğiniz widget yüklenemezse (örneğin boş kalır veya genel arama kutusunu gösterir), farklı bir tane deneyin.</string>
+    <string name="widget_replacement_picker_title">Widget Seçin</string>
+    <string name="widget_replacement_picker_loading">Widget\'lar Yükleniyor…</string>
+    <string name="widget_replacement_picker_item_app_count_one">%1s widget\'ı</string>
+    <string name="widget_replacement_picker_item_app_count_other">%1s widget\'ları</string>
+    <string name="widget_replacement_picker_header">Widget\'ların önizlemeleri, Pixel Launcher\'da nasıl göründüklerinden farklı olabilir. Boyutlandırma yaklaşıktır ve dinamik önizlemeler, küçük alanı simüle etmek için kasıtlı olarak kırpılır.</string>
+    <string name="widget_replacement_picker_error_toast">Bu widget ayarlanırken bir hata oluştu.</string>
+    <string name="proxy_widget_preview">@string/app_name</string>
+    <string name="tweaks_deferred_restart">Sorunsuz Yeniden Başlatma</string>
+    <string name="tweaks_deferred_restart_content">Cihaz kullanımında minimum kesinti olması için Pixel Launcher\'ın ne zaman yeniden başlatılacağını yapılandırın</string>
+
+    <string name="deferred_restart_loading">Yükleniyor…</string>
+    <string name="deferred_restart_header">Sorunsuz Yeniden Başlatma, Pixel Launcher\'ı kullanmadığınız zamanlarda arka planda yeniden başlatılmasını sağlar. Hâlâ istenmeyen yeniden başlatmalar yaşıyorsanız, yalnızca cihazınızın ekranı kapalıyken yeniden başlatılmasını sağlamak için \"ekran kapalıyken\" seçeneğini kullanmayı deneyin. İstenmeyen simge sıfırlamaları yaşıyorsanız daha agresif bir ayar kullanmanız gerekebilir.</string>
+    <string name="deferred_restart_instant_title">Anında Yeniden Başlatma</string>
+    <string name="deferred_restart_instant_content">Değişiklikleri yaptıktan hemen sonra Launcher Mods\'u yeniden başlatır ve Sorunsuz Yeniden Başlatmayı etkin bir şekilde devre dışı bırakır.\n<b>Not:</b> Launcher görünür olduğunda anında yeniden başlatma, ekranın ortasında kaydırma konumunuzu kaybedebilirsiniz. kullanın.</string>
+    <string name="deferred_restart_background_title">Arka Planda Yeniden Başlatma</string>
+    <string name="deferred_restart_background_content">Görünür olmadığında Pixel Launcher\'ı yeniden başlatır, ör. arka plandadır. Cihazınızı Launcher her zaman görünür şekilde bırakmadığı sürece, bu modda simge sıfırlamaları minimum düzeyde olmalıdır.\n<b>Önerilir</b></string>
+    <string name="deferred_restart_screen_off_title">Ekran Kapalı Yeniden Başlat</string>
+    <string name="deferred_restart_screen_off_content">Sıfır kesinti için yalnızca ekran kapalıyken yeniden başlar. Cihazınızı uzun süre kullanıyorsanız ve otomatik güncellemeleri etkinleştirdiyseniz, bu modda simge sıfırlamaları yaşayabilirsiniz.</string>
+    <string name="deferred_restart_disabled">Devre dışı</string>
+    <string name="deferred_restart_disabled_content">Otomatik yeniden başlatmaları tamamen devre dışı bırakır, <b>gerektiğinde simgeleri manuel olarak yeniden uygulamanız gerekir.</b></string>
+
+    <string name="backup_restore_backup_close">Kapat</string>
+    <string name="backup_restore_backup_creating">Yedek oluşturuluyor…</string>
+    <string name="backup_restore_backup_creating_success">Yedek oluşturuldu</string>
+    <string name="backup_restore_backup_creating_failed">Yedek oluşturulamadı</string>
+
+    <string name="options_backup_restore">Yedekleme &amp; Geri yükle</string>
+    <string name="options_backup_restore_content">Yedekleme &amp; uygulama seçeneklerinizi ve ayarlarınızı geri yükleyin</string>
+    <string name="options_backup_restore_backup">Yedekleme</string>
+    <string name="options_backup_restore_backup_content">Pixel Launcher Mods seçeneklerinizin ve ayarlarınızın bir yedeğini cihazınızda veya bulutta oluşturun</string>
+    <string name="options_backup_restore_restore">Geri yükle</string>
+    <string name="options_backup_restore_restore_content">Cihazınızdan veya buluttan bir yedeği geri yükleyin</string>
+
+    <string name="backup_restore_restore_close">Kapat</string>
+    <string name="backup_restore_restore_restoring">Yedekleme geri yükleniyor…</string>
+    <string name="backup_restore_restore_issues_title">%1d Atlandı</string>
+    <string name="backup_restore_restore_issues_content_one">%1d uygulama geri yükleme sırasında atlandı. Daha fazla bilgi için dokunun.</string>
+    <string name="backup_restore_restore_issues_content_other">%1d uygulama geri yükleme sırasında atlandı. Daha fazla bilgi için dokunun.</string>
+    <string name="backup_restore_restore_magisk_title">Magisk Modülü Gerekli</string>
+    <string name="backup_restore_restore_magisk_content">Bu yedekleme, Pixel Launcher Mods Magisk Modülünü gerektiren ince ayarları içerir. Daha fazla bilgi için dokunun.</string>
+    <string name="backup_restore_restore_tweaks_title">Tweaks\'i Geri Yükle</string>
+    <string name="backup_restore_restore_tweaks_content">Bu yedekleme, ayrı olarak uygulanması gereken ince ayar ayarlarını içerir. Bunları uygulamak için dokunun.\n<b>Not:</b> Sistem sınırlamaları nedeniyle, seçtiğiniz pencere öğesi değiştirmeyi (ayarlanmışsa) geri yüklemek mümkün değildir, yalnızca konumu geri yükleyin.</string>
+    <string name="backup_restore_restore_restoring_success">Yedekleme geri yüklendi</string>
+    <string name="backup_restore_restore_restoring_failed">Yedek geri yüklenemedi</string>
+
+    <string name="restore_issue_title">Atlanan Uygulamalar</string>
+    <string name="restore_issue_type_app">Bir uygulama</string>
+    <string name="restore_issue_type_shortcut">Bir kısayol</string>
+    <string name="restore_issue_type_app_short">Uygulama</string>
+    <string name="restore_issue_type_shortcut_short">Kısayol</string>
+    <string name="restore_issue_component_title">{type_short_upper} Bulunamadı</string>
+    <string name="restore_issue_component_content">%1s paket adına sahip {type} bulunamadı.</string>
+    <string name="restore_issue_package_title">{type_short_upper} Simge Bulunamadı</string>
+    <string name="restore_issue_package_content">%1s paket adına sahip bir uygulama bulunamadı, dolayısıyla simgesi %1s paket adına sahip {type_short} için kullanılamadı.</string>
+    <string name="restore_issue_icon_pack_title">Simge Paketi Simgesi Bulunamadı</string>
+    <string name="restore_issue_icon_pack_content">{type_short} %1s için simge, %1s paket adına sahip bir simge paketinde bulunamadı, bu nedenle bu {type_short} öğesine uygulanamadı. Paketin kurulu ve güncel olduğunu kontrol edin.</string>
+    <string name="restore_issue_lawnicon_title">Lawnicon Simgesi Bulunamadı</string>
+    <string name="restore_issue_lawnicon_content">{type_short} %1s (simge %1s) için bir Lawnicon bulunamadı, bu yedekleme yapıldığında aynı Lawnicon sürümünü kullanıp kullanmadığınızı kontrol edin.</string>
+    <string name="restore_issue_legacy_mono_title">Eski Temalı Simge Bulunamadı</string>
+    <string name="restore_issue_legacy_mono_content">{type_short} %1s (simge %1s) için eski temalı bir simge bulunamadı. Daha önce daha fazla simge eklemek için bir kaplama kullandıysanız, kurulu olup olmadığını kontrol edin.</string>
+    <string name="restore_issue_mono_icon_not_ Compatible_title">Temalı Simge Uyumlu Değil</string>
+    <string name="restore_issue_mono_icon_not_ Compatible_content">Yedeklemedeki {type_short} %1s için temalı simge seti, Android\'in bu sürümüyle uyumlu değil.</string>
+    <string name="restore_issue_static_icon_title">Simge Bulunamadı</string>
+    <string name="restore_issue_static_icon_content">Bu yedeklemede %1s simgesi bulunamadı, yedeklemenin değiştirilmediğini kontrol edin.</string>
+    <string name="restore_issue_package_unknown">Bilinmeyen</string>
+
+    <string name="magisk_info_title">Magisk Modülü</string>
+	
+	  <string name="options_title">Seçenekler</string>
+    <string name="options_reapply_icons">Simgeleri Yeniden Uygula</string>
+    <string name="options_reapply_icons_content">Simgeleri manuel olarak yeniden uygular, bir güncellemeden sonra bir simge teması olmadan takılırsa kullanın</string>
+    <string name="options_reapply_title">Simgeleri Yeniden Uygulanıyor…</string>
+    <string name="options_reapply_finished">Simgeler yeniden uygulandı</string>
+    <string name="options_advanced">Gelişmiş</string>
+    <string name="options_advanced_content">Sıfırlama, kısayol güncellemelerini devre dışı bırakma ve Pixel Launcher\'ı manuel olarak yeniden başlatma dahil gelişmiş seçenekler</string>
+    <string name="options_advanced_restart">Pixel Launcher\'ı yeniden başlatın</string>
+    <string name="options_advanced_restart_content">Pixel Launcher\'ı hemen yeniden başlatın</string>
+    <string name="options_advanced_restart_finished">Yeniden başlatma tamamlandı</string>
+    <string name="options_advanced_shortcut">Uygulama Kısayol Güncellemelerini Devre Dışı Bırak</string>
+    <string name="options_advanced_shortcut_content">Bazı uygulamalar çok sık uygulama kısayolu güncellemeleri gönderir, bu da Pixel Launcher Modlarının pil kullanımını artırabilir ve daha yaygın yeniden başlatmalara yol açabilir. Bunu yaşıyorsanız, uygulama kısayol güncellemelerini devre dışı bırakmak sorunu çözecektir, ancak temalarının bozulmaması için simgeleri daha sık yeniden uygulamanız gerekebilir.</string>
+    <string name="options_advanced_reset">Sıfırla</string>
+    <string name="options_advanced_reset_content">Değiştirilen tüm uygulamaları sıfırlayın\' &amp; uygulama kısayolunun etiketleri ve simgeleri ve Pixel Launcher\'ın simge önbelleğini yeniden oluşturun</string>
+    <string name="options_advanced_debug_restart_reason_toast">Hata Ayıklama: Yeniden Başlatma Nedenini Göster Tost</string>
+    <string name="options_advanced_debug_restart_reason_toast_content">Olası bir <b>olası</b> yeniden başlatmanın gerçekleşmeden önce nedenini içeren bir Toast mesajı gösterir. Bunun yeniden başlatmayı <i>garanti etmediğini</i> unutmayın, ancak bir yeniden başlatma olursa size neyin neden olduğunu söyleyecektir.</string>
+    <string name="reset_info_loading">Yükleniyor…</string>
+    <string name="reset_info_warning">Sıfırlama işlemi geri alınamaz. Uygulama ve uygulama kısayol yapılandırmanızı korumak istiyorsanız, devam etmeden önce bir yedekleme yaptığınızdan emin olun</string>
+    <string name="reset_info_title">Uyarı</string>
+    <string name="reset_info_included">Sıfırlama işlemi silinecek</string>
+    <string name="reset_info_included_content">• Hem temalı hem normal, değiştirilmiş uygulama etiketleri ve simgeleri\n• Değiştirilmiş uygulama kısayol simgeleri\n• Otomatik simge paketi yapılandırması\n• Gizli uygulamalar yapılandırması\n• Widget değiştirme yapılandırması</string>
+    <string name="reset_info_not_included">Sıfırlama işlemi <b>silmez</b></string>
+    <string name="reset_info_not_included_content">%1s• Saati gizleme veya Kesintisiz Yeniden Başlatma yapılandırması gibi Pixel Launcher Mod ayarlarınız</string>
+    <string name="reset_info_not_included_content_extra_shortcut">• Eski kısayollar, örneğin \"%1s\"\n</string>
+    <string name="reset_info_continue">Devam et</string>
+    <string name="reset_apply_title">Sıfırlanıyor…</string>
+    <string name="reset_apply_content">Kurduğunuz uygulama sayısına bağlı olarak bu işlem birkaç dakika sürebilir</string>
+    <string name="reset_apply_toast_success">Sıfırlama tamamlandı</string>
+    <string name="reset_apply_toast_failed">Sıfırlama başarısız oldu</string>
+    <string name="menu_hide_apps_deselect_all">Tümünün seçimini kaldırın</string>
+
+    <string name="options_faq">Sık Sorulan Sorular</string>
+    <string name="options_faq_short">SSS</string>
+    <string name="options_faq_content"><b>Pixel Launcher Mods\'un değişiklikleri geride bırakmadan nasıl temiz bir şekilde kaldırılacağı da dahil olmak üzere sık sorulan soruların yanıtları</b></string>
+    
+	  <string name="xda_thread">XDA Konusu</string>
+    <string name="github">GitHub</string>
+    <string name="libraries">Üçüncü taraf kitaplıkları</string>
+    <string name="donate">Bağış yap</string>
+    <string name="twitter">Beni Twitter\'da takip edin</string>
+    <string name="about_version">Sürüm %1s\nKieron Quinn tarafından oluşturuldu</string>
+    <string name="about_contributors">Katkıda Bulunanlar</string>
+    <string name="about_contributors_icons">Simgeler</string>
+    <string name="about_contributors_icons_content"><![CDATA[<b><a href="https://material.io/resources/icons">Material Icons</a></b> (<a href="https://www.apache.org/licenses/LICENSE-2.0.html">Apache Licence 2.0</a>)<br><b><a href="https://github.com/Templarian/MaterialDesign">Material Design Icons</a></b> (<a href="https://github.com/Templarian/MaterialDesign/blob/master/LICENSE">Pictogrammers Free Licence</a>)<br><a href="https://github.com/LawnchairLauncher/lawnicons/blob/develop/app/src/main/res/drawable/magisk.xml"><b>Magisk icon from Lawnicons</b> - Patryk Michalik</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0.html">Apache Licence 2.0</a>)<br><b><a href="https://github.com/HatScripts/circle-flags">circle-flags</a></b> by HatScripts (<a href="https://github.com/HatScripts/circle-flags/blob/gh-pages/LICENSE">MIT Licence</a>)]]></string>
+    <string name="about_contributors_overlay">Dinamik Yer Paylaşımı Oluşturma</string>
+    <string name="about_contributors_overlay_content"><![CDATA[Statically compiled <b><a href="https://github.com/rendiix/termux-aapt">aapt</a></b> and <b><a href="https://github.com/rendiix/termux-zipalign">zipalign</a></b> by <a href="https://github.com/rendiix">rendixx</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0.html">Apache Licence 2.0</a>)<br><a href="https://android.googlesource.com/platform/tools/apksig/">apksigner</a> from AOSP (<a href="https://www.apache.org/licenses/LICENSE-2.0.html">Apache Licence 2.0</a>)]]></string>
+
+    <!-- Update downloader -->
+    <string name="snackbar_update">Güncelleme mevcut</string>
+    <string name="snackbar_update_button">Güncelle</string>
+    <string name="settings_update_heading">Pixel Launcher Mods sürümü %1s</string>
+    <string name="settings_update_subheading">Geçerli sürüm %1s</string>
+    <string name="settings_update_changes">Değişiklikler</string>
+    <string name="settings_update_open_installer">Yüklemeyi Başlat</string>
+    <string name="settings_update_done">İndirme Tamamlandı</string>
+    <string name="settings_update_loading">Yükleniyor…</string>
+    <string name="settings_update_fab">İndir</string>
+    <string name="download_manager_description">Güncelleme indiriliyor…</string>
+    <string name="update_downloader_downloading_title">Güncelleme indiriliyor…</string>
+    <string name="update_downloader_downloading_failed">İndirme başarısız</string>
+    <string name="update_downloader_github">Tarayıcı aracılığıyla indirin</string>
+
+    <!-- Restart Reason Debug Toasts -->
+    <string name="restart_reason_template">Olası yeniden başlatma: %1s</string>
+    <string name="restart_reason_package">%1s değişti</string>
+    <string name="restart_reason_restart">Pixel Launcher öldürüldü / simge sıfırlandı</string>
+    <string name="restart_reason_config">simge yapılandırması değişti</string>
+
+    <!-- Contributors: Translation Languages -->
+    <string name="contributors_translators">Çevirmenler</string>
+    <string name="contributors_translators_turkish">EleoXDA</string>
+</resources>
