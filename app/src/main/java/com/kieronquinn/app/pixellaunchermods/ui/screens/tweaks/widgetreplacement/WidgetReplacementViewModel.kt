@@ -153,7 +153,7 @@ class WidgetReplacementViewModelImpl(
     override fun onSaveClicked() {
         val localReplacement = localWidgetReplacement.value ?: return
         viewModelScope.launch {
-            navigation.navigate(WidgetReplacementFragmentDirections.actionTweaksWidgetReplacementFragmentToTweaksApplyFragment(null, ParceledWidgetReplacement(localReplacement)))
+            navigation.navigate(WidgetReplacementFragmentDirections.actionTweaksWidgetReplacementFragmentToTweaksApplyFragment(null, ParceledWidgetReplacement(localReplacement), null))
         }
     }
 

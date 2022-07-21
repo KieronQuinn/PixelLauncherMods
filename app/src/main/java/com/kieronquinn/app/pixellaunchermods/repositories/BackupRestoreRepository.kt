@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Parcelable
-import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.stream.JsonWriter
 import com.kieronquinn.app.pixellaunchermods.R
@@ -69,6 +68,7 @@ interface BackupRestoreRepository {
     sealed class OverlayAction {
         data class CommitWidgetReplacement(val widgetReplacement: WidgetReplacement): OverlayAction()
         data class CommitHiddenApps(val components: List<String>): OverlayAction()
+        data class CommitRecentsTransparency(val transparency: Float): OverlayAction()
     }
 
     sealed class RestoreIssue(open val component: String): Parcelable {
@@ -423,6 +423,7 @@ class BackupRestoreRepositoryImpl(
             settings.suppressShortcutChangeListener.setIfExists(::suppressShortcutChangeListener)
             settings.hiddenComponents.setIfExists(::hiddenComponents)
             settings.widgetReplacement.setIfExists(::widgetReplacement)
+            settings.recentsBackgroundTransparency.setIfExists(::recentsTransparency)
         }
     }
 
@@ -440,6 +441,9 @@ class BackupRestoreRepositoryImpl(
         }
         backup.hiddenComponents?.let {
             overlayActions.add(OverlayAction.CommitHiddenApps(it))
+        }
+        backup.recentsTransparency?.let {
+            overlayActions.add(OverlayAction.CommitRecentsTransparency(it))
         }
         return overlayActions
     }

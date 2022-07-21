@@ -62,6 +62,8 @@ import com.kieronquinn.app.pixellaunchermods.ui.screens.tweaks.hideapps.HideApps
 import com.kieronquinn.app.pixellaunchermods.ui.screens.tweaks.hideapps.HideAppsViewModelImpl
 import com.kieronquinn.app.pixellaunchermods.ui.screens.tweaks.overlayapply.OverlayApplyViewModel
 import com.kieronquinn.app.pixellaunchermods.ui.screens.tweaks.overlayapply.OverlayApplyViewModelImpl
+import com.kieronquinn.app.pixellaunchermods.ui.screens.tweaks.recents.RecentsTweaksViewModel
+import com.kieronquinn.app.pixellaunchermods.ui.screens.tweaks.recents.RecentsTweaksViewModelImpl
 import com.kieronquinn.app.pixellaunchermods.ui.screens.tweaks.widgetreplacement.WidgetReplacementViewModel
 import com.kieronquinn.app.pixellaunchermods.ui.screens.tweaks.widgetreplacement.WidgetReplacementViewModelImpl
 import com.kieronquinn.app.pixellaunchermods.ui.screens.tweaks.widgetreplacement.widgetpicker.WidgetReplacementPickerViewModel
@@ -126,6 +128,7 @@ class PixelLauncherMods: Application() {
         viewModel<OverlayApplyViewModel> { OverlayApplyViewModelImpl(get(), get(), get(), get()) }
         viewModel<WidgetReplacementViewModel> { WidgetReplacementViewModelImpl(get(), get(), get(), get()) }
         viewModel<WidgetReplacementPickerViewModel> { WidgetReplacementPickerViewModelImpl(get(), get(), get(), get(), get()) }
+        viewModel<RecentsTweaksViewModel> { RecentsTweaksViewModelImpl(get(), get(), get()) }
         viewModel<DeferredRestartViewModel> { DeferredRestartViewModelImpl(get()) }
         viewModel<BackupRestoreBackupViewModel> { BackupRestoreBackupViewModelImpl(get(), get()) }
         viewModel<OptionsViewModel> { OptionsViewModelImpl(get()) }

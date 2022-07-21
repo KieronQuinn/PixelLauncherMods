@@ -123,6 +123,14 @@
     <string name="tweaks_widget_replacement_loading">Loading…</string>
     <string name="tweaks_widget_replacement_save">Apply</string>
     <string name="tweaks_widget_replacement_info">Due to limitations within the Pixel Launcher, it is not possible to replace both the At a Glance and the Search Box at the same time.\n\n<b>Note:</b> Not all widgets are compatible with this feature. If your chosen widget fails to load (for example it stays blank or shows the generic search box), try a different one.</string>
+    <string name="tweaks_recents">Recents</string>
+    <string name="tweaks_recents_content">Tweak the recent apps view</string>
+    <string name="tweaks_recents_background_transparency">Background Transparency</string>
+    <string name="tweaks_recents_background_transparency_content"><b>Note: Lower values may reduce readability</b>. Background may still be blurred, depending on your device.</string>
+    <string name="tweaks_recents_loading">Loading…</string>
+    <string name="tweaks_recents_save">Save</string>
+    <string name="tweaks_recents_formatter">%1s%%</string>
+
     <string name="widget_replacement_picker_title">Select Widget</string>
     <string name="widget_replacement_picker_loading">Loading Widgets…</string>
     <string name="widget_replacement_picker_item_app_count_one">%1s widget</string>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?android:selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
+    android:gravity="center_vertical"
+    android:minHeight="72dp"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/item_settings_slider_icon"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        android:padding="16dp"
+        tools:src="@drawable/ic_info"
+        tools:tint="?android:textColorPrimary" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_16"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/margin_8"
+        android:paddingBottom="@dimen/margin_8">
+
+        <TextView
+            android:id="@+id/item_settings_slider_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium.PixelLauncherMods"
+            android:textColor="?android:textColorPrimary"
+            tools:text="Setting Title" />
+
+        <TextView
+            android:id="@+id/item_settings_slider_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small.PixelLauncherMods"
+            android:textColor="?android:textColorPrimary"
+            android:visibility="gone"
+            tools:text="Setting Content"
+            tools:visibility="visible" />
+
+        <com.google.android.material.slider.Slider
+            android:id="@+id/item_settings_slider_slider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_8" />
+
+    </LinearLayout>
+
+</LinearLayout>

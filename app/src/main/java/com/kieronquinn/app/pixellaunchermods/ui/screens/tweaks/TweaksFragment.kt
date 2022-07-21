@@ -31,6 +31,12 @@ class TweaksFragment: BaseSettingsFragment(), CanShowSnackbar {
                 contentRes = R.string.tweaks_widget_replacement_content,
                 onClick = viewModel::onWidgetReplacementClicked
             ),
+            SettingsItem.Text(
+                icon = R.drawable.ic_tweaks_recents,
+                titleRes = R.string.tweaks_recents,
+                contentRes = R.string.tweaks_recents_content,
+                onClick = viewModel::onRecentsClicked
+            ),
             SettingsItem.Switch(
                 icon = R.drawable.ic_tweaks_hide_clock,
                 titleRes = R.string.tweaks_hide_clock,

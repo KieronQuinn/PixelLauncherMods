@@ -10,6 +10,7 @@ import com.kieronquinn.app.pixellaunchermods.repositories.SettingsRepository.Def
 import com.kieronquinn.app.pixellaunchermods.repositories.SettingsRepository.DeferredRestartMode.INSTANT
 import com.kieronquinn.app.pixellaunchermods.repositories.SettingsRepository.PixelLauncherModsSetting
 import com.kieronquinn.app.pixellaunchermods.repositories.SettingsRepositoryImpl.SettingsConverters.SHARED_BOOLEAN
+import com.kieronquinn.app.pixellaunchermods.repositories.SettingsRepositoryImpl.SettingsConverters.SHARED_FLOAT
 import com.kieronquinn.app.pixellaunchermods.repositories.SettingsRepositoryImpl.SettingsConverters.SHARED_INT
 import com.kieronquinn.app.pixellaunchermods.repositories.SettingsRepositoryImpl.SettingsConverters.SHARED_STRING
 import com.kieronquinn.app.pixellaunchermods.utils.extensions.toHexString
@@ -40,6 +41,9 @@ interface SettingsRepository {
 
     //Whether to hide the clock on the homescreen
     val hideClock: PixelLauncherModsSetting<Boolean>
+
+    //Transparency of the recents view background colour
+    val recentsBackgroundTransparency: PixelLauncherModsSetting<Float>
 
     //Whether to suppress the shortcut change listener (which can be quite noisy)
     val suppressShortcutChangeListener: PixelLauncherModsSetting<Boolean>
@@ -167,6 +171,8 @@ class SettingsRepositoryImpl(context: Context): SettingsRepository {
         private val DEFAULT_AUTO_ICON_PACK_ORDER = emptyList<String>()
         private const val KEY_HIDE_CLOCK = "hide_clock"
         private const val DEFAULT_HIDE_CLOCK = false
+        private const val KEY_RECENTS_BACKGOUND_TRANSPARENCY = "recents_background_transparency"
+        private const val DEFAULT_RECENTS_BACKGROUND_TRANSPARENCY = 0f
         private const val KEY_SUPPRESS_SHORTCUT_LISTENER = "suppress_shortcut_listener"
         private const val DEFAULT_SUPPRESS_SHORTCUT_LISTENER = false
         private const val KEY_HIDDEN_COMPONENTS = "hidden_components"
@@ -215,6 +221,12 @@ class SettingsRepositoryImpl(context: Context): SettingsRepository {
         KEY_HIDE_CLOCK,
         DEFAULT_HIDE_CLOCK,
         SHARED_BOOLEAN
+    )
+
+    override val recentsBackgroundTransparency: PixelLauncherModsSetting<Float> = PixelLauncherModsSettingImpl(
+        KEY_RECENTS_BACKGOUND_TRANSPARENCY,
+        DEFAULT_RECENTS_BACKGROUND_TRANSPARENCY,
+        SHARED_FLOAT
     )
 
     override val suppressShortcutChangeListener: PixelLauncherModsSetting<Boolean> = PixelLauncherModsSettingImpl(

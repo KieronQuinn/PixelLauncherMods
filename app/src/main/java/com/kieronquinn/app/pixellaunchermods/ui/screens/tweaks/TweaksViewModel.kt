@@ -15,6 +15,7 @@ abstract class TweaksViewModel: BaseSettingsViewModel() {
 
     abstract fun onWidgetResizeClicked()
     abstract fun onWidgetReplacementClicked()
+    abstract fun onRecentsClicked()
     abstract fun onHideAppsClicked()
 
 }
@@ -43,6 +44,12 @@ class TweaksViewModelImpl(
     override fun onHideAppsClicked() {
         viewModelScope.launch {
             containerNavigation.navigate(TweaksFragmentDirections.actionTweaksFragmentToHideAppsFragment())
+        }
+    }
+
+    override fun onRecentsClicked() {
+        viewModelScope.launch {
+            containerNavigation.navigate(TweaksFragmentDirections.actionTweaksFragmentToRecentsTweaksFragment())
         }
     }
 
