@@ -109,7 +109,7 @@ class HideAppsViewModelImpl(
             val components = apps.filter { it.hidden }.map {
                 it.launcherApp.componentName.flattenToShortString()
             }.toTypedArray()
-            navigation.navigate(HideAppsFragmentDirections.actionHideAppsFragmentToHideAppsApplyFragment(components, null))
+            navigation.navigate(HideAppsFragmentDirections.actionHideAppsFragmentToHideAppsApplyFragment(components, null, null))
         }
     }
 

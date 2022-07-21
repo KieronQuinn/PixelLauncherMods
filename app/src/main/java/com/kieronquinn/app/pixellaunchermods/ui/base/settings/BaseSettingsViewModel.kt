@@ -3,6 +3,7 @@ package com.kieronquinn.app.pixellaunchermods.ui.base.settings
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.lifecycle.ViewModel
+import com.google.android.material.slider.LabelFormatter
 import com.kieronquinn.app.pixellaunchermods.repositories.SettingsRepository
 
 abstract class BaseSettingsViewModel : ViewModel() {
@@ -36,6 +37,20 @@ abstract class BaseSettingsViewModel : ViewModel() {
             override val isEnabled: () -> Boolean = { true }
         ) : SettingsItem(SettingsItemType.SWITCH, isVisible, isEnabled)
 
+        data class Slider(
+            @DrawableRes val icon: Int,
+            @StringRes val titleRes: Int? = null,
+            val title: CharSequence? = null,
+            @StringRes val contentRes: Int? = null,
+            val content: (() -> CharSequence)? = null,
+            val setting: SettingsRepository.PixelLauncherModsSetting<Float>,
+            val min: Float,
+            val max: Float,
+            val labelFormatter: LabelFormatter,
+            override val isVisible: () -> Boolean = { true },
+            override val isEnabled: () -> Boolean = { true }
+        ) : SettingsItem(SettingsItemType.SLIDER, isVisible, isEnabled)
+
         data class About(
             val onContributorsClicked: () -> Unit,
             val onDonateClicked: () -> Unit,
@@ -50,7 +65,7 @@ abstract class BaseSettingsViewModel : ViewModel() {
         ): SettingsItem(SettingsItemType.HEADER, { true }, { true })
 
         enum class SettingsItemType {
-            TEXT, SWITCH, ABOUT, HEADER;
+            TEXT, SWITCH, ABOUT, HEADER, SLIDER;
 
             companion object {
                 fun fromViewType(type: Int): SettingsItemType {

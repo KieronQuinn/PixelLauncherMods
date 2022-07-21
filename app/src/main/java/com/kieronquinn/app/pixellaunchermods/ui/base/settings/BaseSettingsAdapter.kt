@@ -14,16 +14,14 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import com.kieronquinn.app.pixellaunchermods.BuildConfig
 import com.kieronquinn.app.pixellaunchermods.R
-import com.kieronquinn.app.pixellaunchermods.databinding.ItemSettingsAboutBinding
-import com.kieronquinn.app.pixellaunchermods.databinding.ItemSettingsHeaderBinding
-import com.kieronquinn.app.pixellaunchermods.databinding.ItemSettingsSwitchItemBinding
-import com.kieronquinn.app.pixellaunchermods.databinding.ItemSettingsTextItemBinding
+import com.kieronquinn.app.pixellaunchermods.databinding.*
 import com.kieronquinn.app.pixellaunchermods.repositories.SettingsRepository
 import com.kieronquinn.app.pixellaunchermods.repositories.invert
 import com.kieronquinn.app.pixellaunchermods.ui.base.settings.BaseSettingsViewModel.SettingsItem
 import com.kieronquinn.app.pixellaunchermods.ui.base.settings.BaseSettingsViewModel.SettingsItem.SettingsItemType
 import com.kieronquinn.app.pixellaunchermods.ui.views.LifecycleAwareRecyclerView
 import com.kieronquinn.app.pixellaunchermods.utils.extensions.addRipple
+import com.kieronquinn.app.pixellaunchermods.utils.extensions.onChanged
 import com.kieronquinn.app.pixellaunchermods.utils.extensions.onClicked
 import com.kieronquinn.app.pixellaunchermods.utils.extensions.removeRipple
 import me.saket.bettermovementmethod.BetterLinkMovementMethod
@@ -42,11 +40,11 @@ abstract class BaseSettingsAdapter(
         ResourcesCompat.getFont(recyclerView.context, R.font.google_sans_text_medium)
     }
 
-    private fun getItems(): List<SettingsItem> {
+    private fun filterItems(): List<SettingsItem> {
         return _items.filter { it.isVisible() }
     }
 
-    private var items = getItems()
+    private var items = filterItems()
 
     private val layoutInflater =
         context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -87,6 +85,13 @@ abstract class BaseSettingsAdapter(
                     false
                 )
             )
+            SettingsItemType.SLIDER -> ViewHolder.Slider(
+                ItemSettingsSliderItemBinding.inflate(
+                    layoutInflater,
+                    parent,
+                    false
+                )
+            )
         }
     }
 
@@ -103,6 +108,10 @@ abstract class BaseSettingsAdapter(
             )
             is ViewHolder.About -> holder.binding.setupAboutItem(
                 item as SettingsItem.About,
+                holder.lifecycleScope
+            )
+            is ViewHolder.Slider -> holder.binding.setupSliderItem(
+                item as SettingsItem.Slider,
                 holder.lifecycleScope
             )
             is ViewHolder.Header -> holder.binding.setupHeaderItem(
@@ -217,6 +226,52 @@ abstract class BaseSettingsAdapter(
         }
     }
 
+    private fun ItemSettingsSliderItemBinding.setupSliderItem(
+        item: SettingsItem.Slider,
+        scope: LifecycleCoroutineScope
+    ) {
+        root.removeRipple()
+        val context = root.context
+        itemSettingsSliderTitle.text = when {
+            item.title != null -> item.title
+            item.titleRes != null -> context.getText(item.titleRes)
+            else -> null
+        }
+        itemSettingsSliderContent.text = when {
+            item.content != null -> item.content.invoke()
+            item.contentRes != null -> context.getText(item.contentRes)
+            else -> null
+        }.also {
+            itemSettingsSliderContent.isVisible = !it.isNullOrEmpty()
+        }
+        itemSettingsSliderIcon.setImageResource(item.icon)
+        val isEnabled = item.isEnabled()
+        itemSettingsSliderSlider.isEnabled = isEnabled
+        itemSettingsSliderSlider.valueFrom = item.min
+        itemSettingsSliderSlider.valueTo = item.max
+        itemSettingsSliderSlider.setLabelFormatter(item.labelFormatter)
+        itemSettingsSliderSlider.value = item.setting.getSync()
+        itemSettingsSliderSlider.alpha = if (isEnabled) 1f else 0.5f
+        itemSettingsSliderTitle.alpha = if (isEnabled) 1f else 0.5f
+        itemSettingsSliderContent.alpha = if (isEnabled) 1f else 0.5f
+        itemSettingsSliderIcon.alpha = if (isEnabled) 1f else 0.5f
+        scope.launchWhenResumed {
+            item.setting.asFlow().collect {
+                itemSettingsSliderSlider.value = it
+            }
+        }
+        scope.launchWhenResumed {
+            itemSettingsSliderSlider.onChanged().collect {
+                if (!isEnabled) return@collect
+                if (item.setting is SettingsRepository.FakePixelLauncherModsSetting) {
+                    //Prevent initial change
+                    itemSettingsSliderSlider.value = item.setting.get()
+                }
+                item.setting.set(it)
+            }
+        }
+    }
+
     private fun ItemSettingsHeaderBinding.setupHeaderItem(item: SettingsItem.Header) {
         itemSettingsHeaderTitle.setText(item.titleRes)
     }
@@ -250,6 +305,7 @@ abstract class BaseSettingsAdapter(
     sealed class ViewHolder(open val binding: ViewBinding) : LifecycleAwareRecyclerView.ViewHolder(binding.root) {
         data class Text(override val binding: ItemSettingsTextItemBinding) : ViewHolder(binding)
         data class Switch(override val binding: ItemSettingsSwitchItemBinding) : ViewHolder(binding)
+        data class Slider(override val binding: ItemSettingsSliderItemBinding) : ViewHolder(binding)
         data class Header(override val binding: ItemSettingsHeaderBinding) : ViewHolder(binding)
         data class About(override val binding: ItemSettingsAboutBinding) : ViewHolder(binding)
     }

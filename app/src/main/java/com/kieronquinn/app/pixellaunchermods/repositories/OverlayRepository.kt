@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.net.Uri
 import android.util.Xml
-import androidx.core.os.BuildCompat
 import com.android.apksigner.ApkSignerTool
 import com.kieronquinn.app.pixellaunchermods.PIXEL_LAUNCHER_PACKAGE_NAME
 import com.kieronquinn.app.pixellaunchermods.model.tweaks.WidgetReplacement
@@ -18,7 +17,6 @@ import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.withContext
-import org.xmlpull.v1.XmlSerializer
 import java.io.File
 import java.io.FileOutputStream
 import java.time.LocalDateTime
@@ -34,10 +32,11 @@ interface OverlayRepository {
     data class OverlayConfig(
         val components: List<String>,
         val widgetReplacement: WidgetReplacement,
+        val recentsTransparency: Float,
         val saveComponents: Boolean,
-        val saveWidgetReplacement: Boolean
+        val saveWidgetReplacement: Boolean,
+        val saveRecentsTransparency: Boolean
     )
-
 
     /**
      *  Checks if the overlay is installed, via the root service. Will still return true if it
@@ -140,6 +139,7 @@ class OverlayRepositoryImpl(
         emitter.println("Building XML…")
         writeValues(config.components, config.widgetReplacement)
         writeSearchContainer(config.widgetReplacement)
+        writeColors(config.recentsTransparency)
         emitter.println("Compiling resources…")
         if(!emitter.runAndEmit(::compileResources)) return false
         emitter.println("Building overlay APK…")
@@ -191,6 +191,10 @@ class OverlayRepositoryImpl(
                     element("dimen", "0dp") {
                         attribute("name", "enhanced_smartspace_height")
                     }
+                    //Disable page dots
+                    element("dimen", "0dp") {
+                        attribute("name", "page_indicator_dot_size")
+                    }
                 }
             }
         }
@@ -234,6 +238,39 @@ class OverlayRepositoryImpl(
         layoutXml.writeText(layout)
     }
 
+    private fun writeColors(alpha: Float) {
+        val colorDir = File(resDir, "color")
+        colorDir.mkdirs()
+        val normalisedAlpha = (1f - (alpha / 100f))
+            .coerceAtLeast(0f)
+            .coerceAtMost(1f)
+        val xml = Xml.newSerializer()
+        val scrimColorLight = xml.document {
+            element("selector"){
+                attribute("xmlns:android", "http://schemas.android.com/apk/res/android")
+                element("item") {
+                    attribute("android:color", "@android:color/system_neutral2_500")
+                    attribute("android:lStar", "87")
+                    attribute("android:alpha", normalisedAlpha.toString())
+                }
+            }
+        }
+        val scrimColorDark = xml.document {
+            element("selector"){
+                attribute("xmlns:android", "http://schemas.android.com/apk/res/android")
+                element("item") {
+                    attribute("android:color", "@android:color/system_neutral1_500")
+                    attribute("android:lStar", "35")
+                    attribute("android:alpha", normalisedAlpha.toString())
+                }
+            }
+        }
+        val colorXmlLight = File(colorDir, "overview_scrim.xml")
+        colorXmlLight.writeText(scrimColorLight)
+        val colorXmlDark = File(colorDir, "overview_scrim_dark.xml")
+        colorXmlDark.writeText(scrimColorDark)
+    }
+
     private fun compileResources(): Pair<Boolean, List<String>> {
         intermediatesDir.mkdirs()
         val linkOutput = ArrayList<String>()
@@ -263,6 +300,8 @@ class OverlayRepositoryImpl(
                 )
                 append(" ${intermediatesDir.name}/layout_$resourceName.xml.flat")
             }
+            append(" ${intermediatesDir.name}/color_overview_scrim.xml.flat")
+            append(" ${intermediatesDir.name}/color_overview_scrim_dark.xml.flat")
             //Add manifest
             append(" --manifest ${buildDir.name}/AndroidManifest.xml")
         }
@@ -339,6 +378,9 @@ class OverlayRepositoryImpl(
             rootServiceRepository.runWithRootService {
                 it.setSearchWidgetPackageEnabled(config.widgetReplacement != WidgetReplacement.NONE)
             }
+        }
+        if(config.saveRecentsTransparency) {
+            settingsRepository.recentsBackgroundTransparency.set(config.recentsTransparency)
         }
     }
 

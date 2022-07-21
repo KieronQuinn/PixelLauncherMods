@@ -38,7 +38,7 @@ class RootServiceRepositoryImpl(context: Context): RootServiceRepository {
 
     override suspend fun isRooted(): Boolean {
         return withContext(Dispatchers.IO){
-            Shell.rootAccess()
+            Shell.cmd("whoami").exec().out.firstOrNull() == "root"
         }
     }
 

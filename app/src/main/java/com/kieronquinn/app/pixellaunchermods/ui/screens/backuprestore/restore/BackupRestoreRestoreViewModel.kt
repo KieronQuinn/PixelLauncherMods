@@ -63,11 +63,14 @@ class BackupRestoreRestoreViewModelImpl(
             val widgetReplacement = actions.firstOrNull {
                 it is OverlayAction.CommitWidgetReplacement
             } as? OverlayAction.CommitWidgetReplacement
+            val recentsTransparency = actions.firstOrNull {
+                it is OverlayAction.CommitRecentsTransparency
+            } as? OverlayAction.CommitRecentsTransparency
             navigation.navigate(
                 BackupRestoreRestoreFragmentDirections.actionBackupRestoreRestoreFragmentToOverlayApplyFragment(
                     components?.components?.toTypedArray(), widgetReplacement?.widgetReplacement?.run {
                         ParceledWidgetReplacement(this)
-                    }
+                    }, recentsTransparency?.transparency?.toString()
                 )
             )
         }

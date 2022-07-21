@@ -76,6 +76,9 @@ class Backup {
 
         @SerializedName("widget_replacement")
         var widgetReplacement: WidgetReplacement? = null
+
+        @SerializedName("recents_transparency")
+        var recentsTransparency: Float? = null
     }
 
 }

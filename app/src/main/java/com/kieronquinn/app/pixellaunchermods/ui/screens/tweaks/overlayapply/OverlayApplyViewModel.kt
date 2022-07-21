@@ -27,7 +27,7 @@ abstract class OverlayApplyViewModel: ViewModel() {
 
     abstract val consoleLines: StateFlow<List<String>>
     abstract val state: StateFlow<State>
-    abstract fun setConfig(components: Array<String>?, widgetReplacement: WidgetReplacement?)
+    abstract fun setConfig(components: Array<String>?, widgetReplacement: WidgetReplacement?, recentsTransparency: Float?)
     abstract fun saveLog(outputUri: Uri)
     abstract fun onSaveLogClicked(launcher: ActivityResultLauncher<String>)
     abstract fun onBackPressed()
@@ -64,15 +64,18 @@ class OverlayApplyViewModelImpl(
         }
     }.stateIn(viewModelScope, SharingStarted.Eagerly, State.Applying)
 
-    override fun setConfig(components: Array<String>?, widgetReplacement: WidgetReplacement?) {
+    override fun setConfig(components: Array<String>?, widgetReplacement: WidgetReplacement?, recentsTransparency: Float?) {
         viewModelScope.launch {
             val overlayComponents = components?.toList() ?: settingsRepository.hiddenComponents.get()
             val overlayWidgetReplacement = widgetReplacement ?: settingsRepository.widgetReplacement.get()
+            val transparency = recentsTransparency ?: settingsRepository.recentsBackgroundTransparency.get()
             val config = OverlayConfig(
                 overlayComponents,
                 overlayWidgetReplacement,
+                transparency,
                 components != null,
-                widgetReplacement != null
+                widgetReplacement != null,
+                recentsTransparency != null
             )
             this@OverlayApplyViewModelImpl.config.emit(config)
         }

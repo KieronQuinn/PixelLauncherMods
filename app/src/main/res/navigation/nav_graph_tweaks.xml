@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_tweaksFragment_to_tweaksWidgetReplacementFragment"
             app:destination="@id/tweaksWidgetReplacementFragment" />
+        <action
+            android:id="@+id/action_tweaksFragment_to_recentsTweaksFragment"
+            app:destination="@id/recentsTweaksFragment" />
     </fragment>
     <fragment
         android:id="@+id/hideAppsFragment"
@@ -39,6 +42,10 @@
             android:name="widget_replacement"
             app:argType="com.kieronquinn.app.pixellaunchermods.model.tweaks.ParceledWidgetReplacement"
             app:nullable="true" />
+        <argument
+            android:name="recents_transparency"
+            app:argType="string"
+            app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/tweaksWidgetReplacementFragment"
@@ -61,6 +68,15 @@
             android:id="@+id/widgetComponentPickerDeeplink"
             app:action="android.intent.action.VIEW"
             app:uri="plm://widgetcomponentpicker" />
+    </fragment>
+    <fragment
+        android:id="@+id/recentsTweaksFragment"
+        android:name="com.kieronquinn.app.pixellaunchermods.ui.screens.tweaks.recents.RecentsTweaksFragment"
+        android:label="@string/tweaks_recents"
+        tools:layout="@layout/fragment_settings_tweaks_recents">
+        <action
+            android:id="@+id/action_recentsTweaksFragment_to_tweaksApplyFragment"
+            app:destination="@id/tweaksApplyFragment" />
     </fragment>
 
 </navigation>

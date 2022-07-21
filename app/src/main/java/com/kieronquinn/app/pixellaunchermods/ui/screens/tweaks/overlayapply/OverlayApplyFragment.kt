@@ -42,7 +42,11 @@ class OverlayApplyFragment: BoundFragment<FragmentTweaksApplyBinding>(FragmentTw
         setupConsole()
         setupSaveConsole()
         setupClose()
-        viewModel.setConfig(args.components, args.widgetReplacement?.widgetReplacement)
+        viewModel.setConfig(
+            args.components,
+            args.widgetReplacement?.widgetReplacement,
+            args.recentsTransparency?.toFloatOrNull()
+        )
     }
 
     private fun setupState() {
