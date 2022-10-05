@@ -7,12 +7,14 @@
         <item name="postSplashScreenTheme">@style/Theme.PixelLauncherMods</item>
     </style>
     <style name="Theme.PixelLauncherMods" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="android:windowShowWallpaper">true</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:windowLightStatusBar">@bool/lightStatusNav</item>
         <item name="android:windowLightNavigationBar">@bool/lightStatusNav</item>
+    </style>
+    <style name="Theme.PixelLauncherMods.Wallpaper" parent="Theme.PixelLauncherMods">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowShowWallpaper">true</item>
     </style>
     <style name="AppTheme.ThirdPartyLicences" parent="Theme.MaterialComponents.DayNight">
         <item name="actionBarStyle">@style/ThirdPartyLicencesToolbarTheme</item>

@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_tweaksFragment_to_recentsTweaksFragment"
             app:destination="@id/recentsTweaksFragment" />
+        <action
+            android:id="@+id/action_tweaksFragment_to_widgetResizeActivity"
+            app:destination="@id/widgetResizeActivity" />
     </fragment>
     <fragment
         android:id="@+id/hideAppsFragment"
@@ -78,5 +81,10 @@
             android:id="@+id/action_recentsTweaksFragment_to_tweaksApplyFragment"
             app:destination="@id/tweaksApplyFragment" />
     </fragment>
+    <activity
+        android:id="@+id/widgetResizeActivity"
+        android:name="com.kieronquinn.app.pixellaunchermods.ui.activities.WidgetResizeActivity"
+        android:label=" "
+        tools:layout="@layout/activity_widget_resize"/>
 
 </navigation>

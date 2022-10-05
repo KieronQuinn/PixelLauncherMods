@@ -122,7 +122,7 @@ class PixelLauncherMods: Application() {
         viewModel<ShortcutEditorViewModel> { ShortcutEditorViewModelImpl(get(), get(), get(), get()) }
         viewModel<AutoIconPackViewModel> { AutoIconPackViewModelImpl(get(), get(), get()) }
         viewModel<AutoIconPackApplyViewModel> { AutoIconPackApplyViewModelImpl(get(), get(), get()) }
-        viewModel<TweaksViewModel> { TweaksViewModelImpl(get(), get(), get(), get()) }
+        viewModel<TweaksViewModel> { TweaksViewModelImpl(get(), get(), get()) }
         viewModel<WidgetResizeViewModel> { WidgetResizeViewModelImpl(get(), get(), get()) }
         viewModel<HideAppsViewModel>{ HideAppsViewModelImpl(get(), get(), get()) }
         viewModel<OverlayApplyViewModel> { OverlayApplyViewModelImpl(get(), get(), get(), get()) }
