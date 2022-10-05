@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         installSplashScreen()
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)
-        DynamicColors.applyIfAvailable(this)
+        DynamicColors.applyToActivityIfAvailable(this)
         UpdateCheckWorker.queueCheckWorker(this)
         setContentView(R.layout.activity_main)
         findViewById<View>(android.R.id.content).delayPreDrawUntilFlow(

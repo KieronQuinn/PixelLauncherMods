@@ -2,11 +2,9 @@ package com.kieronquinn.app.pixellaunchermods.ui.screens.tweaks
 
 import androidx.lifecycle.viewModelScope
 import com.kieronquinn.app.pixellaunchermods.components.navigation.ContainerNavigation
-import com.kieronquinn.app.pixellaunchermods.components.navigation.RootNavigation
 import com.kieronquinn.app.pixellaunchermods.repositories.HideClockRepository
 import com.kieronquinn.app.pixellaunchermods.repositories.SettingsRepository
 import com.kieronquinn.app.pixellaunchermods.ui.base.settings.BaseSettingsViewModel
-import com.kieronquinn.app.pixellaunchermods.ui.screens.container.ContainerFragmentDirections
 import kotlinx.coroutines.launch
 
 abstract class TweaksViewModel: BaseSettingsViewModel() {
@@ -21,7 +19,6 @@ abstract class TweaksViewModel: BaseSettingsViewModel() {
 }
 
 class TweaksViewModelImpl(
-    private val rootNavigation: RootNavigation,
     private val containerNavigation: ContainerNavigation,
     private val hideClockRepository: HideClockRepository,
     settingsRepository: SettingsRepository
@@ -31,7 +28,7 @@ class TweaksViewModelImpl(
 
     override fun onWidgetResizeClicked() {
         viewModelScope.launch {
-            rootNavigation.navigate(ContainerFragmentDirections.actionContainerFragmentToWidgetResizeFragment())
+            containerNavigation.navigate(TweaksFragmentDirections.actionTweaksFragmentToWidgetResizeActivity())
         }
     }
 

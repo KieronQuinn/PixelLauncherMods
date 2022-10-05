@@ -7,6 +7,7 @@ import android.view.MenuItem
 interface BackAvailable
 interface LockCollapsed
 interface CanShowSnackbar
+interface Root
 
 interface ProvidesBack {
     fun onBackPressed(): Boolean

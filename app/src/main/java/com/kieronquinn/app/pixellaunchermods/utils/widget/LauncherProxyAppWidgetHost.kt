@@ -15,7 +15,10 @@ import com.kieronquinn.app.pixellaunchermods.utils.extensions.reflect
  */
 class LauncherProxyAppWidgetHost(context: Context, hostId: Int): AppWidgetHost(context, hostId) {
 
-    private val mViews by reflect<AppWidgetHost, SparseArray<AppWidgetHostView>>("mViews")
+    private val mViews by reflect<AppWidgetHost, SparseArray<AppWidgetHostView>>(
+        "mViews", "mListeners"
+    )
+
     private var isListening = false
 
     override fun onCreateView(

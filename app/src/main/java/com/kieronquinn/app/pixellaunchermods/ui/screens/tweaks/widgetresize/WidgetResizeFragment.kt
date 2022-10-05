@@ -1,16 +1,13 @@
 package com.kieronquinn.app.pixellaunchermods.ui.screens.tweaks.widgetresize
 
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuInflater
 import android.view.View
 import androidx.activity.addCallback
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import androidx.core.view.updatePadding
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.shape.CornerFamily
 import com.google.android.material.shape.ShapeAppearanceModel
@@ -18,12 +15,10 @@ import com.kieronquinn.app.pixellaunchermods.R
 import com.kieronquinn.app.pixellaunchermods.databinding.FragmentWidgetResizeBinding
 import com.kieronquinn.app.pixellaunchermods.databinding.IncludeWidgetResizeSheetBinding
 import com.kieronquinn.app.pixellaunchermods.ui.base.BoundFragment
-import com.kieronquinn.app.pixellaunchermods.ui.base.ProvidesBack
 import com.kieronquinn.app.pixellaunchermods.ui.screens.tweaks.widgetresize.WidgetResizeViewModel.State
 import com.kieronquinn.app.pixellaunchermods.ui.screens.tweaks.widgetresize.WidgetResizeViewModel.Target
 import com.kieronquinn.app.pixellaunchermods.utils.extensions.onApplyInsets
 import com.kieronquinn.app.pixellaunchermods.utils.extensions.onNavigationIconClicked
-import kotlinx.coroutines.flow.collect
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class WidgetResizeFragment: BoundFragment<FragmentWidgetResizeBinding>(FragmentWidgetResizeBinding::inflate) {
@@ -63,7 +58,7 @@ class WidgetResizeFragment: BoundFragment<FragmentWidgetResizeBinding>(FragmentW
 
     private fun setupBack() {
         requireActivity().onBackPressedDispatcher.addCallback(this) {
-            viewModel.onBackPressed()
+            requireActivity().finish()
         }
     }
 
@@ -92,7 +87,7 @@ class WidgetResizeFragment: BoundFragment<FragmentWidgetResizeBinding>(FragmentW
     private fun setupToolbar() = with(binding.widgetResizeSheetInclude.widgetResizeSheetToolbar){
         viewLifecycleOwner.lifecycleScope.launchWhenResumed {
             onNavigationIconClicked().collect {
-                viewModel.onBackPressed()
+                requireActivity().finish()
             }
         }
     }

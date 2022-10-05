@@ -1,8 +1,11 @@
 package com.kieronquinn.app.pixellaunchermods.components.notifications
 
+import android.Manifest
+import android.app.Activity
 import android.app.Notification
 import android.app.NotificationManager
 import android.content.Context
+import android.os.Build
 import androidx.core.app.NotificationCompat
 import com.kieronquinn.app.pixellaunchermods.R
 import android.app.NotificationChannel as AndroidNotificationChannel
@@ -22,6 +25,12 @@ fun Context.createNotification(
         }
     notificationManager.createNotificationChannel(notificationChannel)
     return NotificationCompat.Builder(this, channel.id).apply(builder).build()
+}
+
+fun Activity.requestNotificationPermission() {
+    if(Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) return
+    //We don't actually care about the result - this is purely for better UX
+    requestPermissions(arrayOf(Manifest.permission.POST_NOTIFICATIONS), 101)
 }
 
 enum class NotificationChannel(

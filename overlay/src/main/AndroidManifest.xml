@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.google.android.apps.nexuslauncher.plmoverlay"
     android:compileSdkVersion="31"
     android:compileSdkVersionCodename="12"
@@ -7,8 +8,9 @@
     android:versionName="1.0">
 
     <uses-sdk
-        android:targetSdkVersion="31"
-        android:minSdkVersion="31"/>
+        android:targetSdkVersion="33"
+        android:minSdkVersion="31"
+        tools:ignore="GradleOverrides" />
 
     <overlay
         android:priority="10"
@@ -18,6 +20,7 @@
     <application
         android:allowBackup="false"
         android:hasCode="false"
-        android:label="PixelLauncherModsOverlay" />
+        android:label="PixelLauncherModsOverlay"
+        tools:ignore="DataExtractionRules,MissingApplicationIcon" />
 
 </manifest>

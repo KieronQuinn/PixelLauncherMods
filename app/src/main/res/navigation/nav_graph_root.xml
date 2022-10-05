@@ -9,15 +9,6 @@
         android:id="@+id/containerFragment"
         android:name="com.kieronquinn.app.pixellaunchermods.ui.screens.container.ContainerFragment"
         android:label="ContainerFragment"
-        tools:layout="@layout/fragment_container" >
-        <action
-            android:id="@+id/action_containerFragment_to_widgetResizeFragment"
-            app:destination="@id/widgetResizeFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/widgetResizeFragment"
-        android:name="com.kieronquinn.app.pixellaunchermods.ui.screens.tweaks.widgetresize.WidgetResizeFragment"
-        android:label="WidgetResizeFragment"
-        tools:layout="@layout/fragment_widget_resize" />
+        tools:layout="@layout/fragment_container" />
 
 </navigation>

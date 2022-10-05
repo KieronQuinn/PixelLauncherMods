@@ -14,10 +14,11 @@ import com.kieronquinn.app.pixellaunchermods.R
 import com.kieronquinn.app.pixellaunchermods.databinding.FragmentAppsBinding
 import com.kieronquinn.app.pixellaunchermods.ui.base.BoundFragment
 import com.kieronquinn.app.pixellaunchermods.ui.base.CanShowSnackbar
+import com.kieronquinn.app.pixellaunchermods.ui.base.Root
 import com.kieronquinn.app.pixellaunchermods.utils.extensions.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class AppsFragment: BoundFragment<FragmentAppsBinding>(FragmentAppsBinding::inflate), CanShowSnackbar {
+class AppsFragment: BoundFragment<FragmentAppsBinding>(FragmentAppsBinding::inflate), CanShowSnackbar, Root {
 
     private val viewModel by viewModel<AppsViewModel>()
 

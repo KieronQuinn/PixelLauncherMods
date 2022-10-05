@@ -3,12 +3,10 @@ package com.kieronquinn.app.pixellaunchermods.ui.screens.tweaks.widgetresize
 import android.appwidget.AppWidgetHostView
 import android.content.Context
 import android.content.pm.ApplicationInfo
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kieronquinn.app.pixellaunchermods.components.navigation.RootNavigation
 import com.kieronquinn.app.pixellaunchermods.model.ipc.GridSize
-import com.kieronquinn.app.pixellaunchermods.model.remote.RemoteFavourite
 import com.kieronquinn.app.pixellaunchermods.model.remote.RemoteWidget
 import com.kieronquinn.app.pixellaunchermods.repositories.AppWidgetRepository
 import com.kieronquinn.app.pixellaunchermods.repositories.RemoteAppsRepository
@@ -57,7 +55,6 @@ abstract class WidgetResizeViewModel: ViewModel() {
     abstract val hasChanges: StateFlow<Boolean>
     abstract fun startListening()
     abstract fun stopListening()
-    abstract fun onBackPressed()
     abstract suspend fun loadWidget(context: Context, widget: Target.Widget): AppWidgetHostView
     abstract fun onWidgetClicked(widget: Target.Widget?)
     abstract fun onWidgetPlusXClicked()
@@ -123,12 +120,6 @@ class WidgetResizeViewModelImpl(
         //Break out of viewmodelscope as we're closing
         GlobalScope.launch {
             appWidgetRepository.stopListening()
-        }
-    }
-
-    override fun onBackPressed() {
-        viewModelScope.launch {
-            rootNavigation.navigateBack()
         }
     }
 

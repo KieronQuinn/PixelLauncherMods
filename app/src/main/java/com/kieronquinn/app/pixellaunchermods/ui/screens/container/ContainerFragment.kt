@@ -2,7 +2,6 @@ package com.kieronquinn.app.pixellaunchermods.ui.screens.container
 
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuInflater
 import android.view.View
 import androidx.activity.addCallback
@@ -24,6 +23,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.kieronquinn.app.pixellaunchermods.R
 import com.kieronquinn.app.pixellaunchermods.components.navigation.ContainerNavigation
 import com.kieronquinn.app.pixellaunchermods.components.navigation.setupWithNavigation
+import com.kieronquinn.app.pixellaunchermods.components.notifications.requestNotificationPermission
 import com.kieronquinn.app.pixellaunchermods.databinding.FragmentContainerBinding
 import com.kieronquinn.app.pixellaunchermods.repositories.RemoteAppsRepository
 import com.kieronquinn.app.pixellaunchermods.ui.base.*
@@ -92,6 +92,7 @@ class ContainerFragment: BoundFragment<FragmentContainerBinding>(FragmentContain
         setupApplyState()
         setupUpdateSnackbar()
         NavigationUI.setupWithNavController(binding.containerBottomNavigation, navController)
+        requireActivity().requestNotificationPermission()
     }
 
     private fun setupBottomNavigation() {
@@ -138,7 +139,10 @@ class ContainerFragment: BoundFragment<FragmentContainerBinding>(FragmentContain
     }
 
     private fun setupBack() {
-        requireActivity().onBackPressedDispatcher.addCallback(this) {
+        val callback = requireActivity().onBackPressedDispatcher.addCallback(
+            this,
+            shouldBackDispatcherBeEnabled()
+        ) {
             (navHostFragment.getTopFragment() as? ProvidesBack)?.let {
                 if(it.onBackPressed()) return@addCallback
             }
@@ -146,6 +150,16 @@ class ContainerFragment: BoundFragment<FragmentContainerBinding>(FragmentContain
                 requireActivity().finish()
             }
         }
+        viewLifecycleOwner.lifecycleScope.launchWhenResumed {
+            navController.onDestinationChanged().collect {
+                callback.isEnabled = shouldBackDispatcherBeEnabled()
+            }
+        }
+    }
+
+    private fun shouldBackDispatcherBeEnabled(): Boolean {
+        val top = navHostFragment.getTopFragment()
+        return top is ProvidesBack || top !is Root
     }
 
     private fun setupAppBar() {
