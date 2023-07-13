@@ -14,7 +14,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MagiskInfoFragment: BoundFragment<FragmentMagiskInfoBinding>(FragmentMagiskInfoBinding::inflate), BackAvailable {
 
-    private val saveModuleLauncher = registerForActivityResult(ActivityResultContracts.CreateDocument()) {
+    private val saveModuleLauncher = registerForActivityResult(ActivityResultContracts.CreateDocument("*/*")) {
         if(it != null){
             viewModel.saveModule(it)
         }

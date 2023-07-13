@@ -9,7 +9,34 @@ import com.kieronquinn.app.pixellaunchermods.components.navigation.RootNavigatio
 import com.kieronquinn.app.pixellaunchermods.components.navigation.RootNavigationImpl
 import com.kieronquinn.app.pixellaunchermods.model.room.IconMetadata
 import com.kieronquinn.app.pixellaunchermods.model.room.getRoomDatabase
-import com.kieronquinn.app.pixellaunchermods.repositories.*
+import com.kieronquinn.app.pixellaunchermods.repositories.AppStateRepository
+import com.kieronquinn.app.pixellaunchermods.repositories.AppStateRepositoryImpl
+import com.kieronquinn.app.pixellaunchermods.repositories.AppWidgetRepository
+import com.kieronquinn.app.pixellaunchermods.repositories.AppWidgetRepositoryImpl
+import com.kieronquinn.app.pixellaunchermods.repositories.AppsRepository
+import com.kieronquinn.app.pixellaunchermods.repositories.AppsRepositoryImpl
+import com.kieronquinn.app.pixellaunchermods.repositories.BackupRestoreRepository
+import com.kieronquinn.app.pixellaunchermods.repositories.BackupRestoreRepositoryImpl
+import com.kieronquinn.app.pixellaunchermods.repositories.DatabaseRepository
+import com.kieronquinn.app.pixellaunchermods.repositories.DatabaseRepositoryImpl
+import com.kieronquinn.app.pixellaunchermods.repositories.HideClockRepository
+import com.kieronquinn.app.pixellaunchermods.repositories.HideClockRepositoryImpl
+import com.kieronquinn.app.pixellaunchermods.repositories.IconLoaderRepository
+import com.kieronquinn.app.pixellaunchermods.repositories.IconLoaderRepositoryImpl
+import com.kieronquinn.app.pixellaunchermods.repositories.IconPackRepository
+import com.kieronquinn.app.pixellaunchermods.repositories.IconPackRepositoryImpl
+import com.kieronquinn.app.pixellaunchermods.repositories.OverlayRepository
+import com.kieronquinn.app.pixellaunchermods.repositories.OverlayRepositoryImpl
+import com.kieronquinn.app.pixellaunchermods.repositories.ProxyAppWidgetRepository
+import com.kieronquinn.app.pixellaunchermods.repositories.ProxyAppWidgetRepositoryImpl
+import com.kieronquinn.app.pixellaunchermods.repositories.RemoteAppsRepository
+import com.kieronquinn.app.pixellaunchermods.repositories.RemoteAppsRepositoryImpl
+import com.kieronquinn.app.pixellaunchermods.repositories.RootServiceRepository
+import com.kieronquinn.app.pixellaunchermods.repositories.RootServiceRepositoryImpl
+import com.kieronquinn.app.pixellaunchermods.repositories.SettingsRepository
+import com.kieronquinn.app.pixellaunchermods.repositories.SettingsRepositoryImpl
+import com.kieronquinn.app.pixellaunchermods.repositories.UpdateRepository
+import com.kieronquinn.app.pixellaunchermods.repositories.UpdateRepositoryImpl
 import com.kieronquinn.app.pixellaunchermods.ui.activities.MainActivityViewModel
 import com.kieronquinn.app.pixellaunchermods.ui.activities.MainActivityViewModelImpl
 import com.kieronquinn.app.pixellaunchermods.ui.screens.apps.AppsViewModel
@@ -60,10 +87,10 @@ import com.kieronquinn.app.pixellaunchermods.ui.screens.tweaks.deferredrestart.D
 import com.kieronquinn.app.pixellaunchermods.ui.screens.tweaks.deferredrestart.DeferredRestartViewModelImpl
 import com.kieronquinn.app.pixellaunchermods.ui.screens.tweaks.hideapps.HideAppsViewModel
 import com.kieronquinn.app.pixellaunchermods.ui.screens.tweaks.hideapps.HideAppsViewModelImpl
+import com.kieronquinn.app.pixellaunchermods.ui.screens.tweaks.overlay.OverlayTweaksViewModel
+import com.kieronquinn.app.pixellaunchermods.ui.screens.tweaks.overlay.OverlayTweaksViewModelImpl
 import com.kieronquinn.app.pixellaunchermods.ui.screens.tweaks.overlayapply.OverlayApplyViewModel
 import com.kieronquinn.app.pixellaunchermods.ui.screens.tweaks.overlayapply.OverlayApplyViewModelImpl
-import com.kieronquinn.app.pixellaunchermods.ui.screens.tweaks.recents.RecentsTweaksViewModel
-import com.kieronquinn.app.pixellaunchermods.ui.screens.tweaks.recents.RecentsTweaksViewModelImpl
 import com.kieronquinn.app.pixellaunchermods.ui.screens.tweaks.widgetreplacement.WidgetReplacementViewModel
 import com.kieronquinn.app.pixellaunchermods.ui.screens.tweaks.widgetreplacement.WidgetReplacementViewModelImpl
 import com.kieronquinn.app.pixellaunchermods.ui.screens.tweaks.widgetreplacement.widgetpicker.WidgetReplacementPickerViewModel
@@ -122,13 +149,13 @@ class PixelLauncherMods: Application() {
         viewModel<ShortcutEditorViewModel> { ShortcutEditorViewModelImpl(get(), get(), get(), get()) }
         viewModel<AutoIconPackViewModel> { AutoIconPackViewModelImpl(get(), get(), get()) }
         viewModel<AutoIconPackApplyViewModel> { AutoIconPackApplyViewModelImpl(get(), get(), get()) }
-        viewModel<TweaksViewModel> { TweaksViewModelImpl(get(), get(), get()) }
+        viewModel<TweaksViewModel> { TweaksViewModelImpl(get(), get(), get(), get()) }
         viewModel<WidgetResizeViewModel> { WidgetResizeViewModelImpl(get(), get(), get()) }
         viewModel<HideAppsViewModel>{ HideAppsViewModelImpl(get(), get(), get()) }
         viewModel<OverlayApplyViewModel> { OverlayApplyViewModelImpl(get(), get(), get(), get()) }
         viewModel<WidgetReplacementViewModel> { WidgetReplacementViewModelImpl(get(), get(), get(), get()) }
         viewModel<WidgetReplacementPickerViewModel> { WidgetReplacementPickerViewModelImpl(get(), get(), get(), get(), get()) }
-        viewModel<RecentsTweaksViewModel> { RecentsTweaksViewModelImpl(get(), get(), get()) }
+        viewModel<OverlayTweaksViewModel> { OverlayTweaksViewModelImpl(get(), get(), get()) }
         viewModel<DeferredRestartViewModel> { DeferredRestartViewModelImpl(get()) }
         viewModel<BackupRestoreBackupViewModel> { BackupRestoreBackupViewModelImpl(get(), get()) }
         viewModel<OptionsViewModel> { OptionsViewModelImpl(get()) }

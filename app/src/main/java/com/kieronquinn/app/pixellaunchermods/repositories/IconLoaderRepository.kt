@@ -6,14 +6,20 @@ import android.content.pm.PackageManager
 import android.content.res.Resources
 import android.content.res.XmlResourceParser
 import android.graphics.Bitmap
+import android.graphics.Bitmap.Config
 import android.graphics.BitmapFactory
-import android.graphics.drawable.*
+import android.graphics.drawable.AdaptiveIconDrawable
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
+import android.graphics.drawable.InsetDrawable
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.ArrayMap
 import android.util.Log
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.toBitmap
+import com.bumptech.glide.Glide
 import com.kieronquinn.app.pixellaunchermods.LAWNICONS_PACKAGE_NAME
 import com.kieronquinn.app.pixellaunchermods.PIXEL_LAUNCHER_PACKAGE_NAME
 import com.kieronquinn.app.pixellaunchermods.R
@@ -29,8 +35,20 @@ import com.kieronquinn.app.pixellaunchermods.model.remote.RemoteFavourite
 import com.kieronquinn.app.pixellaunchermods.ui.drawables.ClockDrawableWrapper
 import com.kieronquinn.app.pixellaunchermods.ui.screens.iconpicker.BasePickerViewModel.IconPickerResultOptions
 import com.kieronquinn.app.pixellaunchermods.utils.drawable.IconNormalizer
-import com.kieronquinn.app.pixellaunchermods.utils.extensions.*
-import com.kieronquinn.app.pixellaunchermods.utils.glide.GlideApp
+import com.kieronquinn.app.pixellaunchermods.utils.extensions.AdaptiveIconDrawable_getInsetFraction
+import com.kieronquinn.app.pixellaunchermods.utils.extensions.Bitmap_decodeRawBitmap
+import com.kieronquinn.app.pixellaunchermods.utils.extensions.Bitmap_getSize
+import com.kieronquinn.app.pixellaunchermods.utils.extensions.compress
+import com.kieronquinn.app.pixellaunchermods.utils.extensions.compressRaw
+import com.kieronquinn.app.pixellaunchermods.utils.extensions.createLawniconsResources
+import com.kieronquinn.app.pixellaunchermods.utils.extensions.createPixelLauncherResources
+import com.kieronquinn.app.pixellaunchermods.utils.extensions.extractLegacyNormalIcon
+import com.kieronquinn.app.pixellaunchermods.utils.extensions.getMonochromeOrForeground
+import com.kieronquinn.app.pixellaunchermods.utils.extensions.getPlateColours
+import com.kieronquinn.app.pixellaunchermods.utils.extensions.isPackageInstalled
+import com.kieronquinn.app.pixellaunchermods.utils.extensions.parseToComponentName
+import com.kieronquinn.app.pixellaunchermods.utils.extensions.setShrinkNonAdaptiveIcons
+import com.kieronquinn.app.pixellaunchermods.utils.extensions.updateLegacyIcon
 import com.kieronquinn.app.pixellaunchermods.utils.glide.ScaleTransformation
 import me.zhanghai.android.appiconloader.AppIconLoader
 import org.koin.core.component.KoinComponent
@@ -38,7 +56,7 @@ import org.koin.core.component.inject
 import org.xmlpull.v1.XmlPullParser
 import java.io.ByteArrayInputStream
 import java.io.DataInputStream
-import java.util.*
+import java.util.Calendar
 
 interface IconLoaderRepository {
 
@@ -103,7 +121,7 @@ class IconLoaderRepositoryImpl(
         get() = overrideIconSize ?: remoteAppsRepository.iconSize.value ?: throw NullPointerException("Cannot access iconSize before it is set")
 
     private val glide by lazy {
-        GlideApp.with(context)
+        Glide.with(context)
     }
 
     private val pixelLauncherThemedIconMap by lazy {
@@ -170,7 +188,7 @@ class IconLoaderRepositoryImpl(
     private fun RemoteApp.loadIcon(context: Context, loadThemedIcon: Boolean): Drawable? {
         return if(loadThemedIcon && monoIcon != null && icon != null){
             val iconSize = Bitmap_getSize(icon)
-            Bitmap_decodeRawBitmap(monoIcon, iconSize.width(), iconSize.height(), Bitmap.Config.ALPHA_8).run {
+            Bitmap_decodeRawBitmap(monoIcon, iconSize.width(), iconSize.height(), Config.ALPHA_8).run {
                 BitmapDrawable(context.resources, this).serveOnPlate(context)
             }
         } else if(icon != null) {
@@ -315,7 +333,7 @@ class IconLoaderRepositoryImpl(
         val size = if(options.loadFullRes) fullResIconSize else iconSize
         return try {
             glide.asDrawable().load(options).submit(size, size)
-                .get().toBitmap(size, size, if(options.mono) Bitmap.Config.ALPHA_8 else null)
+                .get().toBitmap(size, size, if(options.mono) Config.ALPHA_8 else null)
         }catch (e: Exception){
             null
         }
@@ -438,30 +456,42 @@ class IconLoaderRepositoryImpl(
     }
 
     override fun resizeIcon(icon: ByteArray, size: Int): ByteArray? {
-        val bitmap = BitmapFactory.decodeByteArray(icon, 0, icon.size)
-        val scaledBitmap = Bitmap.createScaledBitmap(bitmap, size, size, true)
-        return scaledBitmap.compress().also {
-            bitmap.recycle()
-            scaledBitmap.recycle()
+        return try {
+            val bitmap = BitmapFactory.decodeByteArray(icon, 0, icon.size)
+            val scaledBitmap = Bitmap.createScaledBitmap(bitmap, size, size, true)
+            scaledBitmap.compress().also {
+                bitmap.recycle()
+                scaledBitmap.recycle()
+            }
+        }catch (e: Exception){
+            null
         }
     }
 
     override fun resizeThemedIcon(icon: ByteArray, currentSize: Int, size: Int): ByteArray? {
-        val bitmap = Bitmap_decodeRawBitmap(icon, currentSize, currentSize, Bitmap.Config.ALPHA_8)
-        val scaledBitmap = Bitmap.createScaledBitmap(bitmap, size, size, true)
-        return scaledBitmap.compressRaw().also {
-            bitmap.recycle()
-            scaledBitmap.recycle()
+        return try {
+            val bitmap = Bitmap_decodeRawBitmap(icon, currentSize, currentSize, Config.ALPHA_8)
+            val scaledBitmap = Bitmap.createScaledBitmap(bitmap, size, size, true)
+            scaledBitmap.compressRaw().also {
+                bitmap.recycle()
+                scaledBitmap.recycle()
+            }
+        }catch (e: Exception) {
+            null
         }
     }
 
     override fun resizeLegacyIcon(icon: ByteArray, size: Int): ByteArray? {
-        val iconBytes = icon.extractLegacyNormalIcon()
-        val bitmap = BitmapFactory.decodeByteArray(iconBytes, 0, iconBytes.size)
-        val scaledBitmap = Bitmap.createScaledBitmap(bitmap, size, size, true)
-        return icon.updateLegacyIcon(icon = scaledBitmap.compress())?.also {
-            bitmap.recycle()
-            scaledBitmap.recycle()
+        return try {
+            val iconBytes = icon.extractLegacyNormalIcon()
+            val bitmap = BitmapFactory.decodeByteArray(iconBytes, 0, iconBytes.size)
+            val scaledBitmap = Bitmap.createScaledBitmap(bitmap, size, size, true)
+            return icon.updateLegacyIcon(icon = scaledBitmap.compress())?.also {
+                bitmap.recycle()
+                scaledBitmap.recycle()
+            }
+        }catch (e: Exception){
+            null
         }
     }
 

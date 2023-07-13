@@ -20,10 +20,7 @@ import com.kieronquinn.app.pixellaunchermods.model.tweaks.WidgetReplacementOptio
 import com.kieronquinn.app.pixellaunchermods.ui.screens.tweaks.widgetreplacement.WidgetReplacementViewModel.Item
 import com.kieronquinn.app.pixellaunchermods.ui.screens.tweaks.widgetreplacement.WidgetReplacementViewModel.WidgetPosition
 import com.kieronquinn.app.pixellaunchermods.ui.views.LifecycleAwareRecyclerView
-import com.kieronquinn.app.pixellaunchermods.utils.extensions.onChanged
 import com.kieronquinn.app.pixellaunchermods.utils.extensions.onClicked
-import com.kieronquinn.app.pixellaunchermods.utils.extensions.onSelected
-import com.kieronquinn.app.pixellaunchermods.utils.extensions.selectTab
 import com.kieronquinn.app.pixellaunchermods.utils.widget.PreviewAppWidgetHostView
 import kotlinx.coroutines.launch
 
@@ -32,7 +29,6 @@ class WidgetReplacementAdapter(
     var items: List<Item>,
     private val getWidgetView: suspend (WidgetPosition) -> AppWidgetHostView?,
     private val onSwitchChanged: (Boolean) -> Unit,
-    private val onToggleChanged: (WidgetPosition) -> Unit,
     private val onSelectClicked: () -> Unit,
     private val onReconfigureClicked: () -> Unit
 ): LifecycleAwareRecyclerView.Adapter<WidgetReplacementAdapter.ViewHolder>(recyclerView) {
@@ -86,28 +82,16 @@ class WidgetReplacementAdapter(
     }
 
     private fun ItemTweaksWidgetReplacementSwitchBinding.setup(item: Item.Switch, holder: ViewHolder) {
-        tweaksWidgetReplacementSwitch.setOnCheckedChangeListener(null)
         tweaksWidgetReplacementSwitch.isChecked = item.enabled
         holder.lifecycleScope.launchWhenResumed {
-            tweaksWidgetReplacementSwitch.onChanged().collect {
-                onSwitchChanged(it)
+            tweaksWidgetReplacementSwitch.onClicked().collect {
+                onSwitchChanged(tweaksWidgetReplacementSwitch.isChecked)
             }
         }
     }
 
     private fun ItemTweaksWidgetReplacementPreviewBinding.setup(item: Item.Preview, holder: ViewHolder) {
         holder.lifecycleScope.launchWhenResumed {
-            val widgetViewTop = getWidgetView(WidgetPosition.TOP) as? PreviewAppWidgetHostView
-            if(widgetViewTop != null){
-                launch {
-                    widgetViewTop.onChanged().collect {
-                        glide.load(WidgetReplacementOptions(widgetViewTop, WidgetReplacement.TOP))
-                            .diskCacheStrategy(DiskCacheStrategy.NONE)
-                            .skipMemoryCache(true)
-                            .into(itemTweaksWidgetReplacementPreviewTopWidgetContainer)
-                    }
-                }
-            }
             val widgetViewBottom = getWidgetView(WidgetPosition.BOTTOM) as? PreviewAppWidgetHostView
             if(widgetViewBottom != null){
                 launch {
@@ -117,22 +101,6 @@ class WidgetReplacementAdapter(
                             .skipMemoryCache(true)
                             .into(itemTweaksWidgetReplacementPreviewBottomWidgetContainer)
                     }
-                }
-            }
-            itemConfigurationOverlayTabs.selectTab(item.position.index)
-            launch {
-                itemConfigurationOverlayTabs.onSelected().collect { index ->
-                    onToggleChanged(WidgetPosition.values().first { it.index == index })
-                }
-            }
-            launch {
-                itemTweaksWidgetReplacementPreviewTopWidgetTap.onClicked().collect {
-                    itemConfigurationOverlayTabs.selectTab(0)
-                }
-            }
-            launch {
-                itemTweaksWidgetReplacementPreviewBottomWidgetTap.onClicked().collect {
-                    itemConfigurationOverlayTabs.selectTab(1)
                 }
             }
         }

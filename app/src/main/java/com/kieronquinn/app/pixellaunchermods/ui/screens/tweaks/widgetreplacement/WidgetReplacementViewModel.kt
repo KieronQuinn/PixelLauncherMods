@@ -14,7 +14,13 @@ import com.kieronquinn.app.pixellaunchermods.repositories.OverlayRepository
 import com.kieronquinn.app.pixellaunchermods.repositories.ProxyAppWidgetRepository
 import com.kieronquinn.app.pixellaunchermods.repositories.SettingsRepository
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 abstract class WidgetReplacementViewModel: ViewModel() {
@@ -34,7 +40,9 @@ abstract class WidgetReplacementViewModel: ViewModel() {
     abstract fun saveModule(uri: Uri)
 
     enum class WidgetPosition(val index: Int) {
-        TOP(0), BOTTOM(1)
+        @Deprecated("No longer possible, removed")
+        TOP(0),
+        BOTTOM(1)
     }
 
     sealed class State {
@@ -91,13 +99,13 @@ class WidgetReplacementViewModelImpl(
     ){ switch, toggle, remote ->
         when {
             switch != null && !switch -> WidgetReplacement.NONE
-            toggle == WidgetPosition.TOP -> WidgetReplacement.TOP
+            toggle == WidgetPosition.TOP -> WidgetReplacement.BOTTOM
             toggle == WidgetPosition.BOTTOM -> WidgetReplacement.BOTTOM
             switch != null && remote != WidgetReplacement.NONE -> {
                 remote //Default to whatever the remote value is if one is set
             }
             switch != null -> {
-                WidgetReplacement.TOP //Default to top if switch is enabled but no value is set
+                WidgetReplacement.BOTTOM
             }
             else -> null
         }
@@ -117,9 +125,9 @@ class WidgetReplacementViewModelImpl(
             it.widgetFeatures and AppWidgetProviderInfo.WIDGET_FEATURE_RECONFIGURABLE != 0
         } ?: false
         val widgetPosition = when(bestReplacement){
-            WidgetReplacement.TOP -> WidgetPosition.TOP
+            WidgetReplacement.TOP -> WidgetPosition.BOTTOM
             WidgetReplacement.BOTTOM -> WidgetPosition.BOTTOM
-            WidgetReplacement.NONE -> WidgetPosition.TOP //Default to top, although it will be hidden
+            WidgetReplacement.NONE -> WidgetPosition.BOTTOM //Default to top, although it will be hidden
         }
         val items = listOfNotNull(
             Item.Switch(enabled),
@@ -153,7 +161,15 @@ class WidgetReplacementViewModelImpl(
     override fun onSaveClicked() {
         val localReplacement = localWidgetReplacement.value ?: return
         viewModelScope.launch {
-            navigation.navigate(WidgetReplacementFragmentDirections.actionTweaksWidgetReplacementFragmentToTweaksApplyFragment(null, ParceledWidgetReplacement(localReplacement), null))
+            navigation.navigate(WidgetReplacementFragmentDirections
+                .actionTweaksWidgetReplacementFragmentToTweaksApplyFragment(
+                    null,
+                    ParceledWidgetReplacement(localReplacement),
+                    null,
+                    null,
+                    null,
+                    null
+                ))
         }
     }
 

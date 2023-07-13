@@ -16,8 +16,17 @@ import com.kieronquinn.app.pixellaunchermods.repositories.AppsRepository
 import com.kieronquinn.app.pixellaunchermods.repositories.ProxyAppWidgetRepository
 import com.kieronquinn.app.pixellaunchermods.repositories.RootServiceRepository
 import com.kieronquinn.app.pixellaunchermods.repositories.SettingsRepository
+import com.kieronquinn.app.pixellaunchermods.widget.ProxyWidget
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -111,8 +120,9 @@ class WidgetReplacementPickerViewModelImpl(
 
     private val appWidgets = flow {
         emit(appWidgetRepository.getAllProviders().filterNot {
-            //Ignore our own widget
-            it.provider.packageName == BuildConfig.APPLICATION_ID
+            //Ignore our own proxy widget
+            it.provider.packageName == BuildConfig.APPLICATION_ID &&
+                    it.provider.className == ProxyWidget::class.java.name
         }.groupBy {
             val packageName = it.activityInfo.packageName
             val appInfo = appsRepository.getApplicationInfoForPackage(packageName) ?: return@groupBy null

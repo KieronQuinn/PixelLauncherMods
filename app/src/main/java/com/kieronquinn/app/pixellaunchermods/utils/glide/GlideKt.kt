@@ -29,7 +29,7 @@ fun <I, O, A> Registry.prepend(
     ))
 }
 
-private fun <I, O, A> createFactory(
+private fun <I : Any, O, A> createFactory(
     context: Context,
     classOut: Class<O>,
     fetcherArg: A,
@@ -49,7 +49,7 @@ private fun <I, O, A> createFactory(
     }
 }
 
-private fun <I, O, A> createLoader(
+private fun <I : Any, O, A> createLoader(
     context: Context,
     classOut: Class<O>,
     loader: (context: Context, item: I, arg: A, callback: DataFetcher.DataCallback<in O>) -> Unit,

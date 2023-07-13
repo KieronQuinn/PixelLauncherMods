@@ -726,7 +726,11 @@ class PixelLauncherModsRootServiceImpl: IPixelLauncherModsRootService.Stub() {
     // HIDE CLOCK
 
     override fun setStatusBarIconDenylist(denylist: String) {
-        execRootCommand("settings put secure $SETTINGS_KEY_ICON_BLACKLIST $denylist")
+        if(denylist.isBlank()){
+            execRootCommand("settings delete secure $SETTINGS_KEY_ICON_BLACKLIST")
+        }else{
+            execRootCommand("settings put secure $SETTINGS_KEY_ICON_BLACKLIST $denylist")
+        }
     }
 
     // OVERLAY

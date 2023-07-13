@@ -22,7 +22,12 @@ import com.kieronquinn.app.pixellaunchermods.ui.base.ProvidesOverflow
 import com.kieronquinn.app.pixellaunchermods.ui.screens.tweaks.hideapps.HideAppsViewModel.State
 import com.kieronquinn.app.pixellaunchermods.ui.screens.tweaks.overlayapply.OverlayApplyFragment.Companion.REQUEST_KEY_TWEAKS
 import com.kieronquinn.app.pixellaunchermods.ui.screens.tweaks.overlayapply.OverlayApplyFragment.Companion.RESULT_EXTRA_TWEAKS_WAS_SUCCESSFUL
-import com.kieronquinn.app.pixellaunchermods.utils.extensions.*
+import com.kieronquinn.app.pixellaunchermods.utils.extensions.applyBottomNavigationInset
+import com.kieronquinn.app.pixellaunchermods.utils.extensions.applyBottomNavigationMargin
+import com.kieronquinn.app.pixellaunchermods.utils.extensions.hideIme
+import com.kieronquinn.app.pixellaunchermods.utils.extensions.onChanged
+import com.kieronquinn.app.pixellaunchermods.utils.extensions.onClicked
+import com.kieronquinn.app.pixellaunchermods.utils.extensions.onEditorActionSent
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HideAppsFragment: BoundFragment<FragmentHideAppsBinding>(FragmentHideAppsBinding::inflate), BackAvailable, ProvidesOverflow {
@@ -43,7 +48,7 @@ class HideAppsFragment: BoundFragment<FragmentHideAppsBinding>(FragmentHideAppsB
         )
     }
 
-    private val saveModuleLauncher = registerForActivityResult(ActivityResultContracts.CreateDocument()) {
+    private val saveModuleLauncher = registerForActivityResult(ActivityResultContracts.CreateDocument("*/*")) {
         if(it != null){
             viewModel.saveModule(it)
         }

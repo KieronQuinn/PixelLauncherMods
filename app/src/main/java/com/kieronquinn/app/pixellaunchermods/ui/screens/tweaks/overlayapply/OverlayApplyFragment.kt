@@ -26,7 +26,7 @@ class OverlayApplyFragment: BoundFragment<FragmentTweaksApplyBinding>(FragmentTw
         const val RESULT_EXTRA_TWEAKS_WAS_SUCCESSFUL = "success"
     }
 
-    private val saveLogLauncher = registerForActivityResult(ActivityResultContracts.CreateDocument()) {
+    private val saveLogLauncher = registerForActivityResult(ActivityResultContracts.CreateDocument("*/*")) {
         if(it != null){
             viewModel.saveLog(it)
         }
@@ -45,7 +45,10 @@ class OverlayApplyFragment: BoundFragment<FragmentTweaksApplyBinding>(FragmentTw
         viewModel.setConfig(
             args.components,
             args.widgetReplacement?.widgetReplacement,
-            args.recentsTransparency?.toFloatOrNull()
+            args.recentsTransparency?.toFloatOrNull(),
+            args.disableWallpaperScrim?.toBooleanStrictOrNull(),
+            args.disableWallpaperRegionColours?.toBooleanStrictOrNull(),
+            args.disableSmartspace?.toBooleanStrictOrNull()
         )
     }
 

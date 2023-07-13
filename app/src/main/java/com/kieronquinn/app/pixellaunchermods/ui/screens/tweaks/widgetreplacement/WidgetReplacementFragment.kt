@@ -32,12 +32,11 @@ class WidgetReplacementFragment: BoundFragment<FragmentTweaksWidgetReplacementBi
             emptyList(),
             viewModel::getWidgetView,
             viewModel::onSwitchStateChanged,
-            viewModel::onToggleStateChanged,
             viewModel::onSelectClicked
         ) { viewModel.onReconfigureClicked(configurationLauncher) }
     }
 
-    private val saveModuleLauncher = registerForActivityResult(ActivityResultContracts.CreateDocument()) {
+    private val saveModuleLauncher = registerForActivityResult(ActivityResultContracts.CreateDocument("*/*")) {
         if(it != null){
             viewModel.saveModule(it)
         }

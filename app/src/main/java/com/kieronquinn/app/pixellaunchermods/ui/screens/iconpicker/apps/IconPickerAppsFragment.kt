@@ -15,7 +15,11 @@ import com.kieronquinn.app.pixellaunchermods.databinding.FragmentIconPickerAppsB
 import com.kieronquinn.app.pixellaunchermods.ui.base.BackAvailable
 import com.kieronquinn.app.pixellaunchermods.ui.screens.iconpicker.BasePickerFragment
 import com.kieronquinn.app.pixellaunchermods.ui.screens.iconpicker.apps.IconPickerAppsViewModel.State
-import com.kieronquinn.app.pixellaunchermods.utils.extensions.*
+import com.kieronquinn.app.pixellaunchermods.utils.extensions.applyBottomNavigationInset
+import com.kieronquinn.app.pixellaunchermods.utils.extensions.hideIme
+import com.kieronquinn.app.pixellaunchermods.utils.extensions.onChanged
+import com.kieronquinn.app.pixellaunchermods.utils.extensions.onClicked
+import com.kieronquinn.app.pixellaunchermods.utils.extensions.onEditorActionSent
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class IconPickerAppsFragment: BasePickerFragment<FragmentIconPickerAppsBinding>(FragmentIconPickerAppsBinding::inflate), BackAvailable {
@@ -25,7 +29,7 @@ class IconPickerAppsFragment: BasePickerFragment<FragmentIconPickerAppsBinding>(
 
     private val adapter by lazy {
         IconPickerAppsAdapter(
-            requireContext(),
+            binding.iconPickerAppsRecyclerview,
             emptyList(),
             false,
             viewModel::onShrinkIconsChanged,
@@ -49,6 +53,11 @@ class IconPickerAppsFragment: BasePickerFragment<FragmentIconPickerAppsBinding>(
         setupSearch()
         setupRecyclerView()
         viewModel.setupWithConfig(args.mono)
+    }
+
+    override fun onDestroyView() {
+        binding.iconPickerAppsRecyclerview.adapter = null
+        super.onDestroyView()
     }
 
     private fun setupRecyclerView() = with(binding.iconPickerAppsRecyclerview) {

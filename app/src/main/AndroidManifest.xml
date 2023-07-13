@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="com.kieronquinn.app.pixellaunchermods">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"
@@ -10,6 +9,7 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE"/>
 
     <application
         android:allowBackup="false"
@@ -52,13 +52,23 @@
             <meta-data android:name="android.appwidget.provider"
                 android:resource="@xml/proxy_appwidget_info" />
         </receiver>
+        <receiver android:name=".widget.BlankWidget"
+            android:exported="false"
+            android:label="@string/widget_blank_title">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider"
+                android:resource="@xml/blank_appwidget_info" />
+        </receiver>
         <receiver android:name=".receivers.BootReceiver"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>
         </receiver>
-        <service android:name=".service.PixelLauncherModsForegroundService"/>
+        <service android:name=".service.PixelLauncherModsForegroundService"
+            android:foregroundServiceType="specialUse"/>
 
         <provider
             android:name="androidx.core.content.FileProvider"

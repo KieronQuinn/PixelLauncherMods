@@ -1,5 +1,6 @@
 package com.kieronquinn.app.pixellaunchermods.utils.extensions
 
+import android.annotation.SuppressLint
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -7,6 +8,7 @@ import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.content.res.Resources
+import android.os.Build
 import android.util.TypedValue
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
@@ -28,10 +30,19 @@ fun Context.broadcastReceiverAsFlow(vararg intentFilters: IntentFilter) = callba
         }
     }
     intentFilters.forEach {
-        registerReceiver(receiver, it)
+        registerReceiverCompat(receiver, it)
     }
     awaitClose {
         unregisterReceiver(receiver)
+    }
+}
+
+@SuppressLint("UnspecifiedRegisterReceiverFlag")
+private fun Context.registerReceiverCompat(receiver: BroadcastReceiver, intentFilter: IntentFilter) {
+    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+        registerReceiver(receiver, intentFilter, Context.RECEIVER_EXPORTED)
+    }else{
+        registerReceiver(receiver, intentFilter)
     }
 }
 

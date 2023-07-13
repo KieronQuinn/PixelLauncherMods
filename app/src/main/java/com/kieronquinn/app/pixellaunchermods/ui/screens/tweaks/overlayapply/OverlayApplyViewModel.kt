@@ -12,7 +12,13 @@ import com.kieronquinn.app.pixellaunchermods.repositories.OverlayRepository.Over
 import com.kieronquinn.app.pixellaunchermods.repositories.OverlayRepository.OverlayProgress
 import com.kieronquinn.app.pixellaunchermods.repositories.SettingsRepository
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import java.io.FileOutputStream
 import java.time.LocalDateTime
@@ -27,7 +33,14 @@ abstract class OverlayApplyViewModel: ViewModel() {
 
     abstract val consoleLines: StateFlow<List<String>>
     abstract val state: StateFlow<State>
-    abstract fun setConfig(components: Array<String>?, widgetReplacement: WidgetReplacement?, recentsTransparency: Float?)
+    abstract fun setConfig(
+        components: Array<String>?,
+        widgetReplacement: WidgetReplacement?,
+        recentsTransparency: Float?,
+        disableWallpaperScrim: Boolean?,
+        disableWallpaperRegionColours: Boolean?,
+        disableSmartspace: Boolean?
+    )
     abstract fun saveLog(outputUri: Uri)
     abstract fun onSaveLogClicked(launcher: ActivityResultLauncher<String>)
     abstract fun onBackPressed()
@@ -64,18 +77,35 @@ class OverlayApplyViewModelImpl(
         }
     }.stateIn(viewModelScope, SharingStarted.Eagerly, State.Applying)
 
-    override fun setConfig(components: Array<String>?, widgetReplacement: WidgetReplacement?, recentsTransparency: Float?) {
+    override fun setConfig(
+        components: Array<String>?,
+        widgetReplacement: WidgetReplacement?,
+        recentsTransparency: Float?,
+        disableWallpaperScrim: Boolean?,
+        disableWallpaperRegionColours: Boolean?,
+        disableSmartspace: Boolean?
+    ) {
         viewModelScope.launch {
             val overlayComponents = components?.toList() ?: settingsRepository.hiddenComponents.get()
             val overlayWidgetReplacement = widgetReplacement ?: settingsRepository.widgetReplacement.get()
             val transparency = recentsTransparency ?: settingsRepository.recentsBackgroundTransparency.get()
+            val disableScrim = disableWallpaperScrim ?: settingsRepository.disableWallpaperScrim.get()
+            val disableWallpaperColours = disableWallpaperRegionColours
+                ?: settingsRepository.disableWallpaperRegionColours.get()
+            val disableSmartspaceBool = disableSmartspace ?: settingsRepository.disableSmartspace.get()
             val config = OverlayConfig(
                 overlayComponents,
                 overlayWidgetReplacement,
                 transparency,
+                disableScrim,
+                disableWallpaperColours,
+                disableSmartspaceBool,
                 components != null,
                 widgetReplacement != null,
-                recentsTransparency != null
+                recentsTransparency != null,
+                disableWallpaperScrim != null,
+                disableWallpaperRegionColours != null,
+                disableSmartspace != null
             )
             this@OverlayApplyViewModelImpl.config.emit(config)
         }

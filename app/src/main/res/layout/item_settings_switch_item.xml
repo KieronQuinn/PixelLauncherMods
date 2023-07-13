@@ -51,15 +51,13 @@
 
     </LinearLayout>
 
-    <com.google.android.material.switchmaterial.SwitchMaterial
-        android:layout_marginEnd="@dimen/margin_16"
+    <com.google.android.material.materialswitch.MaterialSwitch
         android:id="@+id/item_settings_switch_switch"
-        app:track="@drawable/switch_track"
-        android:scaleX="0.75"
-        android:scaleY="0.75"
-        app:showText="false"
-        android:thumb="@drawable/switch_thumb"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_16"
+        app:showText="false"
+        app:thumbIconTint="?android:textColorTertiaryInverse"
+        tools:checked="true" />
 
 </LinearLayout>

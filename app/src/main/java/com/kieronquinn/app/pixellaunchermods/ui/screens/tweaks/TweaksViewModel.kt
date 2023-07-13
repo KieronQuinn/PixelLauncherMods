@@ -1,10 +1,15 @@
 package com.kieronquinn.app.pixellaunchermods.ui.screens.tweaks
 
+import android.net.Uri
+import android.util.Log
+import androidx.activity.result.ActivityResultLauncher
 import androidx.lifecycle.viewModelScope
 import com.kieronquinn.app.pixellaunchermods.components.navigation.ContainerNavigation
 import com.kieronquinn.app.pixellaunchermods.repositories.HideClockRepository
+import com.kieronquinn.app.pixellaunchermods.repositories.OverlayRepository
 import com.kieronquinn.app.pixellaunchermods.repositories.SettingsRepository
 import com.kieronquinn.app.pixellaunchermods.ui.base.settings.BaseSettingsViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 abstract class TweaksViewModel: BaseSettingsViewModel() {
@@ -15,12 +20,15 @@ abstract class TweaksViewModel: BaseSettingsViewModel() {
     abstract fun onWidgetReplacementClicked()
     abstract fun onRecentsClicked()
     abstract fun onHideAppsClicked()
+    abstract fun onSaveModuleClicked(launcher: ActivityResultLauncher<String>)
+    abstract fun saveModule(uri: Uri)
 
 }
 
 class TweaksViewModelImpl(
     private val containerNavigation: ContainerNavigation,
     private val hideClockRepository: HideClockRepository,
+    private val overlayRepository: OverlayRepository,
     settingsRepository: SettingsRepository
 ): TweaksViewModel() {
 
@@ -47,6 +55,16 @@ class TweaksViewModelImpl(
     override fun onRecentsClicked() {
         viewModelScope.launch {
             containerNavigation.navigate(TweaksFragmentDirections.actionTweaksFragmentToRecentsTweaksFragment())
+        }
+    }
+
+    override fun onSaveModuleClicked(launcher: ActivityResultLauncher<String>) {
+        launcher.launch(overlayRepository.getModuleFilename())
+    }
+
+    override fun saveModule(uri: Uri) {
+        viewModelScope.launch(Dispatchers.IO) {
+            overlayRepository.saveModule(uri)
         }
     }
 

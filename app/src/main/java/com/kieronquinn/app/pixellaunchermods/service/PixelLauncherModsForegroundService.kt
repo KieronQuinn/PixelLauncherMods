@@ -9,20 +9,41 @@ import android.provider.Settings
 import android.widget.Toast
 import androidx.lifecycle.LifecycleService
 import androidx.lifecycle.lifecycleScope
+import com.kieronquinn.app.pixellaunchermods.BuildConfig
 import com.kieronquinn.app.pixellaunchermods.R
 import com.kieronquinn.app.pixellaunchermods.components.notifications.NotificationChannel
 import com.kieronquinn.app.pixellaunchermods.components.notifications.NotificationId
 import com.kieronquinn.app.pixellaunchermods.components.notifications.createNotification
-import com.kieronquinn.app.pixellaunchermods.repositories.*
+import com.kieronquinn.app.pixellaunchermods.repositories.AppStateRepository
+import com.kieronquinn.app.pixellaunchermods.repositories.DatabaseRepository
+import com.kieronquinn.app.pixellaunchermods.repositories.HideClockRepository
+import com.kieronquinn.app.pixellaunchermods.repositories.ProxyAppWidgetRepository
+import com.kieronquinn.app.pixellaunchermods.repositories.RemoteAppsRepository
 import com.kieronquinn.app.pixellaunchermods.repositories.RemoteAppsRepository.IconApplyProgress
+import com.kieronquinn.app.pixellaunchermods.repositories.RootServiceRepository
+import com.kieronquinn.app.pixellaunchermods.repositories.SettingsRepository
 import com.kieronquinn.app.pixellaunchermods.repositories.SettingsRepository.DeferredRestartMode
 import com.kieronquinn.app.pixellaunchermods.ui.activities.MainActivity
 import com.kieronquinn.app.pixellaunchermods.utils.extensions.broadcastReceiverAsFlow
 import com.kieronquinn.app.pixellaunchermods.utils.extensions.isDarkMode
 import com.kieronquinn.app.pixellaunchermods.utils.extensions.parseToComponentName
+import com.kieronquinn.app.pixellaunchermods.widget.BlankWidget
 import com.kieronquinn.app.pixellaunchermods.widget.ProxyWidget
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.drop
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.mapLatest
+import kotlinx.coroutines.flow.mapNotNull
+import kotlinx.coroutines.flow.shareIn
+import kotlinx.coroutines.flow.stateIn
 import org.koin.android.ext.android.inject
 import kotlin.math.roundToInt
 
@@ -47,6 +68,8 @@ class PixelLauncherModsForegroundService : LifecycleService() {
          *  Pixel Launcher to update its icons.
          */
         private const val PACKAGE_CHANGED_DELAY = 5000L
+
+        private const val ACTION_REAPPLY = "${BuildConfig.APPLICATION_ID}.action.REAPPLY"
     }
 
     private val remoteAppsRepository by inject<RemoteAppsRepository>()
@@ -140,6 +163,12 @@ class PixelLauncherModsForegroundService : LifecycleService() {
         }.stateIn(lifecycleScope, SharingStarted.Eagerly, isDarkMode)
     }
 
+    private val reapply by lazy {
+        broadcastReceiverAsFlow(ACTION_REAPPLY).mapLatest {
+            System.currentTimeMillis()
+        }.stateIn(lifecycleScope, SharingStarted.Eagerly, System.currentTimeMillis())
+    }
+
     private val packageChanged = remoteAppsRepository.onPackageChanged
         .mapNotNull {
             if (it.second && suppressShortcuts.value) return@mapNotNull null
@@ -201,7 +230,7 @@ class PixelLauncherModsForegroundService : LifecycleService() {
         setupNightModeChangedListener()
         setupIconApplyProgress()
         setupHideClock()
-        setupProxyAppWidget()
+        setupWidgets()
     }
 
     override fun onDestroy() {
@@ -240,7 +269,9 @@ class PixelLauncherModsForegroundService : LifecycleService() {
     }
 
     private fun setupNightModeChangedListener() = lifecycleScope.launchWhenCreated {
-        nightModeChanged.drop(1).collectLatest {
+        combine(reapply, nightModeChanged) { _, _ ->
+            System.currentTimeMillis()
+        }.drop(1).collectLatest {
             remoteAppsRepository.recreateIcons(true).collect()
         }
     }
@@ -364,10 +395,11 @@ class PixelLauncherModsForegroundService : LifecycleService() {
         }
     }
 
-    private fun setupProxyAppWidget() {
+    private fun setupWidgets() {
         if (settingsRepository.qsbWidgetId.getSync() != -1) {
             ProxyWidget.sendUpdate(this)
         }
+        BlankWidget.sendUpdate(this)
         lifecycleScope.launchWhenCreated {
             proxyAppWidgetListening.collect {
                 proxyAppWidgetRepository.setListening(it)

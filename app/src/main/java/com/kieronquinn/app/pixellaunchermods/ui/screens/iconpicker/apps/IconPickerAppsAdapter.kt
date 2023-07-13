@@ -10,7 +10,7 @@ import android.text.style.TypefaceSpan
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
-import androidx.recyclerview.widget.RecyclerView
+import androidx.lifecycle.lifecycleScope
 import androidx.viewbinding.ViewBinding
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -19,25 +19,28 @@ import com.kieronquinn.app.pixellaunchermods.databinding.ItemIconAppBinding
 import com.kieronquinn.app.pixellaunchermods.databinding.ItemIconAppHeaderBinding
 import com.kieronquinn.app.pixellaunchermods.model.icon.ApplicationIcon
 import com.kieronquinn.app.pixellaunchermods.ui.screens.iconpicker.apps.IconPickerAppsViewModel.Item
+import com.kieronquinn.app.pixellaunchermods.ui.views.LifecycleAwareRecyclerView
+import com.kieronquinn.app.pixellaunchermods.utils.extensions.onClicked
 
 class IconPickerAppsAdapter(
-    context: Context,
+    recyclerView: LifecycleAwareRecyclerView,
     var items: List<Item>,
     var mono: Boolean,
     private val onShrinkNoneAdaptiveIconsChanged: (Boolean) -> Unit,
     private val onAppClicked: (ApplicationIcon) -> Unit
-): RecyclerView.Adapter<IconPickerAppsAdapter.ViewHolder>() {
+): LifecycleAwareRecyclerView.Adapter<IconPickerAppsAdapter.ViewHolder>(recyclerView) {
 
     init {
         setHasStableIds(true)
     }
 
     private val layoutInflater =
-        context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        recyclerView.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
-    private val glide = Glide.with(context)
-    private val googleSans = ResourcesCompat.getFont(context, R.font.google_sans_text)
-    private val googleSansMedium = ResourcesCompat.getFont(context, R.font.google_sans_text_medium)
+    private val glide = Glide.with(recyclerView.context)
+    private val googleSans = ResourcesCompat.getFont(recyclerView.context, R.font.google_sans_text)
+    private val googleSansMedium =
+        ResourcesCompat.getFont(recyclerView.context, R.font.google_sans_text_medium)
 
     override fun getItemCount() = items.size
 
@@ -67,7 +70,7 @@ class IconPickerAppsAdapter(
         val item = items[position]
         when(holder){
             is ViewHolder.Header -> {
-                holder.binding.setupHeader(item as Item.Header)
+                holder.setupHeader(item as Item.Header)
             }
             is ViewHolder.App -> {
                 holder.binding.setupApp(item as Item.App)
@@ -86,13 +89,16 @@ class IconPickerAppsAdapter(
         root.setOnClickListener { onAppClicked(applicationInfo) }
     }
 
-    private fun ItemIconAppHeaderBinding.setupHeader(item: Item.Header) = with(itemIconAppHeaderSwitch){
-        text = root.context.getSwitchLabel()
-        typeface = googleSansMedium
-        setOnCheckedChangeListener(null)
-        isChecked = item.shrinkNonAdaptiveIcons
-        setOnCheckedChangeListener { _, enabled ->
-            onShrinkNoneAdaptiveIconsChanged(enabled)
+    private fun ViewHolder.Header.setupHeader(item: Item.Header) = with(binding){
+        with(itemIconAppHeaderSwitch) {
+            text = root.context.getSwitchLabel()
+            typeface = googleSansMedium
+            isChecked = item.shrinkNonAdaptiveIcons
+            lifecycleScope.launchWhenResumed {
+                onClicked().collect {
+                    onShrinkNoneAdaptiveIconsChanged(isChecked)
+                }
+            }
         }
     }
 
@@ -109,7 +115,7 @@ class IconPickerAppsAdapter(
         }
     }
 
-    sealed class ViewHolder(open val binding: ViewBinding): RecyclerView.ViewHolder(binding.root) {
+    sealed class ViewHolder(open val binding: ViewBinding): LifecycleAwareRecyclerView.ViewHolder(binding.root) {
         data class Header(override val binding: ItemIconAppHeaderBinding): ViewHolder(binding)
         data class App(override val binding: ItemIconAppBinding): ViewHolder(binding)
     }

@@ -14,7 +14,11 @@ import com.kieronquinn.app.pixellaunchermods.components.navigation.ContainerNavi
 import com.kieronquinn.app.pixellaunchermods.model.update.Release
 import com.kieronquinn.app.pixellaunchermods.utils.extensions.broadcastReceiverAsFlow
 import com.kieronquinn.app.pixellaunchermods.utils.extensions.observerAsFlow
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import java.io.File
 
@@ -124,6 +128,9 @@ class SettingsUpdateViewModelImpl(private val navigation: ContainerNavigation, c
                 is State.StartInstall -> {
                     state.emit(State.Done(it.outputUri))
                     startInstall()
+                }
+                else -> {
+                    //No-op
                 }
             }
         }

@@ -49,6 +49,9 @@ class LegacyThemedIconPickerAdapter(
         val item = items[position]
         when(holder){
             is ViewHolder.Icon -> holder.binding.setup(item as Item.Icon)
+            else -> {
+                //No-op
+            }
         }
     }
 

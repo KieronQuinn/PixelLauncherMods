@@ -45,6 +45,15 @@ interface SettingsRepository {
     //Transparency of the recents view background colour
     val recentsBackgroundTransparency: PixelLauncherModsSetting<Float>
 
+    //Whether to disable the wallpaper scrim on the home screen
+    val disableWallpaperScrim: PixelLauncherModsSetting<Boolean>
+
+    //Whether to disable widget region-based colour picking
+    val disableWallpaperRegionColours: PixelLauncherModsSetting<Boolean>
+
+    //Whether to hide Smartspace
+    val disableSmartspace: PixelLauncherModsSetting<Boolean>
+
     //Whether to suppress the shortcut change listener (which can be quite noisy)
     val suppressShortcutChangeListener: PixelLauncherModsSetting<Boolean>
 
@@ -77,6 +86,7 @@ interface SettingsRepository {
         abstract suspend fun getOrNull(): T?
         abstract suspend fun clear()
         abstract fun getSync(): T
+        abstract fun getSyncOrNull(): T?
         abstract fun asFlow(): Flow<T>
         abstract fun asFlowNullable(): Flow<T?>
     }
@@ -111,6 +121,14 @@ interface SettingsRepository {
         override suspend fun getOrNull(): T? {
             return if(exists()){
                 get()
+            }else{
+                null
+            }
+        }
+
+        override fun getSyncOrNull(): T? {
+            return if(existsSync()){
+                getSync()
             }else{
                 null
             }
@@ -173,6 +191,12 @@ class SettingsRepositoryImpl(context: Context): SettingsRepository {
         private const val DEFAULT_HIDE_CLOCK = false
         private const val KEY_RECENTS_BACKGOUND_TRANSPARENCY = "recents_background_transparency"
         private const val DEFAULT_RECENTS_BACKGROUND_TRANSPARENCY = 0f
+        private const val KEY_TWEAKS_DISABLE_WALLPAPER_SCRIM = "tweaks_disable_wallpaper_scrim"
+        private const val DEFAULT_TWEAKS_DISABLE_WALLPAPER_SCRIM = false
+        private const val KEY_TWEAKS_DISABLE_WALLPAPER_REGION_COLOURS = "tweaks_disable_wallpaper_region_colours"
+        private const val DEFAULT_TWEAKS_DISABLE_WALLPAPER_REGION_COLOURS = false
+        private const val KEY_TWEAKS_DISABLE_SMARTSPACE = "tweaks_disable_smartspace"
+        private const val DEFAULT_TWEAKS_DISABLE_SMARTSPACE = false
         private const val KEY_SUPPRESS_SHORTCUT_LISTENER = "suppress_shortcut_listener"
         private const val DEFAULT_SUPPRESS_SHORTCUT_LISTENER = false
         private const val KEY_HIDDEN_COMPONENTS = "hidden_components"
@@ -227,6 +251,24 @@ class SettingsRepositoryImpl(context: Context): SettingsRepository {
         KEY_RECENTS_BACKGOUND_TRANSPARENCY,
         DEFAULT_RECENTS_BACKGROUND_TRANSPARENCY,
         SHARED_FLOAT
+    )
+
+    override val disableWallpaperScrim: PixelLauncherModsSetting<Boolean> = PixelLauncherModsSettingImpl(
+        KEY_TWEAKS_DISABLE_WALLPAPER_SCRIM,
+        DEFAULT_TWEAKS_DISABLE_WALLPAPER_SCRIM,
+        SHARED_BOOLEAN
+    )
+
+    override val disableWallpaperRegionColours: PixelLauncherModsSetting<Boolean> = PixelLauncherModsSettingImpl(
+        KEY_TWEAKS_DISABLE_WALLPAPER_REGION_COLOURS,
+        DEFAULT_TWEAKS_DISABLE_WALLPAPER_REGION_COLOURS,
+        SHARED_BOOLEAN
+    )
+
+    override val disableSmartspace: PixelLauncherModsSetting<Boolean> = PixelLauncherModsSettingImpl(
+        KEY_TWEAKS_DISABLE_SMARTSPACE,
+        DEFAULT_TWEAKS_DISABLE_SMARTSPACE,
+        SHARED_BOOLEAN
     )
 
     override val suppressShortcutChangeListener: PixelLauncherModsSetting<Boolean> = PixelLauncherModsSettingImpl(
@@ -367,6 +409,12 @@ class SettingsRepositoryImpl(context: Context): SettingsRepository {
         override suspend fun getOrNull(): T? {
             return if(exists()){
                 get()
+            }else null
+        }
+
+        override fun getSyncOrNull(): T? {
+            return if(existsSync()){
+                getSync()
             }else null
         }
 

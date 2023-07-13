@@ -13,6 +13,7 @@ import com.kieronquinn.app.pixellaunchermods.repositories.AppStateRepository
 import com.kieronquinn.app.pixellaunchermods.service.PixelLauncherModsForegroundService
 import com.kieronquinn.app.pixellaunchermods.ui.activities.MainActivityViewModel.State
 import com.kieronquinn.app.pixellaunchermods.utils.extensions.delayPreDrawUntilFlow
+import com.kieronquinn.app.pixellaunchermods.widget.BlankWidget
 import com.kieronquinn.app.pixellaunchermods.widget.ProxyWidget
 import com.kieronquinn.app.pixellaunchermods.work.UpdateCheckWorker
 import kotlinx.coroutines.flow.filterNotNull
@@ -54,6 +55,7 @@ class MainActivity : AppCompatActivity() {
         when(state) {
             is State.Loaded -> {
                 ProxyWidget.sendUpdate(this)
+                BlankWidget.sendUpdate(this)
                 PixelLauncherModsForegroundService.start(this)
             }
             is State.NoRoot -> {

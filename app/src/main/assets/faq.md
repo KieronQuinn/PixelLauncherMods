@@ -36,10 +36,19 @@ settings delete global SEARCH_PROVIDER_PACKAGE_NAME
 On a device that has become unrooted (for example after an update), you **must** clear the data of 
 the Pixel Launcher. This will reset your home screen layout.
 
+## After using the Hide Clock option, the clock does not re-appear, even when the option is disabled!
+
+This is caused by the system not responding correctly to the settings change. To reset it, you must 
+run this command using either a root terminal, or using ADB from a computer, and reboot:
+
+```bash
+settings delete secure icon_blacklist
+```
+
 ## After using Pixel Launcher Mods, I see a different search widget on a launcher that isn't the Pixel Launcher!
 
-This is caused by the method used to replace the Search Box or At a Glance widgets. To reset it, 
-you must run this command using either a root terminal, or using ADB from a computer, and reboot:
+This is caused by the method used to replace the Search Box. To reset it, you must run this command 
+using either a root terminal, or using ADB from a computer, and reboot:
 
 ```bash
 settings delete global SEARCH_PROVIDER_PACKAGE_NAME
@@ -61,17 +70,18 @@ with the launcher, and therefore changes do not persist.
 Dynamic icons are shown dynamically, loaded directly from the apps that use them. This makes it
 impossible to change the icons.
 
-## Why do not all widgets work in the At a Glance / Search Box replacement option?
+## Why do not all widgets work in the Search Box replacement option?
 
-This is a restriction of the method used to replace At a Glance / Search Box, it does support some 
+This is a restriction of the method used to replace Search Box, it does support some 
 features modern widgets use. As a result, some widgets will fail to load or show as blank spaces.
 
-## Can I remove the search box or At a Glance widget entirely?
+## Can I remove the search box or At a Glance entirely?
 
 Unfortunately not. The space is always shown, regardless of the height of a widget, or the size
-of the underlying layout. Removing this is not possible using overlays.
+of the underlying layout. You can replace the Search Box with Pixel Launcher Mods' Blank Widget,
+and hide At a Glance, but the space will remain.
 
-## The widget I am using to replace At a Glance or Search Box is frozen
+## The widget I am using to replace the Search Box is frozen
 
 This occasionally happens when the connection between the replacement widget and the chosen app 
 widget is broken. Rebooting will fix it.

@@ -98,11 +98,10 @@
     <string name="tweaks_apply_failed">Nu s-au putut aplica ajustările</string>
     <string name="tweaks_apply_close">Închideți</string>
     <string name="tweaks_apply_save_log">Salvare jurnal</string>
-    <string name="tweaks_widget_replacement_preview_title">Alegeți poziția de înlocuire</string>
     <string name="tweaks_widget_replacement_preview_bottom">Jos</string>
     <string name="tweaks_widget_replacement_preview_top">Sus</string>
     <string name="tweaks_widget_replacement">Pe scurt / Caseta de căutare</string>
-    <string name="tweaks_widget_replacement_content"><b>Experimental:</b> Înlocuiește Pe scurt <b>sau</b> Caseta de căutare cu un widget la alegere</string>
+    <string name="tweaks_widget_replacement_content"><b>Experimental:</b> Înlocuiește Caseta de căutare cu un widget la alegere</string>
     <string name="proxy_widget_loading">Se încarcă…</string>
     <string name="proxy_widget_empty">Apăsați pentru a configura</string>
     <string name="proxy_widget_error">Acest widget nu a putut fi încărcat\nÎncercați un alt widget</string>
@@ -114,7 +113,7 @@
     <string name="tweaks_widget_replacement_provider_reconfigure_content">Schimbați setările acestui widget în aplicație</string>
     <string name="tweaks_widget_replacement_loading">Se încarcă…</string>
     <string name="tweaks_widget_replacement_save">Aplicare</string>
-    <string name="tweaks_widget_replacement_info">Din cauza limitărilor din lansatorul Pixel, nu este posibil să înlocuiți Pe scurt și Caseta de căutare în același timp.\n\n<b>Notă:</b> Nu toate widget-urile sunt compatibile cu această funcție. Dacă widget-ul ales de dvs. nu se încarcă (de exemplu, rămâne necompletat sau afișează caseta de căutare generică), încercați unul diferit.</string>
+    <string name="tweaks_widget_replacement_info"><b>Notă:</b> Nu toate widget-urile sunt compatibile cu această funcție. Dacă widget-ul ales de dvs. nu se încarcă (de exemplu, rămâne necompletat sau afișează caseta de căutare generică), încercați unul diferit.</string>
     <string name="widget_replacement_picker_title">Selectați widget-ul</string>
     <string name="widget_replacement_picker_loading">Se încarcă widget-urile…</string>
     <string name="widget_replacement_picker_item_app_count_one">%1s widget</string>

@@ -33,9 +33,15 @@ interface OverlayRepository {
         val components: List<String>,
         val widgetReplacement: WidgetReplacement,
         val recentsTransparency: Float,
+        val disableWallpaperScrim: Boolean,
+        val disableWallpaperRegionColours: Boolean,
+        val disableSmartspace: Boolean,
         val saveComponents: Boolean,
         val saveWidgetReplacement: Boolean,
-        val saveRecentsTransparency: Boolean
+        val saveRecentsTransparency: Boolean,
+        val saveDisableWallpaperScrim: Boolean,
+        val saveDisableWallpaperRegionColours: Boolean,
+        val saveDisableSmartspace: Boolean
     )
 
     /**
@@ -83,9 +89,19 @@ class OverlayRepositoryImpl(
         private const val MODULE_FILENAME = "pixel_launcher_mods_overlay_module_%s.zip"
 
         private const val OVERLAY_RESOURCE_NAME_HIDDEN_COMPONENTS = "filtered_components"
+        private const val OVERLAY_RESOURCE_NAME_LOCAL_COLORS = "local_colors_extraction_class"
         private const val OVERLAY_RESOURCE_NAME_QSB_SMARTSPACE = "search_container_workspace"
         private const val OVERLAY_RESOURCE_NAME_QSB_SEARCH = "search_container_hotseat"
+        private const val OVERLAY_RESOURCE_NAME_WALLPAPER_SCRIM = "wallpaper_scrim_color"
         private const val OVERLAY_RESOURCE_REPLACEMENT_SEARCH_TERM = "QsbContainerView"
+
+        private val DRAWABLE_DIRS = arrayOf(
+            "drawable-mdpi-v31",
+            "drawable-hdpi-v31",
+            "drawable-xhdpi-v31",
+            "drawable-xxhdpi-v31",
+            "drawable-xxxhdpi-v31"
+        )
     }
 
     private val cacheDir = applicationContext.cacheDir
@@ -137,7 +153,14 @@ class OverlayRepositoryImpl(
         overlayCacheDir.mkdirs()
         extractBuildTools()
         emitter.println("Building XML…")
-        writeValues(config.components, config.widgetReplacement)
+        writeValues(
+            hiddenComponents = config.components,
+            disableWallpaperRegionColours = config.disableWallpaperRegionColours,
+            disableSmartspace = config.disableSmartspace
+        )
+        if(config.disableWallpaperScrim) {
+            writeDrawables()
+        }
         writeSearchContainer(config.widgetReplacement)
         writeColors(config.recentsTransparency)
         emitter.println("Compiling resources…")
@@ -173,7 +196,11 @@ class OverlayRepositoryImpl(
         assetManager.copyRecursively("overlay/build", buildDir)
     }
 
-    private fun writeValues(hiddenComponents: List<String>, widgetReplacement: WidgetReplacement) {
+    private fun writeValues(
+        hiddenComponents: List<String>,
+        disableWallpaperRegionColours: Boolean,
+        disableSmartspace: Boolean
+    ) {
         //Not disabled when empty as we need to apply *something*
         val valuesDir = File(resDir, "values")
         valuesDir.mkdirs()
@@ -186,7 +213,12 @@ class OverlayRepositoryImpl(
                         element("item", it)
                     }
                 }
-                if(widgetReplacement == WidgetReplacement.TOP) {
+                if(disableWallpaperRegionColours) {
+                    element("string", "") {
+                        attribute("name", OVERLAY_RESOURCE_NAME_LOCAL_COLORS)
+                    }
+                }
+                if(disableSmartspace) {
                     //Hide existing smartspace
                     element("dimen", "0dp") {
                         attribute("name", "enhanced_smartspace_height")
@@ -204,7 +236,7 @@ class OverlayRepositoryImpl(
 
     @SuppressLint("UnsafeOptInUsageError")
     private fun writeSearchContainer(widgetReplacement: WidgetReplacement) {
-        if(widgetReplacement == WidgetReplacement.NONE) {
+        if(widgetReplacement != WidgetReplacement.BOTTOM) {
             //This option is disabled
             return
         }
@@ -212,13 +244,7 @@ class OverlayRepositoryImpl(
         layoutDir.mkdirs()
         val xml = Xml.newSerializer()
         val layout = xml.document {
-            //If we're replacing the top we have to keep Smartspace's container, otherwise can get away with a regular FrameLayout
-            val rootTag = if(widgetReplacement == WidgetReplacement.TOP){
-                "com.google.android.apps.nexuslauncher.qsb.SmartspaceViewContainer"
-            }else{
-                "FrameLayout"
-            }
-            element(rootTag) {
+            element("FrameLayout") {
                 attribute("xmlns:android", "http://schemas.android.com/apk/res/android")
                 attribute("android:orientation", "vertical")
                 attribute("android:layout_width", "match_parent")
@@ -271,6 +297,27 @@ class OverlayRepositoryImpl(
         colorXmlDark.writeText(scrimColorDark)
     }
 
+    private fun writeDrawables() {
+        val drawableDirs = DRAWABLE_DIRS.map {
+            File(resDir, it).also { file ->
+                file.mkdirs()
+            }
+        }
+        val xml = Xml.newSerializer()
+        val workspaceBgXml = xml.document {
+            element("shape"){
+                attribute("xmlns:android", "http://schemas.android.com/apk/res/android")
+                element("solid") {
+                    attribute("android:color", "@android:color/transparent")
+                }
+            }
+        }
+        drawableDirs.forEach {
+            val workspaceBg = File(it, "workspace_bg.xml")
+            workspaceBg.writeText(workspaceBgXml)
+        }
+    }
+
     private fun compileResources(): Pair<Boolean, List<String>> {
         intermediatesDir.mkdirs()
         val linkOutput = ArrayList<String>()
@@ -302,6 +349,11 @@ class OverlayRepositoryImpl(
             }
             append(" ${intermediatesDir.name}/color_overview_scrim.xml.flat")
             append(" ${intermediatesDir.name}/color_overview_scrim_dark.xml.flat")
+            if(config.disableWallpaperScrim) {
+                DRAWABLE_DIRS.forEach {
+                    append(" ${intermediatesDir.name}/${it}_workspace_bg.xml.flat")
+                }
+            }
             //Add manifest
             append(" --manifest ${buildDir.name}/AndroidManifest.xml")
         }
@@ -381,6 +433,15 @@ class OverlayRepositoryImpl(
         }
         if(config.saveRecentsTransparency) {
             settingsRepository.recentsBackgroundTransparency.set(config.recentsTransparency)
+        }
+        if(config.saveDisableWallpaperScrim) {
+            settingsRepository.disableWallpaperScrim.set(config.disableWallpaperScrim)
+        }
+        if(config.saveDisableWallpaperRegionColours) {
+            settingsRepository.disableWallpaperRegionColours.set(config.disableWallpaperRegionColours)
+        }
+        if(config.saveDisableSmartspace) {
+            settingsRepository.disableSmartspace.set(config.disableSmartspace)
         }
     }
 
