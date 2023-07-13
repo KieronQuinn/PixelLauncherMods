@@ -43,27 +43,13 @@ android {
         buildConfigField "String", "TAG_NAME", "\"${tagName}\""
     }
 
-    signingConfigs {
-        release {
-            def keystore = getKeystoreProperties()
-            if (keystore != null) {
-                storeFile file(keystore.getProperty("storeFile"))
-                storePassword keystore.getProperty("storePassword")
-                keyAlias keystore.getProperty("keyAlias")
-                keyPassword keystore.getProperty("keyPassword")
-            }
-        }
-    }
-
     buildTypes {
         release {
             minifyEnabled false
-            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         debug {
             minifyEnabled false
-            signingConfig signingConfigs.release
         }
     }
     buildFeatures {
