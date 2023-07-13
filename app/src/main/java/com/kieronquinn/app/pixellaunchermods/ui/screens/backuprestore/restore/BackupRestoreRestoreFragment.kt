@@ -56,7 +56,7 @@ class BackupRestoreRestoreFragment: BoundFragment<FragmentBackupRestoreRestoreBi
                 binding.backupRestoreRestoreIcon.isVisible = true
                 if(state.result != null){
                     val hasIssues = state.result.restoreIssues.isNotEmpty()
-                    val hasActions = state.result.overlayActions.isNotEmpty()
+                    val hasActions = state.result.overlayActions.any { it.isValid() }
                     val issueCount = state.result.restoreIssues.size
                     binding.backupRestoreRestoreTitle.setText(R.string.backup_restore_restore_restoring_success)
                     binding.backupRestoreRestoreIcon.setImageResource(R.drawable.ic_check_circle)

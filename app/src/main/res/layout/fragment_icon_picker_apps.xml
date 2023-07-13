@@ -46,7 +46,7 @@
         android:layout_height="0dp"
         app:constraint_referenced_ids="icon_picker_apps_loading_label,icon_picker_apps_loading_progress" />
 
-    <androidx.recyclerview.widget.RecyclerView
+    <com.kieronquinn.app.pixellaunchermods.ui.views.LifecycleAwareRecyclerView
         android:id="@+id/icon_picker_apps_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

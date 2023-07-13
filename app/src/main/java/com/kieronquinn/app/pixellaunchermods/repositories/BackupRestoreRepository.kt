@@ -17,7 +17,9 @@ import com.kieronquinn.app.pixellaunchermods.model.room.IconMetadata
 import com.kieronquinn.app.pixellaunchermods.model.room.ModifiedApp
 import com.kieronquinn.app.pixellaunchermods.model.room.ModifiedShortcut
 import com.kieronquinn.app.pixellaunchermods.model.tweaks.WidgetReplacement
-import com.kieronquinn.app.pixellaunchermods.repositories.BackupRestoreRepository.*
+import com.kieronquinn.app.pixellaunchermods.repositories.BackupRestoreRepository.OverlayAction
+import com.kieronquinn.app.pixellaunchermods.repositories.BackupRestoreRepository.RestoreIssue
+import com.kieronquinn.app.pixellaunchermods.repositories.BackupRestoreRepository.RestoreResult
 import com.kieronquinn.app.pixellaunchermods.ui.screens.iconpicker.BasePickerViewModel
 import com.kieronquinn.app.pixellaunchermods.utils.extensions.compress
 import com.kieronquinn.app.pixellaunchermods.utils.extensions.compressRaw
@@ -68,7 +70,19 @@ interface BackupRestoreRepository {
     sealed class OverlayAction {
         data class CommitWidgetReplacement(val widgetReplacement: WidgetReplacement): OverlayAction()
         data class CommitHiddenApps(val components: List<String>): OverlayAction()
-        data class CommitRecentsTransparency(val transparency: Float): OverlayAction()
+        data class CommitOverlayTweaks(
+            val transparency: Float?,
+            val disableWallpaperScrim: Boolean?,
+            val disableWallpaperRegionColours: Boolean?,
+            val disableSmartspace: Boolean?
+        ): OverlayAction() {
+            override fun isValid(): Boolean {
+                return transparency != null || disableWallpaperScrim != null
+                        || disableWallpaperRegionColours != null || disableSmartspace != null
+            }
+        }
+
+        open fun isValid(): Boolean = true
     }
 
     sealed class RestoreIssue(open val component: String): Parcelable {
@@ -424,6 +438,9 @@ class BackupRestoreRepositoryImpl(
             settings.hiddenComponents.setIfExists(::hiddenComponents)
             settings.widgetReplacement.setIfExists(::widgetReplacement)
             settings.recentsBackgroundTransparency.setIfExists(::recentsTransparency)
+            settings.disableWallpaperScrim.setIfExists(::disableWallpaperScrim)
+            settings.disableWallpaperRegionColours.setIfExists(::disableWallpaperRegionColours)
+            settings.disableSmartspace.setIfExists(::disableSmartspace)
         }
     }
 
@@ -442,9 +459,12 @@ class BackupRestoreRepositoryImpl(
         backup.hiddenComponents?.let {
             overlayActions.add(OverlayAction.CommitHiddenApps(it))
         }
-        backup.recentsTransparency?.let {
-            overlayActions.add(OverlayAction.CommitRecentsTransparency(it))
-        }
+        overlayActions.add(OverlayAction.CommitOverlayTweaks(
+            backup.recentsTransparency,
+            backup.disableWallpaperScrim,
+            backup.disableWallpaperRegionColours,
+            backup.disableSmartspace
+        ))
         return overlayActions
     }
 

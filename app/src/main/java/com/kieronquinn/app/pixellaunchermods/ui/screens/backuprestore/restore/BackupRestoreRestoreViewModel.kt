@@ -9,7 +9,12 @@ import com.kieronquinn.app.pixellaunchermods.repositories.BackupRestoreRepositor
 import com.kieronquinn.app.pixellaunchermods.repositories.BackupRestoreRepository.OverlayAction
 import com.kieronquinn.app.pixellaunchermods.repositories.BackupRestoreRepository.RestoreResult
 import com.kieronquinn.app.pixellaunchermods.repositories.OverlayRepository
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 abstract class BackupRestoreRestoreViewModel: ViewModel() {
@@ -63,14 +68,18 @@ class BackupRestoreRestoreViewModelImpl(
             val widgetReplacement = actions.firstOrNull {
                 it is OverlayAction.CommitWidgetReplacement
             } as? OverlayAction.CommitWidgetReplacement
-            val recentsTransparency = actions.firstOrNull {
-                it is OverlayAction.CommitRecentsTransparency
-            } as? OverlayAction.CommitRecentsTransparency
+            val overlayTweaks = actions.firstOrNull {
+                it is OverlayAction.CommitOverlayTweaks
+            } as? OverlayAction.CommitOverlayTweaks
             navigation.navigate(
                 BackupRestoreRestoreFragmentDirections.actionBackupRestoreRestoreFragmentToOverlayApplyFragment(
                     components?.components?.toTypedArray(), widgetReplacement?.widgetReplacement?.run {
                         ParceledWidgetReplacement(this)
-                    }, recentsTransparency?.transparency?.toString()
+                    },
+                    overlayTweaks?.transparency?.toString(),
+                    overlayTweaks?.disableWallpaperScrim?.toString(),
+                    overlayTweaks?.disableWallpaperRegionColours?.toString(),
+                    overlayTweaks?.disableSmartspace?.toString()
                 )
             )
         }

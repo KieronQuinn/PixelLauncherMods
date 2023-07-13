@@ -29,17 +29,13 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="App with a very long name" />
 
-    <com.google.android.material.switchmaterial.SwitchMaterial
+    <com.google.android.material.materialswitch.MaterialSwitch
         android:layout_marginEnd="@dimen/margin_16"
         android:id="@+id/item_hide_app_switch"
-        app:track="@drawable/switch_track"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:scaleX="0.75"
-        android:scaleY="0.75"
         app:showText="false"
-        android:thumb="@drawable/switch_thumb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

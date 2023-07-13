@@ -10,7 +10,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class BackupRestoreFragment: BaseSettingsFragment(), BackAvailable {
 
-    private val backupSelector = registerForActivityResult(ActivityResultContracts.CreateDocument()) {
+    private val backupSelector = registerForActivityResult(ActivityResultContracts.CreateDocument("*/*")) {
         if(it != null){
             viewModel.onBackupSelected(it)
         }

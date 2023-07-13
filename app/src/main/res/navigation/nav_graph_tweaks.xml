@@ -49,6 +49,18 @@
             android:name="recents_transparency"
             app:argType="string"
             app:nullable="true" />
+        <argument
+            android:name="disable_wallpaper_scrim"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="disable_wallpaper_region_colours"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="disable_smartspace"
+            app:argType="string"
+            app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/tweaksWidgetReplacementFragment"
@@ -74,9 +86,9 @@
     </fragment>
     <fragment
         android:id="@+id/recentsTweaksFragment"
-        android:name="com.kieronquinn.app.pixellaunchermods.ui.screens.tweaks.recents.RecentsTweaksFragment"
-        android:label="@string/tweaks_recents"
-        tools:layout="@layout/fragment_settings_tweaks_recents">
+        android:name="com.kieronquinn.app.pixellaunchermods.ui.screens.tweaks.overlay.OverlayTweaksFragment"
+        android:label="@string/tweaks_overlay"
+        tools:layout="@layout/fragment_settings_tweaks_overlay">
         <action
             android:id="@+id/action_recentsTweaksFragment_to_tweaksApplyFragment"
             app:destination="@id/tweaksApplyFragment" />

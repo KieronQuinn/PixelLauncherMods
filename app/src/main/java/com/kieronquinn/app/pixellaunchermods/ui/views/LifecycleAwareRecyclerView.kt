@@ -8,6 +8,8 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LifecycleRegistry
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.kieronquinn.app.pixellaunchermods.ui.views.LifecycleAwareRecyclerView.Adapter
+import com.kieronquinn.app.pixellaunchermods.ui.views.LifecycleAwareRecyclerView.ViewHolder
 import com.kieronquinn.app.pixellaunchermods.utils.recyclerview.SpannedGridLayoutManager
 
 /**
@@ -36,13 +38,12 @@ class LifecycleAwareRecyclerView : RecyclerView {
 
         private val lifecycleRegistry by lazy { LifecycleRegistry(this@ViewHolder) }
 
+        override val lifecycle: Lifecycle
+            get() = lifecycleRegistry
+
         init {
             handleLifecycleEvent(Lifecycle.Event.ON_START)
             handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
-        }
-
-        final override fun getLifecycle(): Lifecycle {
-            return lifecycleRegistry
         }
 
         internal fun handleLifecycleEvent(event: Lifecycle.Event) {

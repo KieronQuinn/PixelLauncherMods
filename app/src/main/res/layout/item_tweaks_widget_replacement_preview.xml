@@ -8,7 +8,9 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:paddingStart="@dimen/margin_16"
+        android:paddingEnd="@dimen/margin_16"
+        android:layout_height="300dp"
         android:layout_gravity="center_horizontal"
         android:layout_margin="@dimen/margin_16"
         android:background="@drawable/background_tweaks_widget_replacement_preview_container"
@@ -17,7 +19,7 @@
 
         <TextView
             android:id="@+id/item_tweaks_widget_replacement_preview_title"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:paddingStart="@dimen/margin_16"
@@ -31,48 +33,16 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/item_tweaks_widget_replacement_preview_top"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_16"
-            android:layout_marginTop="@dimen/margin_16"
-            android:layout_marginEnd="@dimen/margin_8"
-            android:adjustViewBounds="true"
-            android:background="@drawable/background_tweaks_widget_replacement_preview"
-            android:src="@drawable/ic_widget_preview_top"
-            app:layout_constraintEnd_toStartOf="@id/item_tweaks_widget_replacement_preview_bottom"
-            app:layout_constraintHeight_max="400dp"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/item_tweaks_widget_replacement_preview_title"
-            app:layout_constraintWidth_max="200dp" />
-
-        <ImageView
-            android:id="@+id/item_tweaks_widget_replacement_preview_top_widget_container"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:paddingStart="@dimen/margin_8"
-            android:paddingEnd="@dimen/margin_8"
-            app:layout_constraintBottom_toBottomOf="@id/item_tweaks_widget_replacement_preview_top"
-            app:layout_constraintEnd_toEndOf="@id/item_tweaks_widget_replacement_preview_top"
-            app:layout_constraintHeight_percent="0.15"
-            app:layout_constraintStart_toStartOf="@id/item_tweaks_widget_replacement_preview_top"
-            app:layout_constraintTop_toTopOf="@id/item_tweaks_widget_replacement_preview_top"
-            app:layout_constraintVertical_bias="0" />
-
-        <ImageView
             android:id="@+id/item_tweaks_widget_replacement_preview_bottom"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_8"
+            android:layout_width="wrap_content"
+            android:layout_height="200dp"
             android:layout_marginTop="@dimen/margin_16"
-            android:layout_marginEnd="@dimen/margin_16"
             android:adjustViewBounds="true"
             android:background="@drawable/background_tweaks_widget_replacement_preview"
             android:src="@drawable/ic_widget_preview_bottom"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_max="400dp"
-            app:layout_constraintStart_toEndOf="@id/item_tweaks_widget_replacement_preview_top"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/item_tweaks_widget_replacement_preview_title"
             app:layout_constraintWidth_max="200dp" />
 
@@ -94,52 +64,11 @@
             android:layout_height="0dp"
             android:clickable="true"
             android:focusable="true"
-            android:id="@+id/item_tweaks_widget_replacement_preview_top_widget_tap"
-            app:layout_constraintBottom_toBottomOf="@id/item_tweaks_widget_replacement_preview_top"
-            app:layout_constraintEnd_toEndOf="@id/item_tweaks_widget_replacement_preview_top"
-            app:layout_constraintStart_toStartOf="@id/item_tweaks_widget_replacement_preview_top"
-            app:layout_constraintTop_toTopOf="@id/item_tweaks_widget_replacement_preview_top" />
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:clickable="true"
-            android:focusable="true"
             android:id="@+id/item_tweaks_widget_replacement_preview_bottom_widget_tap"
             app:layout_constraintBottom_toBottomOf="@id/item_tweaks_widget_replacement_preview_bottom"
             app:layout_constraintEnd_toEndOf="@id/item_tweaks_widget_replacement_preview_bottom"
             app:layout_constraintStart_toStartOf="@id/item_tweaks_widget_replacement_preview_bottom"
             app:layout_constraintTop_toTopOf="@id/item_tweaks_widget_replacement_preview_bottom" />
-
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/item_configuration_overlay_tabs"
-            android:layout_width="wrap_content"
-            android:layout_height="56dp"
-            android:layout_margin="@dimen/margin_16"
-            android:background="@drawable/background_configuration_tabs"
-            android:minWidth="@dimen/tab_min_width"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/item_tweaks_widget_replacement_preview_bottom"
-            app:tabIndicator="@drawable/indicator_configuration_tabs"
-            app:tabIndicatorFullWidth="true"
-            app:tabIndicatorHeight="56dp"
-            app:tabSelectedTextColor="?android:textColorPrimaryInverse"
-            app:tabTextAppearance="@style/TextAppearance.Tabs"
-            app:tabTextColor="?android:textColorPrimary">
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/tweaks_widget_replacement_preview_top" />
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/tweaks_widget_replacement_preview_bottom" />
-
-        </com.google.android.material.tabs.TabLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

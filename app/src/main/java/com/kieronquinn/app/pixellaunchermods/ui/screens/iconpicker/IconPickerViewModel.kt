@@ -8,17 +8,25 @@ import com.kieronquinn.app.pixellaunchermods.components.navigation.ContainerNavi
 import com.kieronquinn.app.pixellaunchermods.model.editor.IconPack
 import com.kieronquinn.app.pixellaunchermods.model.icon.ApplicationIcon
 import com.kieronquinn.app.pixellaunchermods.model.icon.IconPickerResult
+import com.kieronquinn.app.pixellaunchermods.model.icon.IconPickerResult.PackageIcon
 import com.kieronquinn.app.pixellaunchermods.model.icon.LegacyThemedIcon
 import com.kieronquinn.app.pixellaunchermods.repositories.AppsRepository
 import com.kieronquinn.app.pixellaunchermods.repositories.IconLoaderRepository
 import com.kieronquinn.app.pixellaunchermods.repositories.IconPackRepository
 import com.kieronquinn.app.pixellaunchermods.repositories.IconPackRepository.IconPackIconOptions
 import com.kieronquinn.app.pixellaunchermods.repositories.RemoteAppsRepository
-import com.kieronquinn.app.pixellaunchermods.model.icon.IconPickerResult.PackageIcon
 import com.kieronquinn.app.pixellaunchermods.ui.screens.iconpicker.IconPickerViewModel.Source.IconPackSource
 import com.kieronquinn.app.pixellaunchermods.utils.extensions.TAP_DEBOUNCE
 import com.kieronquinn.app.pixellaunchermods.utils.extensions.parseToComponentName
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 abstract class IconPickerViewModel(
@@ -189,6 +197,9 @@ class IconPickerViewModelImpl(
                         monoConfig.value ?: return@collect, true
                     ))
                 }
+                else -> {
+                    //No-op
+                }
             }
         }
     }
@@ -217,6 +228,9 @@ class IconPickerViewModelImpl(
                     val resourceId = it.legacyThemedIcon?.resourceId ?: return@collect
                     val resourceName = iconLoaderRepository.getLawniconName(it.legacyThemedIcon)
                     onIconSelected(IconPickerResult.Lawnicon(resourceId, resourceName))
+                }
+                else -> {
+                    //No-op
                 }
             }
         }

@@ -24,9 +24,13 @@ class HideClockRepositoryImpl(
     private val contentResolver = context.contentResolver
 
     override suspend fun setClockVisible(visible: Boolean) = withContext(Dispatchers.IO) {
-        val iconList = getIconDenylist().toMutableList().apply {
-            if(!visible) add(ICON_DENYLIST_CLOCK)
-        }.joinToString(",")
+        val iconList = getIconDenylist().toMutableSet().apply {
+            if(visible){
+                remove(ICON_DENYLIST_CLOCK)
+            }else{
+                add(ICON_DENYLIST_CLOCK)
+            }
+        }.filterNot { it.isBlank() }.joinToString(",")
         rootServiceRepository.runWithRootService {
             it.setStatusBarIconDenylist(iconList)
         }

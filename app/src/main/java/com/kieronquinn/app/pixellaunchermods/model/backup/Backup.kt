@@ -79,6 +79,15 @@ class Backup {
 
         @SerializedName("recents_transparency")
         var recentsTransparency: Float? = null
+
+        @SerializedName("tweaks_disable_wallpaper_scrim")
+        var disableWallpaperScrim: Boolean? = null
+
+        @SerializedName("tweaks_disable_wallpaper_region_colours")
+        var disableWallpaperRegionColours: Boolean? = null
+
+        @SerializedName("tweaks_disable_smartspace")
+        var disableSmartspace: Boolean? = null
     }
 
 }

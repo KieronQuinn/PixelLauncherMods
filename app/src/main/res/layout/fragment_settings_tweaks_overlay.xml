@@ -7,12 +7,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.google.android.material.progressindicator.LinearProgressIndicator
-        android:id="@+id/tweaks_recents_loading_progress"
+        android:id="@+id/tweaks_overlay_loading_progress"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="200dp"
         android:indeterminate="true"
-        app:layout_constraintBottom_toTopOf="@id/tweaks_recents_loading_label"
+        app:layout_constraintBottom_toTopOf="@id/tweaks_overlay_loading_label"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -21,25 +21,25 @@
         app:trackThickness="8dp" />
 
     <TextView
-        android:id="@+id/tweaks_recents_loading_label"
+        android:id="@+id/tweaks_overlay_loading_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_16"
-        android:text="@string/tweaks_recents_loading"
+        android:text="@string/tweaks_overlay_loading"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium.PixelLauncherMods"
         android:textColor="?android:textColorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tweaks_recents_loading_progress" />
+        app:layout_constraintTop_toBottomOf="@id/tweaks_overlay_loading_progress" />
 
     <androidx.constraintlayout.widget.Group
-        android:id="@+id/tweaks_recents_loading"
+        android:id="@+id/tweaks_overlay_loading"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:constraint_referenced_ids="tweaks_recents_loading_label,tweaks_recents_loading_progress" />
+        app:constraint_referenced_ids="tweaks_overlay_loading_label,tweaks_overlay_loading_progress" />
 
     <com.kieronquinn.app.pixellaunchermods.ui.views.LifecycleAwareRecyclerView
-        android:id="@+id/tweaks_recents_recycler_view"
+        android:id="@+id/tweaks_overlay_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
@@ -48,10 +48,10 @@
         tools:listitem="@layout/item_settings_text_item" />
 
     <androidx.constraintlayout.widget.Group
-        android:id="@+id/tweaks_recents_loaded"
+        android:id="@+id/tweaks_overlay_loaded"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:constraint_referenced_ids="tweaks_recents_recycler_view,tweaks_recents_save" />
+        app:constraint_referenced_ids="tweaks_overlay_recycler_view,tweaks_overlay_save" />
 
     <include
         android:id="@+id/hide_apps_magisk"
@@ -65,9 +65,9 @@
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tweaks_recents_save"
+        android:id="@+id/tweaks_overlay_save"
         android:layout_margin="@dimen/bottom_nav_height_margins"
-        android:text="@string/tweaks_recents_save"
+        android:text="@string/tweaks_overlay_save"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium.PixelLauncherMods"
         app:icon="@drawable/ic_app_editor_save"
         app:layout_constraintBottom_toBottomOf="parent"

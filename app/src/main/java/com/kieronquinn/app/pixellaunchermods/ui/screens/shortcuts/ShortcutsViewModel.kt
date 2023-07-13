@@ -3,6 +3,7 @@ package com.kieronquinn.app.pixellaunchermods.ui.screens.shortcuts
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.bumptech.glide.Glide
 import com.kieronquinn.app.pixellaunchermods.components.navigation.ContainerNavigation
 import com.kieronquinn.app.pixellaunchermods.model.remote.RemoteApp
 import com.kieronquinn.app.pixellaunchermods.model.remote.RemoteFavourite
@@ -10,8 +11,15 @@ import com.kieronquinn.app.pixellaunchermods.repositories.RemoteAppsRepository
 import com.kieronquinn.app.pixellaunchermods.repositories.RemoteAppsRepository.Shortcut
 import com.kieronquinn.app.pixellaunchermods.utils.extensions.TAP_DEBOUNCE
 import com.kieronquinn.app.pixellaunchermods.utils.extensions.instantCombine
-import com.kieronquinn.app.pixellaunchermods.utils.glide.GlideApp
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.mapLatest
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 abstract class ShortcutsViewModel: ViewModel() {
@@ -55,7 +63,7 @@ class ShortcutsViewModelImpl(
     private val shortcutClickBus = MutableSharedFlow<RemoteFavourite>()
 
     private val glide by lazy {
-        GlideApp.get(context)
+        Glide.get(context)
     }
 
     override val state = combine(remoteShortcuts, themedIconsEnabled, searchTerm) { shortcuts, themed, search ->

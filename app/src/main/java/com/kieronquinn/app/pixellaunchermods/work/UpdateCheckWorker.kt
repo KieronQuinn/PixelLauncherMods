@@ -6,7 +6,14 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import androidx.core.app.NotificationCompat
-import androidx.work.*
+import androidx.work.BackoffPolicy
+import androidx.work.Constraints
+import androidx.work.ExistingPeriodicWorkPolicy
+import androidx.work.NetworkType
+import androidx.work.PeriodicWorkRequest
+import androidx.work.WorkManager
+import androidx.work.Worker
+import androidx.work.WorkerParameters
 import com.kieronquinn.app.pixellaunchermods.BuildConfig
 import com.kieronquinn.app.pixellaunchermods.R
 import com.kieronquinn.app.pixellaunchermods.components.notifications.NotificationChannel
@@ -33,6 +40,8 @@ class UpdateCheckWorker(
     companion object {
         private const val UPDATE_CHECK_WORK_TAG = "plm_update_check"
         private const val UPDATE_CHECK_HOUR = 12L
+        //Removed from WorkManager for some reason???
+        private const val MIN_BACKOFF_MILLIS = 10 * 1000L // 10 seconds.
 
         private fun clearCheckWorker(context: Context){
             val workManager = WorkManager.getInstance(context)
@@ -98,7 +107,7 @@ class UpdateCheckWorker(
             return PeriodicWorkRequest.Builder(UpdateCheckWorker::class.java, 24, TimeUnit.HOURS).addTag(UPDATE_CHECK_WORK_TAG)
                 .setInitialDelay(delay, TimeUnit.MINUTES)
                 .setConstraints(constraints)
-                .setBackoffCriteria(BackoffPolicy.EXPONENTIAL, PeriodicWorkRequest.MIN_BACKOFF_MILLIS, TimeUnit.MILLISECONDS)
+                .setBackoffCriteria(BackoffPolicy.EXPONENTIAL, MIN_BACKOFF_MILLIS, TimeUnit.MILLISECONDS)
                 .build()
         }
     }

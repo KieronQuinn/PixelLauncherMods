@@ -3,13 +3,22 @@ package com.kieronquinn.app.pixellaunchermods.ui.screens.apps
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.bumptech.glide.Glide
 import com.kieronquinn.app.pixellaunchermods.components.navigation.ContainerNavigation
 import com.kieronquinn.app.pixellaunchermods.model.remote.RemoteApp
 import com.kieronquinn.app.pixellaunchermods.repositories.RemoteAppsRepository
 import com.kieronquinn.app.pixellaunchermods.utils.extensions.TAP_DEBOUNCE
 import com.kieronquinn.app.pixellaunchermods.utils.extensions.instantCombine
-import com.kieronquinn.app.pixellaunchermods.utils.glide.GlideApp
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.mapLatest
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 abstract class AppsViewModel: ViewModel() {
@@ -61,7 +70,7 @@ class AppsViewModelImpl(
     private val applyIconPackClickBus = MutableSharedFlow<Unit>()
 
     private val glide by lazy {
-        GlideApp.get(context)
+        Glide.get(context)
     }
 
     override val state = combine(searchTerm, remoteApps.filterNotNull()) { search, apps ->

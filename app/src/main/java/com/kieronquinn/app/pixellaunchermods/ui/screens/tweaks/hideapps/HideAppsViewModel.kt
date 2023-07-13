@@ -3,6 +3,7 @@ package com.kieronquinn.app.pixellaunchermods.ui.screens.tweaks.hideapps
 import android.content.pm.LauncherActivityInfo
 import android.net.Uri
 import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kieronquinn.app.pixellaunchermods.BuildConfig
@@ -10,7 +11,15 @@ import com.kieronquinn.app.pixellaunchermods.components.navigation.ContainerNavi
 import com.kieronquinn.app.pixellaunchermods.repositories.AppsRepository
 import com.kieronquinn.app.pixellaunchermods.repositories.OverlayRepository
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 abstract class HideAppsViewModel: ViewModel() {
@@ -109,7 +118,14 @@ class HideAppsViewModelImpl(
             val components = apps.filter { it.hidden }.map {
                 it.launcherApp.componentName.flattenToShortString()
             }.toTypedArray()
-            navigation.navigate(HideAppsFragmentDirections.actionHideAppsFragmentToHideAppsApplyFragment(components, null, null))
+            navigation.navigate(HideAppsFragmentDirections.actionHideAppsFragmentToHideAppsApplyFragment(
+                components,
+                null,
+                null,
+                null,
+                null,
+                null
+            ))
         }
     }
 

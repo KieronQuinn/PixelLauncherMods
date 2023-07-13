@@ -49,6 +49,9 @@ class IconPickerAdapter(
                 is Source.File -> binding.setupFile()
                 is Source.LegacyThemedIcons -> binding.setupLegacyThemedIcons(item)
                 is Source.Lawnicons -> binding.setupLawnicons(item)
+                else -> {
+                    //No-op
+                }
             }
         }
     }
