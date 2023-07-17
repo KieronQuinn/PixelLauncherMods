@@ -1,6 +1,7 @@
 package com.kieronquinn.app.pixellaunchermods.ui.screens.tweaks.hideapps
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -9,7 +10,7 @@ import com.kieronquinn.app.pixellaunchermods.databinding.ItemHideAppBinding
 import com.kieronquinn.app.pixellaunchermods.ui.screens.tweaks.hideapps.HideAppsViewModel.HiddenApp
 
 class HideAppsAdapter(
-    context: Context,
+    var context: Context,
     var items: List<HiddenApp>
 ): RecyclerView.Adapter<HideAppsAdapter.ViewHolder>() {
 
@@ -41,7 +42,11 @@ class HideAppsAdapter(
             item.hidden = b
         }
         root.setOnClickListener {
-            itemHideAppSwitch.toggle()
+            val intent = context.packageManager.getLaunchIntentForPackage(item.launcherApp.componentName.packageName) as Intent
+            if (!intent.equals(null)) {
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                context.startActivity(intent)
+            }
         }
     }
 
