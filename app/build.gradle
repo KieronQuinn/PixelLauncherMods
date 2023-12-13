@@ -7,8 +7,8 @@ plugins {
     id 'com.google.android.gms.oss-licenses-plugin'
 }
 
-def tagName = '2.5'
-def tagCode = 250
+def tagName = '2.6'
+def tagCode = 260
 
 def getKeystoreProperties() {
     def properties = new Properties()

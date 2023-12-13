@@ -8,7 +8,12 @@ import com.kieronquinn.app.pixellaunchermods.repositories.RootServiceRepository
 import com.kieronquinn.app.pixellaunchermods.repositories.SettingsRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.stateIn
 
 abstract class MainActivityViewModel: ViewModel() {
 
@@ -51,6 +56,7 @@ class MainActivityViewModelImpl(
             settingsRepository.shouldLaunchService.set(false)
             return@combine State.NoPixelLauncher
         }
+        settingsRepository.shouldLaunchService.set(true)
         State.Loaded
     }.stateIn(viewModelScope, SharingStarted.Eagerly, State.Loading)
 
