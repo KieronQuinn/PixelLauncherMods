@@ -1,5 +1,6 @@
 package com.kieronquinn.app.pixellaunchermods.ui.screens.tweaks.overlay
 
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
@@ -52,10 +53,15 @@ class OverlayTweaksFragment: BoundFragment<FragmentSettingsTweaksOverlayBinding>
             BaseSettingsViewModel.SettingsItem.Switch(
                 icon = R.drawable.ic_tweaks_wallpaper_scrim,
                 titleRes = R.string.tweaks_overlay_wallpaper_scrim,
-                contentRes = R.string.tweaks_overlay_wallpaper_scrim_content,
+                contentRes = if(Build.VERSION.SDK_INT >= 34) {
+                    R.string.tweaks_overlay_wallpaper_scrim_content_disabled
+                }else{
+                    R.string.tweaks_overlay_wallpaper_scrim_content
+                },
                 setting = FakePixelLauncherModsSetting(
                     viewModel.wallpaperScrim, viewModel::onWallpaperScrimChanged
-                )
+                ),
+                isEnabled = { Build.VERSION.SDK_INT < 34 }
             ),
             BaseSettingsViewModel.SettingsItem.Switch(
                 icon = R.drawable.ic_tweaks_wallpaper_region_colours,

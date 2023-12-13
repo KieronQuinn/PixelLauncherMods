@@ -30,7 +30,7 @@ task clean(type: Delete) {
 
 task cleanOverlay(type: Delete, dependsOn: ordered(':overlay:clean')) {
     //Delete the previously built APK to start fresh
-    delete 'overlay/module/system/product/overlay/PixelLauncherModsOverlay/PixelLauncherModsOverlay.apk'
+    delete 'overlay/module/system/product/overlay/PixelLauncherModsOverlay.apk'
 }
 
 /**
@@ -51,7 +51,7 @@ task assembleGradleDaemon(type: Exec) {
 task buildAndCopyOverlay(type: Copy, dependsOn: ordered(':assembleGradleDaemon')) {
     //Copy built APK into module folder
     from "overlay/build/outputs/apk/release/overlay-release.apk"
-    into "overlay/module/system/product/overlay/PixelLauncherModsOverlay"
+    into "overlay/module/system/product/overlay"
     rename("overlay-release.apk", "PixelLauncherModsOverlay.apk")
 }
 

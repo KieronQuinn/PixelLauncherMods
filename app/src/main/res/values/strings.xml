@@ -130,6 +130,7 @@
     <string name="tweaks_overlay_background_transparency_content"><b>Note: Lower values may reduce readability</b>. Background may still be blurred, depending on your device.</string>
     <string name="tweaks_overlay_wallpaper_scrim">Disable Wallpaper Scrim</string>
     <string name="tweaks_overlay_wallpaper_scrim_content">Disable the dark scrim at the top of the screen on the wallpaper, intended to provide text contrast for the status bar</string>
+    <string name="tweaks_overlay_wallpaper_scrim_content_disabled">This option is not compatible with your device</string>
     <string name="tweaks_overlay_wallpaper_region_colours">Disable Wallpaper Region Widget Colours</string>
     <string name="tweaks_overlay_wallpaper_region_colours_content">Disable colours of Material You widgets changing based on the colour of the wallpaper behind them (the system colours will be used instead)</string>
     <string name="tweaks_overlay_disable_smartspace">Hide At a Glance</string>

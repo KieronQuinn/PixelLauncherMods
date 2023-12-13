@@ -8,7 +8,16 @@ import com.kieronquinn.app.pixellaunchermods.repositories.IconLoaderRepository
 import com.kieronquinn.app.pixellaunchermods.repositories.RemoteAppsRepository
 import com.kieronquinn.app.pixellaunchermods.ui.screens.iconpicker.BasePickerViewModel
 import com.kieronquinn.app.pixellaunchermods.utils.extensions.TAP_DEBOUNCE
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 abstract class LegacyThemedIconPickerViewModel(
@@ -102,11 +111,12 @@ class LegacyThemedIconPickerViewModelImpl(
     private fun setupClickListener() {
         viewModelScope.launch {
             itemClickBus.debounce(TAP_DEBOUNCE).collect {
-                val resourceName = iconLoaderRepository.getLegacyThemedIconName(it)
                 val lawnicons = lawnicons.filterNotNull().first()
                 val icon = if(lawnicons){
+                    val resourceName = iconLoaderRepository.getLawniconName(it)
                     IconPickerResult.Lawnicon(it.resourceId, resourceName)
                 }else{
+                    val resourceName = iconLoaderRepository.getLegacyThemedIconName(it)
                     IconPickerResult.LegacyThemedIcon(it.resourceId, resourceName)
                 }
                 onIconSelected(icon)

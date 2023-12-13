@@ -1,6 +1,7 @@
 package com.kieronquinn.app.pixellaunchermods.ui.screens.tweaks.overlay
 
 import android.net.Uri
+import android.os.Build
 import androidx.activity.result.ActivityResultLauncher
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -59,7 +60,8 @@ class OverlayTweaksViewModelImpl(
     )
 
     private val disableWallpaperScrim = MutableStateFlow(
-        settingsRepository.disableWallpaperScrim.getSyncOrNull()
+        settingsRepository.disableWallpaperScrim.getSyncOrNull() ?: false
+                && Build.VERSION.SDK_INT < 34
     )
 
     private val disableWallpaperRegionColours = MutableStateFlow(
