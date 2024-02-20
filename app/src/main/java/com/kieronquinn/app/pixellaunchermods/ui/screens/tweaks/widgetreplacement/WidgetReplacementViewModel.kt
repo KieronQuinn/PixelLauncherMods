@@ -5,6 +5,7 @@ import android.appwidget.AppWidgetProviderInfo
 import android.net.Uri
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.IntentSenderRequest
+import androidx.core.app.ActivityOptionsCompat
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kieronquinn.app.pixellaunchermods.components.navigation.ContainerNavigation
@@ -13,6 +14,7 @@ import com.kieronquinn.app.pixellaunchermods.model.tweaks.WidgetReplacement
 import com.kieronquinn.app.pixellaunchermods.repositories.OverlayRepository
 import com.kieronquinn.app.pixellaunchermods.repositories.ProxyAppWidgetRepository
 import com.kieronquinn.app.pixellaunchermods.repositories.SettingsRepository
+import com.kieronquinn.app.pixellaunchermods.utils.extensions.allowBackground
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -216,7 +218,8 @@ class WidgetReplacementViewModelImpl(
             val intentSender = IntentSenderRequest.Builder(
                 widgetRepository.getConfigureIntentSenderForProvider(appWidgetId)
             ).build()
-            configureLauncher.launch(intentSender)
+            val options = ActivityOptionsCompat.makeBasic().allowBackground()
+            configureLauncher.launch(intentSender, options)
         }
     }
 
