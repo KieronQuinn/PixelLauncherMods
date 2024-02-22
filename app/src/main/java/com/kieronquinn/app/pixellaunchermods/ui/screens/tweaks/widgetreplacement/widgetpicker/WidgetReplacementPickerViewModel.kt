@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.pm.ApplicationInfo
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.IntentSenderRequest
+import androidx.core.app.ActivityOptionsCompat
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kieronquinn.app.pixellaunchermods.BuildConfig
@@ -16,6 +17,7 @@ import com.kieronquinn.app.pixellaunchermods.repositories.AppsRepository
 import com.kieronquinn.app.pixellaunchermods.repositories.ProxyAppWidgetRepository
 import com.kieronquinn.app.pixellaunchermods.repositories.RootServiceRepository
 import com.kieronquinn.app.pixellaunchermods.repositories.SettingsRepository
+import com.kieronquinn.app.pixellaunchermods.utils.extensions.allowBackground
 import com.kieronquinn.app.pixellaunchermods.widget.ProxyWidget
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -202,7 +204,8 @@ class WidgetReplacementPickerViewModelImpl(
         if(boundProvider.configure != null){
             //Start the extra configure step, onWidgetConfigured will be called when done
             val intentSender = appWidgetRepository.getConfigureIntentSenderForProvider(appWidgetId)
-            configureLauncher.launch(IntentSenderRequest.Builder(intentSender).build())
+            val options = ActivityOptionsCompat.makeBasic().allowBackground()
+            configureLauncher.launch(IntentSenderRequest.Builder(intentSender).build(), options)
         }else{
             //No config required, proceed with setup immediately
             onWidgetConfigured(context, boundProvider, appWidgetId)
