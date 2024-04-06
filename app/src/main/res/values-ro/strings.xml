@@ -240,4 +240,5 @@
     <!-- Contributors: Translation Languages -->
     <string name="contributors_translators">Traducători</string>
     <string name="contributors_translators_romanian">Română</string>
+    <string name="contributors_translators_turkish">Turc</string>
 </resources>
