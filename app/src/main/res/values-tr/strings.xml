@@ -206,7 +206,7 @@
     <string name="options_advanced_shortcut">Uygulama Kısayol Güncellemelerini Devre Dışı Bırak</string>
     <string name="options_advanced_shortcut_content">Bazı uygulamalar uygulama kısayol güncellemelerini çok sık gönderir, bu da Pixel Başlatıcı Modlarının pil kullanımını artırabilir ve daha yaygın yeniden başlatmalara yol açabilir. Bunu yaşıyorsanız, uygulama kısayol güncellemelerini devre dışı bırakmak sorunu çözecektir, ancak temanın kaldırılmaması için simgeleri daha sık yeniden uygulamanız gerekebilir.</string>
     <string name="options_advanced_reset">Sıfırla</string>
-    <string name="options_advanced_reset_content">Değiştirilen tüm uygulamaları ve uygulama kısayolunun etiketlerini ve simgelerini sıfırlayın ve Piksel Başlatıcı'nın simge önbelleğini yeniden oluşturun</string>
+    <string name="options_advanced_reset_content">Değiştirilen tüm uygulamaları ve uygulama kısayolunun etiketlerini ve simgelerini sıfırlayın ve Piksel Başlatıcı\'nın simge önbelleğini yeniden oluşturun</string>
     <string name="options_advanced_debug_restart_reason_toast">Hata Ayıklama: Yeniden Başlatma Nedeni Tostunu Göster</string>
     <string name="options_advanced_debug_restart_reason_toast_content">Şunun nedenini içeren bir Tost mesajı gösterir: <b>potansiyel</b> gerçekleşmeden önce yeniden başlatın. Bunun şu anlama gelmediğini unutmayın: <i>garanti</i> bir yeniden başlatma, ancak yeniden başlatmaya neyin neden olduğunu size söyleyecektir.</string>
     <string name="reset_info_loading">Yükleniyor…</string>
@@ -233,13 +233,14 @@
     <string name="github">GitHub</string>
     <string name="libraries">Üçüncü taraf kütüphaneler</string>
     <string name="donate">Bağış Yap</string>
-    <string name="twitter">Beni Twitter'da takip et</string>
+    <string name="twitter">Beni Twitter\'da takip et</string>
     <string name="about_version">Sürüm %1s\nKieron Quinn tarafından oluşturuldu</string>
     <string name="about_contributors">Katkıda bulunanlar</string>
     <string name="about_contributors_icons">Simgeler</string>
-    <string name="about_contributors_icons_content"><![CDATA[<b><a href="https://material.io/resources/icons">Malzeme Simgeleri</a></b> (<a href=" https://www.apache.org/licenses/LICENSE-2.0.html">Apache Lisansı 2.0</a>)<br><b><a href="https://github.com/Templarian/MaterialDesign" >Materyal Tasarım Simgeleri</a></b> (<a href="https://github.com/Templarian/MaterialDesign/blob/master/LICENSE">Pictogrammers Ücretsiz Lisansı</a>)<br><a href="https://github.com/LawnchairLauncher/lawnicons/blob/develop/app/src/main/res/drawable/magisk.xml"><b>Lawnicons'tan Magisk simgesi</b> - Patryk Michalik</b> a> (<a href="https://www.apache.org/licenses/LICENSE-2.0.html">Apache Lisansı 2.0</a>)<br><b><a href="https:// github.com/HatScripts/circle-flags">circle-flags</a></b>, HatScripts (<a href="https://github.com/HatScripts/circle-flags/blob/gh-pages/) LİSANS">MIT Lisansı</a>)]]></string>
+    <string name="about_contributors_icons_content"><![CDATA[<b><a href="https://material.io/resources/icons">Material Icons</a></b> (<a href="https://www.apache.org/licenses/LICENSE-2.0.html">Apache Licence 2.0</a>)<br><b><a href="https://github.com/Templarian/MaterialDesign">Material Design Icons</a></b> (<a href="https://github.com/Templarian/MaterialDesign/blob/master/LICENSE">Pictogrammers Free Licence</a>)<br><a href="https://github.com/LawnchairLauncher/lawnicons/blob/develop/app/src/main/res/drawable/magisk.xml"><b>Magisk icon from Lawnicons</b> - Patryk Michalik</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0.html">Apache Licence 2.0</a>)<br><b><a href="https://github.com/HatScripts/circle-flags">circle-flags</a></b> by HatScripts (<a href="https://github.com/HatScripts/circle-flags/blob/gh-pages/LICENSE">MIT Licence</a>)]]></string>
     <string name="about_contributors_overlay">Dinamik Yer Paylaşımı Oluşturma</string>
-    <string name="about_contributors_overlay_content"><![CDATA[Statik olarak derlenmiş <b><a href="https://github.com/rendiix/termux-aapt">aapt</a></b> ve <b ><a href="https://github.com/rendiix/termux-zipalign">zipalign</a></b>, <a href="https://github.com/rendiix">rendixx</a> a> (<a href="https://www.apache.org/licenses/LICENSE-2.0.html">Apache Lisansı 2.0</a>)<br><a href="https://android.googlesource AOSP'den .com/platform/tools/apksig/">apksigner</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0.html">Apache Lisansı 2.0</a> )]]></string>
+    <string name="about_contributors_overlay_content"><![CDATA[Statically compiled <b><a href="https://github.com/rendiix/termux-aapt">aapt</a></b> and <b><a href="https://github.com/rendiix/termux-zipalign">zipalign</a></b> by <a href="https://github.com/rendiix">rendixx</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0.html">Apache Licence 2.0</a>)<br><a href="https://android.googlesource.com/platform/tools/apksig/">apksigner</a> from AOSP (<a href="https://www.apache.org/licenses/LICENSE-2.0.html">Apache Licence 2.0</a>)]]></string>
+
     <!-- Update downloader -->
     <string name="snackbar_update">Güncelleme mevcut</string>
     <string name="snackbar_update_button">Güncelle</string>
