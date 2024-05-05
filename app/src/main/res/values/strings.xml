@@ -282,5 +282,6 @@
     <!-- Contributors: Translation Languages -->
     <string name="contributors_translators">Translators</string>
     <string name="contributors_translators_romanian">Romanian</string>
+    <string name="contributors_translators_turkish">Turkish</string>
 
 </resources>
