@@ -1,7 +1,6 @@
 package com.kieronquinn.app.pixellaunchermods.ui.screens.tweaks.widgetreplacement
 
 import android.app.Activity
-import android.appwidget.AppWidgetManager
 import android.os.Bundle
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
@@ -43,8 +42,6 @@ class WidgetReplacementFragment: BoundFragment<FragmentTweaksWidgetReplacementBi
     }
 
     private val configurationLauncher = registerForActivityResult(ActivityResultContracts.StartIntentSenderForResult()) {
-        val appWidgetId = it.data?.extras?.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID, -1)
-        if(appWidgetId == null || appWidgetId == -1) return@registerForActivityResult
         if(it.resultCode == Activity.RESULT_OK){
             viewModel.reload()
         }
