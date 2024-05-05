@@ -53,18 +53,15 @@ abstract class WidgetReplacementPickerViewModel: ViewModel() {
         context: Context,
         provider: AppWidgetProviderInfo?,
         configureLauncher: ActivityResultLauncher<IntentSenderRequest>,
-        appWidgetId: Int
+        appWidgetId: Int?
     )
 
     abstract fun onWidgetConfigured(
         context: Context,
-        provider: AppWidgetProviderInfo?,
-        appWidgetId: Int
+        provider: AppWidgetProviderInfo?
     )
 
-    abstract fun onWidgetCancelled(
-        appWidgetId: Int
-    )
+    abstract fun onWidgetCancelled()
 
     sealed class State {
         object Loading: State()
@@ -112,6 +109,7 @@ class WidgetReplacementPickerViewModelImpl(
 
     private val searchTerm = MutableStateFlow("")
     private var pendingProvider: AppWidgetProviderInfo? = null
+    private var pendingAppWidgetId: Int? = null
 
     override val searchShowClear = searchTerm.map { it.isNotBlank() }
         .stateIn(viewModelScope, SharingStarted.Eagerly, false)
@@ -191,35 +189,43 @@ class WidgetReplacementPickerViewModelImpl(
     ) {
         pendingProvider = provider
         val appWidgetId = appWidgetRepository.allocateAppWidgetId(provider, bindLauncher) ?: return
-        onWidgetBound(context, provider, configureLauncher, appWidgetId)
+        pendingAppWidgetId = appWidgetId
+        onWidgetBound(context, provider, configureLauncher, pendingAppWidgetId)
     }
 
     override fun onWidgetBound(
         context: Context,
         provider: AppWidgetProviderInfo?,
         configureLauncher: ActivityResultLauncher<IntentSenderRequest>,
-        appWidgetId: Int
+        appWidgetId: Int?
     ) {
         val boundProvider = provider ?: pendingProvider ?: return
+        if(appWidgetId != null) {
+            pendingAppWidgetId = appWidgetId
+        }
         if(boundProvider.configure != null){
             //Start the extra configure step, onWidgetConfigured will be called when done
-            val intentSender = appWidgetRepository.getConfigureIntentSenderForProvider(appWidgetId)
+            val intentSender = appWidgetRepository.getConfigureIntentSenderForProvider(
+                pendingAppWidgetId ?: return
+            )
             val options = ActivityOptionsCompat.makeBasic().allowBackground()
             configureLauncher.launch(IntentSenderRequest.Builder(intentSender).build(), options)
         }else{
             //No config required, proceed with setup immediately
-            onWidgetConfigured(context, boundProvider, appWidgetId)
+            onWidgetConfigured(context, boundProvider)
         }
     }
 
     override fun onWidgetConfigured(
         context: Context,
-        provider: AppWidgetProviderInfo?,
-        appWidgetId: Int
+        provider: AppWidgetProviderInfo?
     ) {
         val emitError = suspend {
             pendingProvider = null
-            appWidgetRepository.deallocateAppWidgetId(appWidgetId)
+            pendingAppWidgetId?.let {
+                appWidgetRepository.deallocateAppWidgetId(it)
+            }
+            pendingAppWidgetId = null
             errorBus.emit(R.string.widget_replacement_picker_error_toast)
         }
         viewModelScope.launch {
@@ -227,7 +233,12 @@ class WidgetReplacementPickerViewModelImpl(
                 emitError()
                 return@launch
             }
+            val pendingAppWidgetId = pendingAppWidgetId ?: run {
+                emitError()
+                return@launch
+            }
             pendingProvider = null
+            this@WidgetReplacementPickerViewModelImpl.pendingAppWidgetId = null
             rootServiceRepository.runWithRootService {
                 it.setSearchWidgetPackageEnabled(true)
                 it.restartLauncherImmediately()
@@ -236,15 +247,18 @@ class WidgetReplacementPickerViewModelImpl(
                 return@launch
             }
             appWidgetRepository.commitProxyWidgetProvider(
-                context, appWidgetProvider.provider.flattenToShortString(), appWidgetId
+                context, appWidgetProvider.provider.flattenToShortString(), pendingAppWidgetId
             )
             navigation.navigateBack()
         }
     }
 
-    override fun onWidgetCancelled(appWidgetId: Int) {
+    override fun onWidgetCancelled() {
         pendingProvider = null
-        appWidgetRepository.deallocateAppWidgetId(appWidgetId)
+        pendingAppWidgetId?.let {
+            appWidgetRepository.deallocateAppWidgetId(it)
+        }
+        pendingAppWidgetId = null
     }
 
     override fun getSearchTerm(): String {

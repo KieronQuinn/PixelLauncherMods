@@ -9,11 +9,20 @@ import com.kieronquinn.app.pixellaunchermods.components.navigation.ContainerNavi
 import com.kieronquinn.app.pixellaunchermods.model.icon.IconPickerResult
 import com.kieronquinn.app.pixellaunchermods.repositories.IconLoaderRepository
 import com.kieronquinn.app.pixellaunchermods.repositories.IconPackRepository
-import com.kieronquinn.app.pixellaunchermods.repositories.IconPackRepository.*
+import com.kieronquinn.app.pixellaunchermods.repositories.IconPackRepository.IconPackIconCategory
+import com.kieronquinn.app.pixellaunchermods.repositories.IconPackRepository.IconPackIconOptions
 import com.kieronquinn.app.pixellaunchermods.ui.screens.iconpicker.BasePickerViewModel
 import com.kieronquinn.app.pixellaunchermods.utils.extensions.TAP_DEBOUNCE
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -106,7 +115,7 @@ class IconPickerPackViewModelImpl(
         intent: Intent?
     ) {
         viewModelScope.launch {
-            externalPicker.launch(intent)
+            externalPicker.launch(intent ?: return@launch)
         }
     }
 
