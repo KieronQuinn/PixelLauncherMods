@@ -22,7 +22,11 @@ import com.kieronquinn.app.pixellaunchermods.model.tweaks.WidgetReplacement
 import com.kieronquinn.app.pixellaunchermods.ui.base.BackAvailable
 import com.kieronquinn.app.pixellaunchermods.ui.base.BoundFragment
 import com.kieronquinn.app.pixellaunchermods.ui.screens.tweaks.widgetreplacement.widgetpicker.WidgetReplacementPickerViewModel.State
-import com.kieronquinn.app.pixellaunchermods.utils.extensions.*
+import com.kieronquinn.app.pixellaunchermods.utils.extensions.applyBottomNavigationInset
+import com.kieronquinn.app.pixellaunchermods.utils.extensions.hideIme
+import com.kieronquinn.app.pixellaunchermods.utils.extensions.onChanged
+import com.kieronquinn.app.pixellaunchermods.utils.extensions.onClicked
+import com.kieronquinn.app.pixellaunchermods.utils.extensions.onEditorActionSent
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class WidgetReplacementPickerFragment: BoundFragment<FragmentWidgetReplacementPickerBinding>(FragmentWidgetReplacementPickerBinding::inflate), BackAvailable {
@@ -35,13 +39,11 @@ class WidgetReplacementPickerFragment: BoundFragment<FragmentWidgetReplacementPi
     private val viewModel by viewModel<WidgetReplacementPickerViewModel>()
 
     private val configurationLauncher = registerForActivityResult(ActivityResultContracts.StartIntentSenderForResult()) {
-        val appWidgetId = it.data?.extras?.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID, -1)
-        if(appWidgetId == null || appWidgetId == -1) return@registerForActivityResult
         if(it.resultCode == Activity.RESULT_OK){
-            viewModel.onWidgetConfigured(requireContext(), null, appWidgetId)
+            viewModel.onWidgetConfigured(requireContext(), null)
             sendResult(true)
         }else{
-            viewModel.onWidgetCancelled(appWidgetId)
+            viewModel.onWidgetCancelled()
             sendResult(false)
         }
     }
@@ -53,7 +55,7 @@ class WidgetReplacementPickerFragment: BoundFragment<FragmentWidgetReplacementPi
             viewModel.onWidgetBound(requireContext(), null, configurationLauncher, appWidgetId)
             sendResult(true)
         }else{
-            viewModel.onWidgetCancelled(appWidgetId)
+            viewModel.onWidgetCancelled()
             sendResult(false)
         }
     }
