@@ -109,6 +109,7 @@ class PixelLauncherModsRootServiceImpl: IPixelLauncherModsRootService.Stub() {
         )
 
         private const val SEARCH_PROVIDER_SETTINGS_KEY = "SEARCH_PROVIDER_PACKAGE_NAME"
+        private const val SEARCH_PROVIDER_SETTINGS_KEY_VARIANT = "selected_search_engine"
     }
 
     private val context by lazy {
@@ -763,12 +764,21 @@ class PixelLauncherModsRootServiceImpl: IPixelLauncherModsRootService.Stub() {
     }
 
     override fun setSearchWidgetPackageEnabled(enabled: Boolean) {
+        val key: String
+        val table: String
+        if(Build.VERSION.SDK_INT >= 35) {
+            key = SEARCH_PROVIDER_SETTINGS_KEY_VARIANT
+            table = "secure"
+        }else{
+            key = SEARCH_PROVIDER_SETTINGS_KEY
+            table = "global"
+        }
         if(enabled) {
             //Set it to PLM package name so it uses our Proxy Widget
-            execRootCommand("settings put global $SEARCH_PROVIDER_SETTINGS_KEY ${BuildConfig.APPLICATION_ID}")
+            execRootCommand("settings put $table $key ${BuildConfig.APPLICATION_ID}")
         }else{
             //Delete to set it back to default (null)
-            execRootCommand("settings delete global $SEARCH_PROVIDER_SETTINGS_KEY")
+            execRootCommand("settings delete $table $key")
         }
     }
 

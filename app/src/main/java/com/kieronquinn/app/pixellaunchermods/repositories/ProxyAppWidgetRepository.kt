@@ -9,7 +9,10 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentSender
 import android.os.Bundle
+import android.util.Log
+import android.util.SizeF
 import androidx.activity.result.ActivityResultLauncher
+import com.kieronquinn.app.pixellaunchermods.utils.extensions.dp
 import com.kieronquinn.app.pixellaunchermods.utils.extensions.getIntentSenderForConfigureActivity
 import com.kieronquinn.app.pixellaunchermods.utils.widget.LauncherProxyAppWidgetHost
 import com.kieronquinn.app.pixellaunchermods.utils.widget.PreviewAppWidgetHost
@@ -88,15 +91,31 @@ class ProxyAppWidgetRepositoryImpl(
         }
     }
 
-    /**
-     *  Rejects size bundles that would render the widget down to 0x0 (making it invisible)
-     */
     private fun AppWidgetHostView.updateAppWidgetOptionsIfValid(options: Bundle) {
-        if(options.getInt(AppWidgetManager.OPTION_APPWIDGET_MAX_HEIGHT) == 0) return
-        if(options.getInt(AppWidgetManager.OPTION_APPWIDGET_MAX_WIDTH) == 0) return
-        if(options.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH) == 0) return
-        if(options.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_HEIGHT) == 0) return
-        updateAppWidgetOptions(options)
+        val sizes = ArrayList<SizeF>().apply {
+            val minWidth = options.getIntOrNull(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH)
+                ?: return@apply
+            val minHeight = options.getIntOrNull(AppWidgetManager.OPTION_APPWIDGET_MIN_HEIGHT)
+                ?: return@apply
+            val maxWidth = options.getIntOrNull(AppWidgetManager.OPTION_APPWIDGET_MAX_WIDTH)
+                ?: return@apply
+            val maxHeight = options.getIntOrNull(AppWidgetManager.OPTION_APPWIDGET_MAX_HEIGHT)
+                ?: return@apply
+            add(SizeF(minWidth.dp.toFloat(), minHeight.dp.toFloat()))
+            add(SizeF(maxWidth.dp.toFloat(), maxHeight.dp.toFloat()))
+        }
+        Log.d("PA", "Setting size: $sizes from $options")
+        updateAppWidgetSize(Bundle.EMPTY, sizes)
+    }
+
+    private fun Bundle.getIntOrNull(key: String): Int? {
+        return getInt(key).takeIf { it >= 0 }
+    }
+
+    private fun Bundle.copy(to: Bundle, key: String) {
+        if(getInt(key) != 0) {
+            to.putInt(key, getInt(key))
+        }
     }
 
     override fun setListening(listening: Boolean) {

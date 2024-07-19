@@ -1,10 +1,11 @@
 package com.kieronquinn.app.pixellaunchermods.ui.screens.container
 
+import android.annotation.SuppressLint
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.view.MenuInflater
 import android.view.View
-import androidx.activity.addCallback
+import androidx.activity.OnBackPressedCallback
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
@@ -17,7 +18,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
-import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.elevation.ElevationOverlayProvider
 import com.google.android.material.snackbar.Snackbar
 import com.kieronquinn.app.pixellaunchermods.R
@@ -26,8 +26,26 @@ import com.kieronquinn.app.pixellaunchermods.components.navigation.setupWithNavi
 import com.kieronquinn.app.pixellaunchermods.components.notifications.requestNotificationPermission
 import com.kieronquinn.app.pixellaunchermods.databinding.FragmentContainerBinding
 import com.kieronquinn.app.pixellaunchermods.repositories.RemoteAppsRepository
-import com.kieronquinn.app.pixellaunchermods.ui.base.*
-import com.kieronquinn.app.pixellaunchermods.utils.extensions.*
+import com.kieronquinn.app.pixellaunchermods.ui.base.BackAvailable
+import com.kieronquinn.app.pixellaunchermods.ui.base.BoundFragment
+import com.kieronquinn.app.pixellaunchermods.ui.base.CanShowSnackbar
+import com.kieronquinn.app.pixellaunchermods.ui.base.LockCollapsed
+import com.kieronquinn.app.pixellaunchermods.ui.base.ProvidesBack
+import com.kieronquinn.app.pixellaunchermods.ui.base.ProvidesOverflow
+import com.kieronquinn.app.pixellaunchermods.ui.base.ProvidesTitle
+import com.kieronquinn.app.pixellaunchermods.utils.extensions.awaitPost
+import com.kieronquinn.app.pixellaunchermods.utils.extensions.collapsedState
+import com.kieronquinn.app.pixellaunchermods.utils.extensions.getRememberedAppBarCollapsed
+import com.kieronquinn.app.pixellaunchermods.utils.extensions.getTopFragment
+import com.kieronquinn.app.pixellaunchermods.utils.extensions.onApplyInsets
+import com.kieronquinn.app.pixellaunchermods.utils.extensions.onDestinationChanged
+import com.kieronquinn.app.pixellaunchermods.utils.extensions.onNavDestinationSelected
+import com.kieronquinn.app.pixellaunchermods.utils.extensions.onNavigationIconClicked
+import com.kieronquinn.app.pixellaunchermods.utils.extensions.onSwipeDismissed
+import com.kieronquinn.app.pixellaunchermods.utils.extensions.rememberAppBarCollapsed
+import com.kieronquinn.app.pixellaunchermods.utils.extensions.setOnBackPressedCallback
+import com.kieronquinn.app.pixellaunchermods.utils.extensions.setTypeface
+import com.kieronquinn.app.pixellaunchermods.utils.extensions.whenResumed
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -92,6 +110,11 @@ class ContainerFragment: BoundFragment<FragmentContainerBinding>(FragmentContain
         setupApplyState()
         setupUpdateSnackbar()
         NavigationUI.setupWithNavController(binding.containerBottomNavigation, navController)
+        binding.containerBottomNavigation.setOnItemSelectedListener {  item ->
+            //Clear the back stack back to the root, to prevent going back between tabs
+            navController.popBackStack(R.id.nav_graph_main, false)
+            navController.onNavDestinationSelected(item)
+        }
         requireActivity().requestNotificationPermission()
     }
 
@@ -138,34 +161,38 @@ class ContainerFragment: BoundFragment<FragmentContainerBinding>(FragmentContain
         }
     }
 
+    @SuppressLint("RestrictedApi")
     private fun setupBack() {
-        val callback = requireActivity().onBackPressedDispatcher.addCallback(
-            this,
-            shouldBackDispatcherBeEnabled()
-        ) {
-            (navHostFragment.getTopFragment() as? ProvidesBack)?.let {
-                if(it.onBackPressed()) return@addCallback
-            }
-            if(!navController.popBackStack()) {
-                requireActivity().finish()
+        val callback = object: OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                (navHostFragment.getTopFragment() as? ProvidesBack)?.let {
+                    if(!it.interceptBack()) return@let
+                    if(it.onBackPressed()) return
+                }
+                if(!navController.popBackStack()) {
+                    requireActivity().finish()
+                }
             }
         }
-        viewLifecycleOwner.lifecycleScope.launchWhenResumed {
+        navController.setOnBackPressedCallback(callback)
+        navController.enableOnBackPressed(shouldBackDispatcherBeEnabled())
+        navController.setOnBackPressedDispatcher(requireActivity().onBackPressedDispatcher)
+        whenResumed {
             navController.onDestinationChanged().collect {
-                callback.isEnabled = shouldBackDispatcherBeEnabled()
+                navController.enableOnBackPressed(shouldBackDispatcherBeEnabled())
             }
         }
     }
 
     private fun shouldBackDispatcherBeEnabled(): Boolean {
         val top = navHostFragment.getTopFragment()
-        return top is ProvidesBack || top !is Root
+        return top is ProvidesBack && top.interceptBack()
     }
 
     private fun setupAppBar() {
-        binding.containerAppBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
+        binding.containerAppBar.addOnOffsetChangedListener { appBarLayout, verticalOffset ->
             binding.navHostFragment.updatePadding(bottom = appBarLayout.totalScrollRange + verticalOffset)
-        })
+        }
     }
 
     private fun setupApplyState() {
