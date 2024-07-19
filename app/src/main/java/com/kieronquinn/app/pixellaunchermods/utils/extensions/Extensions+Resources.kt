@@ -32,3 +32,13 @@ fun Resources.getResourceIdArray(@ArrayRes resourceId: Int): Array<Int> {
     array.recycle()
     return items.toTypedArray()
 }
+
+fun Resources.px(value: Int): Int = (value / displayMetrics.density).toInt()
+
+val Int.px
+    get() = Resources.getSystem().px(this)
+
+fun Resources.dip(value: Int): Int = (value * displayMetrics.density).toInt()
+
+val Int.dp
+    get() = Resources.getSystem().dip(this)

@@ -11,6 +11,7 @@ interface Root
 
 interface ProvidesBack {
     fun onBackPressed(): Boolean
+    fun interceptBack() = true
 }
 
 interface ProvidesTitle {
