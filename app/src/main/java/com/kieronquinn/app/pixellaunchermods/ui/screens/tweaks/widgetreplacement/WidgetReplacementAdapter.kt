@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.kieronquinn.app.pixellaunchermods.R
 import com.kieronquinn.app.pixellaunchermods.databinding.ItemSettingsTextItemBinding
+import com.kieronquinn.app.pixellaunchermods.databinding.ItemTweaksWidgetReplacementIncompatibleBinding
 import com.kieronquinn.app.pixellaunchermods.databinding.ItemTweaksWidgetReplacementInfoBinding
 import com.kieronquinn.app.pixellaunchermods.databinding.ItemTweaksWidgetReplacementPreviewBinding
 import com.kieronquinn.app.pixellaunchermods.databinding.ItemTweaksWidgetReplacementSwitchBinding
@@ -68,6 +69,9 @@ class WidgetReplacementAdapter(
             Item.Type.INFO -> ViewHolder.Info(
                 ItemTweaksWidgetReplacementInfoBinding.inflate(layoutInflater, parent, false)
             )
+            Item.Type.INCOMPATIBLE -> ViewHolder.Incompatible(
+                ItemTweaksWidgetReplacementIncompatibleBinding.inflate(layoutInflater, parent, false)
+            )
         }
     }
 
@@ -78,6 +82,7 @@ class WidgetReplacementAdapter(
             is ViewHolder.ProviderPicker -> holder.binding.setup(items[position] as Item.ProviderPicker, holder)
             is ViewHolder.ProviderReconfigure -> holder.binding.setup(items[position] as Item.ProviderReconfigure, holder)
             is ViewHolder.Info -> {} //Nothing to do
+            is ViewHolder.Incompatible -> {} //Nothing to do
         }
     }
 
@@ -141,6 +146,7 @@ class WidgetReplacementAdapter(
         data class ProviderPicker(override val binding: ItemSettingsTextItemBinding): ViewHolder(binding)
         data class ProviderReconfigure(override val binding: ItemSettingsTextItemBinding): ViewHolder(binding)
         data class Info(override val binding: ItemTweaksWidgetReplacementInfoBinding): ViewHolder(binding)
+        data class Incompatible(override val binding: ItemTweaksWidgetReplacementIncompatibleBinding): ViewHolder(binding)
     }
 
 }

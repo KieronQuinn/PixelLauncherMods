@@ -124,6 +124,7 @@
     <string name="tweaks_widget_replacement_loading">Loading…</string>
     <string name="tweaks_widget_replacement_save">Apply</string>
     <string name="tweaks_widget_replacement_info"><b>Note:</b> Not all widgets are compatible with this feature. If your chosen widget fails to load (for example it stays blank or shows the generic search box), try a different one.</string>
+    <string name="tweaks_widget_replacement_incompatible">Sorry, this option is not compatible with your device.\n\n<b>Note:</b> If it\'s enabled from a previous Android version, you can disable it.</string>
     <string name="tweaks_overlay">Overlay UI Tweaks</string>
     <string name="tweaks_overlay_content">UI tweaks using overlays</string>
     <string name="tweaks_overlay_background_transparency">Recents Background Transparency</string>
