@@ -3,6 +3,7 @@ package com.kieronquinn.app.pixellaunchermods.repositories
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Parcelable
 import com.google.gson.Gson
 import com.google.gson.stream.JsonWriter
@@ -454,7 +455,9 @@ class BackupRestoreRepositoryImpl(
         }
         val overlayActions = ArrayList<OverlayAction>()
         backup.widgetReplacement?.let {
-            overlayActions.add(OverlayAction.CommitWidgetReplacement(it))
+            if(Build.VERSION.SDK_INT < 35) {
+                overlayActions.add(OverlayAction.CommitWidgetReplacement(it))
+            }
         }
         backup.hiddenComponents?.let {
             overlayActions.add(OverlayAction.CommitHiddenApps(it))

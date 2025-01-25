@@ -271,8 +271,8 @@ class PixelLauncherModsRootServiceImpl: IPixelLauncherModsRootService.Stub() {
     private fun loadNativeLibraries(){
         val applicationInfo = pixelLauncherModsContext.applicationInfo
         val nativeLibraryDir = applicationInfo.nativeLibraryDir
-        System.load(File(nativeLibraryDir, "libsqliteX.so").absolutePath)
-        System.load(File(nativeLibraryDir, "libsqlitefunctions.so").absolutePath)
+        loadLibrary(File(nativeLibraryDir, "libsqliteX.so").absolutePath, this::class.java.classLoader!!)
+        loadLibrary(File(nativeLibraryDir, "libsqlitefunctions.so").absolutePath, this::class.java.classLoader!!)
     }
 
     private var suppressChangeListeners = false

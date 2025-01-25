@@ -3,6 +3,7 @@ package com.kieronquinn.app.pixellaunchermods.ui.screens.tweaks.widgetreplacemen
 import android.appwidget.AppWidgetHostView
 import android.appwidget.AppWidgetProviderInfo
 import android.net.Uri
+import android.os.Build
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.IntentSenderRequest
 import androidx.core.app.ActivityOptionsCompat
@@ -59,9 +60,10 @@ abstract class WidgetReplacementViewModel: ViewModel() {
         data class ProviderPicker(val provider: AppWidgetProviderInfo?): Item(Type.PROVIDER_PICKER)
         object ProviderReconfigure: Item(Type.PROVIDER_RECONFIGURE)
         object Info: Item(Type.INFO)
+        data class Incompatible(val enabled: Boolean): Item(Type.INCOMPATIBLE)
 
         enum class Type {
-            SWITCH, PREVIEW, PROVIDER_PICKER, PROVIDER_RECONFIGURE, INFO
+            SWITCH, PREVIEW, PROVIDER_PICKER, PROVIDER_RECONFIGURE, INFO, INCOMPATIBLE
         }
     }
 
@@ -75,6 +77,7 @@ class WidgetReplacementViewModelImpl(
 ): WidgetReplacementViewModel() {
 
     private val reloadBus = MutableStateFlow(System.currentTimeMillis())
+    private val available = Build.VERSION.SDK_INT < 35
 
     private val replacementState = flow {
         emit(overlayRepository.getWidgetReplacement())
@@ -132,11 +135,12 @@ class WidgetReplacementViewModelImpl(
             WidgetReplacement.NONE -> WidgetPosition.BOTTOM //Default to top, although it will be hidden
         }
         val items = listOfNotNull(
-            Item.Switch(enabled),
-            if (enabled) Item.Preview(widgetPosition) else null,
-            Item.Info,
-            if (enabled) Item.ProviderPicker(providerInfo) else null,
-            if (enabled && canReconfigure) Item.ProviderReconfigure else null
+            if (enabled || available) Item.Switch(enabled) else null,
+            if (enabled && available) Item.Preview(widgetPosition) else null,
+            Item.Info.takeIf { available },
+            if (enabled && available) Item.ProviderPicker(providerInfo) else null,
+            if (enabled && canReconfigure && available) Item.ProviderReconfigure else null,
+            if(!available) Item.Incompatible(enabled) else null
         )
         State.Loaded(localReplacement != null, items)
     }
@@ -161,7 +165,9 @@ class WidgetReplacementViewModelImpl(
     }
 
     override fun onSaveClicked() {
-        val localReplacement = localWidgetReplacement.value ?: return
+        var localReplacement = localWidgetReplacement.value ?: return
+        //Always disable if no longer available
+        if(!available) localReplacement = WidgetReplacement.NONE
         viewModelScope.launch {
             navigation.navigate(WidgetReplacementFragmentDirections
                 .actionTweaksWidgetReplacementFragmentToTweaksApplyFragment(
