@@ -1,0 +1,288 @@
+<resources>
+
+    <string name="app_name">Pixel Launcher Mods</string>
+    <string name="search">Поиск</string>
+
+    <string name="no_root_dialog_title">Отсутствует рут</string>
+    <string name="no_root_dialog_content">Для запуска требуется рутированное устройство. Пожалуйста, ознакомьтесь с FAQ для получения подробной информации.</string>
+    <string name="no_root_dialog_close">Закрыть</string>
+
+    <string name="no_pixel_launcher_dialog_title">Pixel Launcher не установлен</string>
+    <string name="no_pixel_launcher_dialog_content">Необходим Pixel Launcher для использования Pixel Launcher Mods</string>
+    <string name="no_pixel_launcher_dialog_close">Закрыть</string>
+
+    <string name="menu_bottom_nav_apps">Приложения</string>
+    <string name="menu_bottom_nav_shortcuts">Ярлыки</string>
+    <string name="menu_bottom_nav_tweaks">Твики</string>
+    <string name="menu_bottom_nav_options">Еще</string>
+    <string name="apps_title">Меню приложений</string>
+    <string name="apps_loading">Загрузка приложений…</string>
+    <string name="apps_error">Ошибка загрузки приложений</string>
+    <string name="apps_error_sub">Убедитесь, что у вас есть root права. Если проблема не устраняется, попробуйте перезагрузить или очистить данные Pixel Launcher.</string>
+    <string name="apps_apply_icon_pack">Применить пакет иконок</string>
+
+    <string name="app_editor_input_label">Название</string>
+    <string name="app_editor_save">Сохранить</string>
+    <string name="app_editor_normal_icon">Иконка приложения</string>
+    <string name="app_editor_normal_icon_shortcut">Иконка</string>
+    <string name="app_editor_add_themed_icon">Добавить тематическую иконку</string>
+    <string name="app_editor_themed_icon">Домашний экран</string>
+    <string name="app_editor_themed_icon_shortcut">Тематическая иконка</string>
+    <string name="app_editor_loading">Загрузка приложений…</string>
+    <string name="app_editor_loading_shortcut">Загрузка ярлыков…</string>
+    <string name="app_editor_saving">Сохранение приложений…</string>
+    <string name="app_editor_resetting">Сброс приложения…</string>
+    <string name="app_editor_saving_shortcut">Сохранение ярлыка…</string>
+    <string name="app_editor_resetting_shortcut">Сброс ярлыка…</string>
+    <string name="app_editor_reset">Сброс</string>
+    <string name="app_editor_dynamic_warning">Иконка этого приложения являются динамическими и не могут быть изменены</string>
+    <string name="app_editor_app_shortcut_label_warning">Имя ярлыка приложения не может быть изменено</string>
+
+    <string name="app_editor_iconpicker_remove">Удалить тематическую иконку</string>
+    <string name="app_editor_iconpicker_legacy_themed_title">Тематические иконки (устаревшие)</string>
+    <string name="app_editor_iconpicker_lawnicons_title">Lawnicons</string>
+    <string name="app_editor_iconpicker_loading">Загрузка источников…</string>
+    <string name="app_editor_iconpicker_title">Источники иконок</string>
+    <string name="app_editor_iconpicker_header">Тематические значки всегда подбираются в соответствии с цветом вашего устройства. При использовании пользовательских значков лучше всего подходят адаптивные значки и/или значки без сплошного фона.</string>
+    <string name="app_editor_iconpicker_more">Еще</string>
+    <string name="app_editor_iconpicker_apps">Установленные приложения</string>
+    <string name="app_editor_iconpicker_apps_switch_title">Преобразование адаптивных иконок</string>
+    <string name="app_editor_iconpicker_apps_switch_subtitle">Добавляет белую "табличку" за старыми неадаптивными значками</string>
+    <string name="app_editor_iconpicker_files">Импорт изображения</string>
+    <string name="app_editor_iconpicker_pack_loading">Загрузка иконок…</string>
+    <string name="app_editor_iconpicker_pack_title">Пакет иконок</string>
+    <string name="app_editor_iconpicker_pack_open_external">Открыть пакет</string>
+    <string name="app_editor_iconpicker_legacy_themed_header_content">Пакеты значков и пользовательские изображения нельзя напрямую использовать в качестве тематических значков. Для получения дополнительных тематических значков рассмотрите возможность использования модуля Magisk, который добавляет дополнительные элементы с помощью наложений (подробнее см. раздел XDA thread).</string>
+    <string name="app_editor_iconpicker_legacy_themed_loading">Загрузка тематических иконок…</string>
+    <string name="app_editor_iconpicker_apps_loading">Загрузка приложений…</string>
+    <string name="app_editor_iconpicker_apps_title">Установленные приложения</string>
+
+    <string name="shortcuts_title">Ярлыки домашнего экрана</string>
+    <string name="shortcuts_error">Ярлыки не найдены</string>
+    <string name="shortcuts_error_sub">Если вы ожидали увидеть ярлыки, убедитесь, что у вас есть права root. Если проблема не устранена, попробуйте перезагрузить или очистить данные Pixel Launcher.</string>
+    <string name="shortcuts_loading">Загрузка ярлыков…</string>
+
+    <string name="notification_channel_title_foreground_service">Фоновая служба</string>
+    <string name="notification_channel_desc_foreground_service">Уведомления для поддержания работы фоновой службы</string>
+    <string name="notification_title_foreground_service">Pixel Launcher Mods запущен</string>
+    <string name="notification_content_foreground_service">Ожидание изменения значков приложений, нажмите, чтобы скрыть.</string>
+    <string name="notification_channel_title_icon_applying">Изменение значка</string>
+    <string name="notification_channel_desc_icon_applying">Уведомление о ходе выполнения при обновлении и применении значков</string>
+    <string name="notification_channel_title_update">Обновление</string>
+    <string name="notification_channel_desc_update">Уведомления о появлении обновлений</string>
+    <string name="notification_title_update">Доступно обновление Pixel Launcher Mods</string>
+    <string name="notification_title_content">Обновление доступно для Pixel Launcher Mods (%1s to %1s)</string>
+    <string name="notification_title_applying_icons">Применение иконок</string>
+    <string name="notification_title_updating_icons">Обновление иконок</string>
+    <string name="notification_title_updating_icon_packs">Обновление пакетов иконок</string>
+    <string name="notification_content_updating_icon_packs">Это может занять несколько минут</string>
+    <string name="auto_icon_pack_loading">Загрузка пакетов иконок…</string>
+    <string name="auto_icon_pack_error">Не найдены пакеты иконок</string>
+    <string name="auto_icon_pack_header">Drag your icon packs into the priority order you wish to apply icons with. Packs below the line will not be used.\n<b>Note:</b> Using a large number of icon packs may take a while.</string>
+    <string name="auto_icon_pack_apply">Apply</string>
+    <string name="auto_icon_pack_snackbar">No icon packs above the line!</string>
+    <string name="auto_icon_pack_applying">Applying Icon Packs…</string>
+    <string name="auto_icon_pack_applying_sub">This may take a few minutes, depending on how many packs you selected and how many apps you have installed.</string>
+    <string name="auto_icon_pack_applying_done">Icon packs applied</string>
+
+    <string name="tweaks_title">Tweaks</string>
+    <string name="tweaks_save_module">Save Magisk Module</string>
+    <string name="tweaks_resize_widgets_title">Resize Widgets</string>
+    <string name="tweaks_resize_widgets_content">Resize widgets beyond their normal bounds</string>
+    <string name="tweaks_resize_widgets_sheet_unselected">Tap a widget to begin</string>
+    <string name="tweaks_resize_widgets_sheet_unselected_info">Note: Icons are not themed and are included as a guide.</string>
+    <string name="widget_resize_loading">Loading Widgets…</string>
+    <string name="tweaks_hide_clock">Hide Clock</string>
+    <string name="tweaks_hide_clock_content">Hide the clock from the status bar when the Pixel Launcher is showing.\n<b>Note: This will also apply in the recent apps screen, as it is handled by the Pixel Launcher.</b></string>
+    <string name="hide_apps_loading">Loading…</string>
+    <string name="hide_apps_magisk_title">Magisk Module Required</string>
+    <string name="hide_apps_magisk_content">The Pixel Launcher Mods Magisk module is required for this option.\n\nTo install the module, first save the module using the button below, then use the <b>Install from storage</b> option in Magisk to install it, and reboot your device.</string>
+    <string name="hide_apps_magisk_button">Save Module</string>
+    <string name="tweaks_hide_apps">Hide Apps</string>
+    <string name="tweaks_hide_apps_content">Hide apps from the app drawer</string>
+    <string name="tweaks_apply">Apply Tweaks</string>
+    <string name="hide_apps_save">Apply</string>
+    <string name="overlay_apply_applying">Applying Tweaks…</string>
+    <string name="overlay_apply_success">Tweaks applied</string>
+    <string name="tweaks_apply_failed">Failed to apply Tweaks</string>
+    <string name="tweaks_apply_close">Close</string>
+    <string name="tweaks_apply_save_log">Save Log</string>
+    <string name="tweaks_widget_replacement_preview_title">Preview</string>
+    <string name="tweaks_widget_replacement_preview_bottom">Bottom</string>
+    <string name="tweaks_widget_replacement_preview_top">Top</string>
+    <string name="tweaks_widget_replacement">Search Box</string>
+    <string name="tweaks_widget_replacement_content"><b>Experimental:</b> Replace the Search Box with a widget of your choice</string>
+    <string name="proxy_widget_loading">Loading…</string>
+    <string name="proxy_widget_empty">Tap to configure</string>
+    <string name="proxy_widget_error">This widget failed to load\nTry a different widget</string>
+    <string name="tweaks_widget_replacement_switch">Enable Replacement</string>
+    <string name="tweaks_widget_replacement_provider">Select Widget</string>
+    <string name="tweaks_widget_replacement_provider_content_unset">Set the widget to show</string>
+    <string name="tweaks_widget_replacement_provider_content_set">Set the widget to show. Currently set to %1s.</string>
+    <string name="tweaks_widget_replacement_provider_reconfigure">Reconfigure widget</string>
+    <string name="tweaks_widget_replacement_provider_reconfigure_content">Change this widget\'s settings in its app</string>
+    <string name="tweaks_widget_replacement_loading">Loading…</string>
+    <string name="tweaks_widget_replacement_save">Apply</string>
+    <string name="tweaks_widget_replacement_info"><b>Note:</b> Not all widgets are compatible with this feature. If your chosen widget fails to load (for example it stays blank or shows the generic search box), try a different one.</string>
+    <string name="tweaks_widget_replacement_incompatible">Sorry, this option is not compatible with your device.\n\n<b>Note:</b> If it\'s enabled from a previous Android version, you can disable it.</string>
+    <string name="tweaks_overlay">Overlay UI Tweaks</string>
+    <string name="tweaks_overlay_content">UI tweaks using overlays</string>
+    <string name="tweaks_overlay_background_transparency">Recents Background Transparency</string>
+    <string name="tweaks_overlay_background_transparency_content"><b>Note: Lower values may reduce readability</b>. Background may still be blurred, depending on your device.</string>
+    <string name="tweaks_overlay_wallpaper_scrim">Disable Wallpaper Scrim</string>
+    <string name="tweaks_overlay_wallpaper_scrim_content">Disable the dark scrim at the top of the screen on the wallpaper, intended to provide text contrast for the status bar</string>
+    <string name="tweaks_overlay_wallpaper_scrim_content_disabled">This option is not compatible with your device</string>
+    <string name="tweaks_overlay_wallpaper_region_colours">Disable Wallpaper Region Widget Colours</string>
+    <string name="tweaks_overlay_wallpaper_region_colours_content">Disable colours of Material You widgets changing based on the colour of the wallpaper behind them (the system colours will be used instead)</string>
+    <string name="tweaks_overlay_disable_smartspace">Hide At a Glance</string>
+    <string name="tweaks_overlay_disable_smartspace_content">Hide At a Glance from the top of the Home Screen. <b>This does not give you the space to put a widget in its place, it leaves a blank area.</b></string>
+    <string name="tweaks_overlay_loading">Loading…</string>
+    <string name="tweaks_overlay_save">Save</string>
+    <string name="tweaks_overlay_formatter">%1s%%</string>
+
+    <string name="widget_replacement_picker_title">Select Widget</string>
+    <string name="widget_replacement_picker_loading">Loading Widgets…</string>
+    <string name="widget_replacement_picker_item_app_count_one">%1s widget</string>
+    <string name="widget_replacement_picker_item_app_count_other">%1s widgets</string>
+    <string name="widget_replacement_picker_header">Previews of the widgets may be different to how they show in the Pixel Launcher. Sizing is approximate, and dynamic previews are intentionally clipped to simulate the small space.</string>
+    <string name="widget_replacement_picker_error_toast">An error occurred when setting up this widget.</string>
+    <string name="proxy_widget_preview">@string/app_name</string>
+    <string name="tweaks_deferred_restart">Seamless Restart</string>
+    <string name="tweaks_deferred_restart_content">Configure when to restart the Pixel Launcher for minimum disruption to device use</string>
+
+    <string name="deferred_restart_loading">Loading…</string>
+    <string name="deferred_restart_header">Seamless Restart allows the Pixel Launcher to be restarted in the background, when you are not using it. If you are still experiencing unwanted restarts, try using the \"while screen off\" option, to make it only restart when your device\'s display is off. If you are experiencing unwanted icon resets, you may need to use a more aggressive setting.</string>
+    <string name="deferred_restart_instant_title">Instant Restart</string>
+    <string name="deferred_restart_instant_content">Restarts the Pixel Launcher immediately after making changes, effectively disabling Seamless Restart.\n<b>Note:</b> Restarting instantly includes when the launcher is visible, you may lose your scroll position mid-use.</string>
+    <string name="deferred_restart_background_title">Background Restart</string>
+    <string name="deferred_restart_background_content">Restarts the Pixel Launcher when it is not visible, ie. it is in the background. Icon resets should be minimal in this mode, unless you leave your device with the launcher always showing.\n<b>Recommended</b></string>
+    <string name="deferred_restart_screen_off_title">Screen Off Restart</string>
+    <string name="deferred_restart_screen_off_content">Restarts only when the display is off, for zero disruption. You may experience icon resets with this mode, if you use your device for long periods of time and have automatic updates enabled.</string>
+    <string name="deferred_restart_disabled">Disabled</string>
+    <string name="deferred_restart_disabled_content">Disables automatic restarts entirely, <b>you will need to manually re-apply icons when required.</b></string>
+
+    <string name="backup_restore_backup_close">Close</string>
+    <string name="backup_restore_backup_creating">Creating backup…</string>
+    <string name="backup_restore_backup_creating_success">Backup created</string>
+    <string name="backup_restore_backup_creating_failed">Failed to create backup</string>
+
+    <string name="options_backup_restore">Backup &amp; Restore</string>
+    <string name="options_backup_restore_content">Backup &amp; restore your app options and settings</string>
+    <string name="options_backup_restore_backup">Backup</string>
+    <string name="options_backup_restore_backup_content">Create a backup of your Pixel Launcher Mods options and settings to your device or the cloud</string>
+    <string name="options_backup_restore_restore">Restore</string>
+    <string name="options_backup_restore_restore_content">Restore a backup from your device or the cloud</string>
+
+    <string name="backup_restore_restore_close">Close</string>
+    <string name="backup_restore_restore_restoring">Restoring backup…</string>
+    <string name="backup_restore_restore_issues_title">%1d Skipped</string>
+    <string name="backup_restore_restore_issues_content_one">%1d app was skipped during restoring. Tap for more info.</string>
+    <string name="backup_restore_restore_issues_content_other">%1d apps were skipped during restoring. Tap for more info.</string>
+    <string name="backup_restore_restore_magisk_title">Magisk Module Required</string>
+    <string name="backup_restore_restore_magisk_content">This backup contains tweaks which require the Pixel Launcher Mods Magisk Module. Tap for more info.</string>
+    <string name="backup_restore_restore_tweaks_title">Restore Tweaks</string>
+    <string name="backup_restore_restore_tweaks_content">This backup contains tweak settings, which must be applied separately. Tap to apply them.\n<b>Note:</b> Due to system limitations, it is not possible to restore your chosen widget replacement (if set), only the position.</string>
+    <string name="backup_restore_restore_restoring_success">Backup restored</string>
+    <string name="backup_restore_restore_restoring_failed">Failed to restore backup</string>
+
+    <string name="restore_issue_title">Skipped Apps</string>
+    <string name="restore_issue_type_app">An app</string>
+    <string name="restore_issue_type_shortcut">A shortcut</string>
+    <string name="restore_issue_type_app_short">App</string>
+    <string name="restore_issue_type_shortcut_short">Shortcut</string>
+    <string name="restore_issue_component_title">{type_short_upper} Not Found</string>
+    <string name="restore_issue_component_content">{type} with the package name %1s was not found.</string>
+    <string name="restore_issue_package_title">{type_short_upper} Icon Not Found</string>
+    <string name="restore_issue_package_content">An app with the package name %1s was not found, so its icon could not be used for the {type_short} with package name %1s.</string>
+    <string name="restore_issue_icon_pack_title">Icon Pack Icon Not Found</string>
+    <string name="restore_issue_icon_pack_content">The icon for {type_short} %1s was not found in an icon pack with a package name of %1s, so it could not be applied to this {type_short}. Check the pack is installed and up to date.</string>
+    <string name="restore_issue_lawnicon_title">Lawnicon Icon Not Found</string>
+    <string name="restore_issue_lawnicon_content">A Lawnicon for the {type_short} %1s (icon %1s) could not be found, check you are using the same version of Lawnicons as when this backup was made.</string>
+    <string name="restore_issue_legacy_mono_title">Legacy Themed Icon Not Found</string>
+    <string name="restore_issue_legacy_mono_content">A legacy themed icon for {type_short} %1s (icon %1s) could not be found. If you were previously using an overlay to add more icons, check if it is installed.</string>
+    <string name="restore_issue_mono_icon_not_compatible_title">Themed Icon Not Compatible</string>
+    <string name="restore_issue_mono_icon_not_compatible_content">The themed icon set for {type_short} %1s in the backup is not compatible with this version of Android.</string>
+    <string name="restore_issue_static_icon_title">Icon Not Found</string>
+    <string name="restore_issue_static_icon_content">The icon for %1s was not found in this backup, check the backup has not been modified.</string>
+    <string name="restore_issue_package_unknown">Unknown</string>
+
+    <string name="magisk_info_title">Модуль Magisk</string>
+
+    <string name="options_title">Опции</string>
+    <string name="options_reapply_icons">Повторно применить иконки</string>
+    <string name="options_reapply_icons_content">Повторно применяет иконки вручную, если после обновления значок застрял без оформления</string>
+    <string name="options_reapply_title">Повторное применение иконок…</string>
+    <string name="options_reapply_finished">Icons re-applied</string>
+    <string name="options_advanced">Дополнительно</string>
+    <string name="options_advanced_content">Дополнительные параметры, включая сброс настроек, отключение обновлений ярлыков и перезапуск Pixel Launcher вручную</string>
+    <string name="options_advanced_restart">Перезапуск Pixel Launcher</string>
+    <string name="options_advanced_restart_content">Немедленный перезапуск Pixel Launcher</string>
+    <string name="options_advanced_restart_finished">Перезапуск завершен</string>
+    <string name="options_advanced_shortcut">Отключить обновление ярлыков приложений</string>
+    <string name="options_advanced_shortcut_content">Некоторые приложения очень часто отправляют обновления ярлыков приложений, что может увеличить время работы модов Pixel Launcher в фоне и привести к более частым перезапускам. Если вы столкнулись с этим, отключение обновлений ярлыков приложений решит проблему, но, возможно, вам придется чаще обновлять новые значки, чтобы они не были лишены оформления.</string>
+    <string name="options_advanced_reset">Сброс</string>
+    <string name="options_advanced_reset_content">Сброс всех измененных ярлыков и иконок приложений и восстановление значков в Pixel Launcher</string>
+    <string name="options_advanced_debug_restart_reason_toast">Отладка: Отображение причины перезапуска.</string>
+    <string name="options_advanced_debug_restart_reason_toast_content">Отображает всплывающее сообщение с указанием причины перезапуска, прежде чем он произойдет. Обратите внимание, что это не гарантирует перезапуск, но сообщит вам, что вызвало перезапуск, если он произошел.</string>
+    <string name="reset_info_loading">Загрузка…</string>
+    <string name="reset_info_warning">Сброс настроек необратим. Прежде чем продолжить, убедитесь, что вы создали резервную копию, если хотите сохранить настройки.</string>
+    <string name="reset_info_title">Внимание</string>
+    <string name="reset_info_included">Сброс приведет к удалению</string>
+    <string name="reset_info_included_content">• Ярлыки и иконки приложений, как тематические, так и обычные \ n• Значки быстрого доступа к приложениям \ n• Автоматические настройки пакета значков \ n • Настройки скрытых приложений \n• Настройки замены виджетов</string>
+    <string name="reset_info_not_included">Сброс настроек не приведет к удалению</string>
+    <string name="reset_info_not_included_content">%1s• Ваши настройки Pixel Launcher Mods, такие как скрытие часов или настройка плавного перезапуска</string>
+    <string name="reset_info_not_included_content_extra_shortcut">• Устаревшие ярлыки, такие как \"%1s\"\n</string>
+    <string name="reset_info_continue">Продолжить</string>
+    <string name="reset_apply_title">Сброс…</string>
+    <string name="reset_apply_content">Это может занять до нескольких минут, в зависимости от того, сколько приложений вы установили</string>
+    <string name="reset_apply_toast_success">Сброс выполнен</string>
+    <string name="reset_apply_toast_failed">Ошибка сброса</string>
+    <string name="menu_hide_apps_deselect_all">Отменить выбор всего</string>
+
+    <string name="options_faq">Часто задаваемые вопросы</string>
+    <string name="options_faq_short">FAQs</string>
+    <string name="options_faq_content">Ответы на часто задаваемые вопросы, в том числе о том, как полностью удалить моды Pixel Launcher, не оставляя изменений</b></string>
+
+    <!-- Blank widget -->
+    <string name="widget_blank_title">Пустой виджет</string>
+    <string name="widget_blank_description">Прозрачный виджет без содержимого</string>
+
+    <string name="xda_thread">Ветка на XDA</string>
+    <string name="github">GitHub</string>
+    <string name="libraries">Прочее</string>
+    <string name="donate">Поддержать</string>
+    <string name="twitter">Twitter</string>
+    <string name="about_version">Версия %1s\nCreated by Kieron Quinn</string>
+    <string name="about_contributors">Сопровождающие</string>
+    <string name="about_contributors_icons">Иконки</string>
+    <string name="about_contributors_icons_content"><![CDATA[<b><a href="https://material.io/resources/icons">Material Icons</a></b> (<a href="https://www.apache.org/licenses/LICENSE-2.0.html">Apache Licence 2.0</a>)<br><b><a href="https://github.com/Templarian/MaterialDesign">Material Design Icons</a></b> (<a href="https://github.com/Templarian/MaterialDesign/blob/master/LICENSE">Pictogrammers Free Licence</a>)<br><a href="https://github.com/LawnchairLauncher/lawnicons/blob/develop/app/src/main/res/drawable/magisk.xml"><b>Magisk icon from Lawnicons</b> - Patryk Michalik</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0.html">Apache Licence 2.0</a>)<br><b><a href="https://github.com/HatScripts/circle-flags">circle-flags</a></b> by HatScripts (<a href="https://github.com/HatScripts/circle-flags/blob/gh-pages/LICENSE">MIT Licence</a>)]]></string>
+    <string name="about_contributors_overlay">Динамическая генерация наложений</string>
+    <string name="about_contributors_overlay_content"><![CDATA[Statically compiled <b><a href="https://github.com/rendiix/termux-aapt">aapt</a></b> and <b><a href="https://github.com/rendiix/termux-zipalign">zipalign</a></b> by <a href="https://github.com/rendiix">rendixx</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0.html">Apache Licence 2.0</a>)<br><a href="https://android.googlesource.com/platform/tools/apksig/">apksigner</a> from AOSP (<a href="https://www.apache.org/licenses/LICENSE-2.0.html">Apache Licence 2.0</a>)]]></string>
+
+    <!-- Update downloader -->
+    <string name="snackbar_update">Доступно обновление</string>
+    <string name="snackbar_update_button">Обновить</string>
+    <string name="settings_update_heading">Pixel Launcher Mods версия %1s</string>
+    <string name="settings_update_subheading">Текущая версия %1s</string>
+    <string name="settings_update_changes">Измененния</string>
+    <string name="settings_update_open_installer">Начать установку</string>
+    <string name="settings_update_done">Скачивание завершено</string>
+    <string name="settings_update_loading">Загрузка…</string>
+    <string name="settings_update_fab">Загрузить</string>
+    <string name="download_manager_description">Загрузка обновления…</string>
+    <string name="update_downloader_downloading_title">Загрузка обновления…</string>
+    <string name="update_downloader_downloading_failed">Ошибка загрузки</string>
+    <string name="update_downloader_github">Загрузка через браузер</string>
+
+    <!-- Restart Reason Debug Toasts -->
+    <string name="restart_reason_template">Перезапуск: %1s</string>
+    <string name="restart_reason_package">%1s изменено</string>
+    <string name="restart_reason_restart">PL был закрыт/значок сброшен</string>
+    <string name="restart_reason_config">Изменена конфигурация значка</string>
+
+    <!-- Contributors: Translation Languages -->
+    <string name="contributors_translators">Переводчики</string>
+    <string name="contributors_translators_romanian">Румынский</string>
+    <string name="contributors_translators_turkish">Турецкий</string>
+
+</resources>
