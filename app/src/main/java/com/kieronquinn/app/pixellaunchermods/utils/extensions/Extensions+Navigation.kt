@@ -11,6 +11,7 @@ import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavOptions
+import androidx.navigation.internal.NavContext
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.debounce
@@ -55,7 +56,7 @@ fun NavController.onNavDestinationSelected(item: MenuItem): Boolean {
         // Return true only if the destination we've navigated to matches the MenuItem
         currentDestination?.matchDestination(item.itemId) == true
     } catch (e: IllegalArgumentException) {
-        val name = NavDestination.getDisplayName(context, item.itemId)
+        val name = NavDestination.getDisplayName(NavContext(context), item.itemId)
         Log.i(
             "NavigationUI",
             "Ignoring onNavDestinationSelected for MenuItem $name as it cannot be found " +
