@@ -311,6 +311,16 @@ class PixelLauncherModsRootServiceImpl: IPixelLauncherModsRootService.Stub() {
             //No-op
         }
 
+        override fun onProcessStarted(
+            pid: Int,
+            processUid: Int,
+            packageUid: Int,
+            packageName: String?,
+            processName: String?
+        ) {
+            //No-op
+        }
+
         override fun onProcessDied(pid: Int, uid: Int) {
             if(uid == pixelLauncherUid){
                 notifyPixelLauncherRestart()

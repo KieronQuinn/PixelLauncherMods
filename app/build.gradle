@@ -7,8 +7,8 @@ plugins {
     id 'com.google.android.gms.oss-licenses-plugin'
 }
 
-def tagName = '2.6.6'
-def tagCode = 266
+def tagName = '2.6.7'
+def tagCode = 267
 
 def getKeystoreProperties() {
     def properties = new Properties()
@@ -75,18 +75,18 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.core:core-ktx:1.15.0'
+    implementation 'androidx.core:core-ktx:1.16.0'
     implementation 'androidx.appcompat:appcompat:1.7.0'
     implementation 'com.google.android.material:material:1.12.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.2.1'
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
     implementation 'androidx.recyclerview:recyclerview:1.4.0'
     implementation 'androidx.palette:palette-ktx:1.0.0'
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.8.7"
-    implementation "androidx.lifecycle:lifecycle-service:2.8.7"
-    implementation "androidx.fragment:fragment-ktx:1.8.5"
-    implementation "androidx.activity:activity-ktx:1.10.0"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.9.0"
+    implementation "androidx.lifecycle:lifecycle-service:2.9.0"
+    implementation "androidx.fragment:fragment-ktx:1.8.7"
+    implementation "androidx.activity:activity-ktx:1.10.1"
     implementation "com.simplecityapps:recyclerview-fastscroll:2.0.1"
     implementation 'me.zhanghai.android.appiconloader:appiconloader:1.5.0'
     implementation 'androidx.core:core-splashscreen:1.0.1'
@@ -98,14 +98,14 @@ dependencies {
     implementation "io.insert-koin:koin-android:3.5.6"
     implementation files('libs/apksigner.jar')
     implementation files('libs/sqlite-android.aar')
-    implementation 'androidx.work:work-runtime-ktx:2.10.0'
+    implementation 'androidx.work:work-runtime-ktx:2.10.1'
     compileOnly project(path: ':systemstubs')
 
     implementation 'com.github.bumptech.glide:glide:4.16.0'
-    ksp 'com.github.bumptech.glide:ksp:4.15.1'
+    ksp 'com.github.bumptech.glide:ksp:4.16.0'
 
     implementation "dev.rikka.shizuku:api:13.1.5"
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.1'
 
     def libsuVersion = '5.2.2'
     implementation "com.github.topjohnwu.libsu:core:${libsuVersion}"
@@ -113,12 +113,12 @@ dependencies {
 
     implementation 'com.google.code.gson:gson:2.11.0'
 
-    def room_version = "2.6.1"
+    def room_version = "2.7.1"
     implementation "androidx.room:room-runtime:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
     ksp "androidx.room:room-compiler:$room_version"
 
-    implementation 'org.lsposed.hiddenapibypass:hiddenapibypass:4.3'
+    implementation 'org.lsposed.hiddenapibypass:hiddenapibypass:6.1'
     implementation 'me.saket:better-link-movement-method:2.2.0'
     implementation 'com.github.jmartinesp:SpannedGridLayoutManager:3.0.2'
 
