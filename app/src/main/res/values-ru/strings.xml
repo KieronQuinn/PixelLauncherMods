@@ -241,7 +241,7 @@
 
     <string name="options_faq">Часто задаваемые вопросы</string>
     <string name="options_faq_short">FAQs</string>
-    <string name="options_faq_content">Ответы на часто задаваемые вопросы, в том числе о том, как полностью удалить моды Pixel Launcher, не оставляя изменений</b></string>
+    <string name="options_faq_content">Ответы на часто задаваемые вопросы, в том числе о том, как полностью удалить моды Pixel Launcher, не оставляя изменений</string>
 
     <!-- Blank widget -->
     <string name="widget_blank_title">Пустой виджет</string>
