@@ -8,6 +8,7 @@ import android.content.res.XmlResourceParser
 import android.graphics.Bitmap
 import android.graphics.Bitmap.Config
 import android.graphics.BitmapFactory
+import android.graphics.Canvas
 import android.graphics.drawable.AdaptiveIconDrawable
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.ColorDrawable
@@ -56,7 +57,9 @@ import org.koin.core.component.inject
 import org.xmlpull.v1.XmlPullParser
 import java.io.ByteArrayInputStream
 import java.io.DataInputStream
+import java.nio.ByteBuffer
 import java.util.Calendar
+import kotlin.math.roundToInt
 
 interface IconLoaderRepository {
 
@@ -104,6 +107,15 @@ class IconLoaderRepositoryImpl(
         const val THEMED_ICON_INSET_FRACTION = 0.325f
         const val THEMED_ICON_INSET_FRACTION_LARGE = 0.225f
         const val THEMED_ICON_INSET_FRACTION_EXTRA_LARGE = 0.175f
+
+        /**
+         *  Themed icon glyphs are scaled so their longest side takes up this fraction of the icon.
+         *  The Pixel Launcher's own monochrome icons sit at around 0.62, so this keeps custom ones
+         *  in line with them (a touch smaller, as wide glyphs would otherwise look oversized).
+         */
+        private const val THEMED_ICON_GLYPH_FRACTION = 0.6f
+        private const val THEMED_ICON_PROBE_SIZE = 512
+        private const val THEMED_ICON_ALPHA_THRESHOLD = 24
     }
 
     private val remoteAppsRepository by inject<RemoteAppsRepository>()
@@ -344,6 +356,14 @@ class IconLoaderRepositoryImpl(
         options: IconPickerResultOptions
     ): Drawable? {
         val result = options.result
+        if(options.mono) {
+            //Each source pads its glyph differently (Lawnicons, icon packs, files...), so rather than
+            //insetting by a fixed amount, size every glyph the same way
+            val size = if(options.loadFullRes) fullResIconSize else iconSize
+            return loadThemedIconSource(context, result)
+                ?.rasterNormalisedThemedIcon(size)
+                ?.let { BitmapDrawable(context.resources, it) }
+        }
         var scale: Float? = null
         return when (result) {
             is IconPackIcon -> {
@@ -406,6 +426,91 @@ class IconLoaderRepositoryImpl(
 
     private fun IconPickerResult.isLegacyThemedIcon(): Boolean {
         return this is IconPickerResult.LegacyThemedIcon || this is IconPickerResult.Lawnicon
+    }
+
+    /**
+     *  Loads the raw drawable a themed icon is made from, without any plate or inset, at the
+     *  highest resolution available so it stays sharp when scaled up.
+     */
+    private fun loadThemedIconSource(context: Context, result: IconPickerResult): Drawable? {
+        val drawable = when (result) {
+            is IconPackIcon -> {
+                if(!context.isPackageInstalled(result.iconPackPackageName)) return null
+                iconPackRepository.getIcon(result.iconPackPackageName, result.iconResource)
+            }
+            is PackageIcon -> {
+                loadApplicationInfoIcon(
+                    context,
+                    result.applicationIcon.applicationInfo,
+                    result.applicationIcon.shrinkNonAdaptiveIcons,
+                    true
+                )
+            }
+            is IconPickerResult.LegacyThemedIcon -> {
+                createLegacyThemedIcon(result.resourceId).loadDrawable()
+            }
+            is IconPickerResult.Lawnicon -> {
+                createLawnicon(result.resourceId)?.loadDrawable()
+            }
+            is IconPickerResult.UriIcon -> {
+                glide.load(result.uri).submit(fullResIconSize, fullResIconSize).get()
+            }
+            is IconPickerResult.BitmapIcon -> {
+                glide.load(RawBytesIcon(result.bitmapBytes, fullResIconSize))
+                    .submit(fullResIconSize, fullResIconSize).get()
+            }
+        } ?: return null
+        return if(drawable is AdaptiveIconDrawable){
+            drawable.getMonochromeOrForeground()
+        }else drawable
+    }
+
+    /**
+     *  Rasterises this drawable as an ALPHA_8 themed icon, cropped to its visible glyph and scaled
+     *  so the glyph's longest side is [THEMED_ICON_GLYPH_FRACTION] of [size], centred.
+     */
+    private fun Drawable.rasterNormalisedThemedIcon(size: Int): Bitmap {
+        //Drawables can be shared, so work on a copy rather than changing their bounds
+        val drawable = constantState?.newDrawable(context.resources)?.mutate() ?: this
+        val probeSize = THEMED_ICON_PROBE_SIZE
+        val probe = Bitmap.createBitmap(probeSize, probeSize, Config.ALPHA_8)
+        drawable.setBounds(0, 0, probeSize, probeSize)
+        drawable.draw(Canvas(probe))
+        val rowBytes = probe.rowBytes
+        val pixels = ByteArray(rowBytes * probeSize)
+        probe.copyPixelsToBuffer(ByteBuffer.wrap(pixels))
+        probe.recycle()
+        var left = probeSize
+        var top = probeSize
+        var right = -1
+        var bottom = -1
+        for(y in 0 until probeSize) {
+            for(x in 0 until probeSize) {
+                val alpha = pixels[y * rowBytes + x].toInt() and 0xFF
+                if(alpha <= THEMED_ICON_ALPHA_THRESHOLD) continue
+                if(x < left) left = x
+                if(x > right) right = x
+                if(y < top) top = y
+                if(y > bottom) bottom = y
+            }
+        }
+        val output = Bitmap.createBitmap(size, size, Config.ALPHA_8)
+        //Nothing visible to scale, leave the icon empty
+        if(right < 0) return output
+        val glyphSize = maxOf(right - left + 1, bottom - top + 1)
+        //Size to draw the whole drawable at so the glyph ends up at the target size
+        val drawSize = size * THEMED_ICON_GLYPH_FRACTION * probeSize / glyphSize
+        val scale = drawSize / probeSize
+        val drawLeft = size / 2f - (left + right + 1) / 2f * scale
+        val drawTop = size / 2f - (top + bottom + 1) / 2f * scale
+        drawable.setBounds(
+            drawLeft.roundToInt(),
+            drawTop.roundToInt(),
+            (drawLeft + drawSize).roundToInt(),
+            (drawTop + drawSize).roundToInt()
+        )
+        drawable.draw(Canvas(output))
+        return output
     }
 
     override fun createLegacyThemedIcon(resourceId: Int): LegacyThemedIcon {
